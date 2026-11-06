@@ -1,12 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, CalendarDays, Phone, Plus, TriangleAlert } from "lucide-react";
 import type { PageDoc } from "@/lib/content";
 import { renderBlocks, renderMarkdown, inline, type Block } from "@/lib/markdown";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ConfirmChip, Tag } from "@/components/Tag";
 import { ServiceCard } from "@/components/Cards";
-import { ServiceBadge } from "@/components/badges/ServiceBadge";
 import { Icon } from "@/components/icons/Icons";
 import { Accordion } from "@/components/Accordion";
 import { ChatFaq } from "@/components/ChatFaq";
@@ -14,14 +12,38 @@ import { EmergencyCallout, ReviewerBox, CtaBand, PcpndtLine, DocBand } from "@/c
 import { BigDocCard, DoctorCard } from "@/components/DoctorCard";
 import { StepTracker } from "@/components/StepTracker";
 import { doctors } from "@/lib/doctors";
+import { DoctorImg, DoctorFigure, FallbackFlag } from "@/components/DoctorImage";
 import { site } from "@/lib/site-config";
 import { doctorFor } from "@/lib/booking-context";
+import { doctorSlot, type DoctorSlotId } from "@/lib/doctor-images";
 import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
+import { TreatmentHero } from "@/components/TreatmentHero";
+import { treatmentHeroes } from "@/lib/treatment-heroes";
 import { allPages } from "@/lib/content";
 
 const PREGNANCY = /pregnancy|delivery|postnatal|preeclampsia|scan|week|lab|newborn|fertility|pap|termination|obstetrics|gynaecology|pcos|periods|fibroids|cysts|endometriosis|menopause|laparoscopic/;
+
+/** Scene slots that appear on each page once the agency photo drops in. */
+const SCENE_SLOTS: Record<string, DoctorSlotId[]> = {
+  "/pregnancy-care/": ["lakshmiPregnancy"],
+  "/high-risk-pregnancy/": ["lakshmiPregnancy"],
+  "/laparoscopic-surgery/": ["lakshmiScrubs"],
+  "/caesarean-delivery/": ["lakshmiScrubs"],
+  "/uterine-fibroids/": ["lakshmiScrubs"],
+  "/ovarian-cysts/": ["lakshmiReview"],
+  "/endometriosis/": ["lakshmiReview"],
+  "/pcos/": ["lakshmiReview"],
+  "/pap-smear-colposcopy/": ["lakshmiReview"],
+  "/heart-check-up/": ["ashishConsult", "ashishEcg"],
+  "/heart-valve-surgery/": ["ashishEcg"],
+  "/bypass-surgery/": ["ashishConsult", "ashishScrubs"],
+  "/keyhole-heart-surgery/": ["ashishScrubs", "ashishRecovery"],
+  "/lung-and-chest-surgery/": ["ashishScrubs"],
+  "/varicose-veins/": ["ashishRecovery"],
+  "/heart-and-vascular-surgery/": ["ashishNight"],
+};
 
 function crumbsFor(url: string) {
   const parts = url.split("/").filter(Boolean);
@@ -139,7 +161,7 @@ function Reviewer({ doc }: { doc: PageDoc }) {
           name={name}
           qualifications={d?.role ?? ""}
           lastReviewed={<ConfirmChip note="on sign-off" />}
-          portrait={d?.portrait}
+          doctor={d?.slug}
         />
       </div>
     </section>
@@ -324,43 +346,7 @@ export function PageTemplate({ doc }: { doc: PageDoc }) {
   return (
     <article>
       {doc.hidden ? <HiddenBanner /> : null}
-      <section className="chero">
-        <div className="wrap">
-          <div className="g">
-            <div>
-              <Breadcrumbs items={crumbsFor(doc.url)} />
-              {doc.badge ? <ServiceBadge slug={doc.badge} size="lg" /> : null}
-              <h1>{h1 || doc.title.split("|")[0].trim()}</h1>
-              <p className="intro">{intro}</p>
-              <div className="ctas">
-                <Link className="btn btn-navy" href={`/book/?from=${encodeURIComponent(doc.url)}`}>
-                  <CalendarDays className="ico" aria-hidden="true" />
-                  Book a visit
-                </Link>
-                <a className="btn btn-wa" href={whatsappLink(doc.url)}>
-                  <WhatsAppIcon className="ico" />
-                  WhatsApp
-                </a>
-              </div>
-              <div className="meta">
-                <span>
-                  <img src={d.portrait} alt="" />
-                  Reviewed by {d.name} {d.nameSoft}
-                </span>
-              </div>
-            </div>
-            <div className="cimg">
-              <img src="/images/clinic/ultrasound-room.jpg" alt="Inside Penguin Hospital" />
-              <div className="chip">
-                <span>
-                  <b>All under one roof</b>
-                  Consultation, scans, labour room and theatre in the same building.
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TreatmentHero doc={doc} h1={h1} intro={intro} />
       <section className="sec white" style={{ paddingTop: "clamp(48px,6vw,80px)" }}>
         <div className="wrap">
           <div className="art">
@@ -383,6 +369,9 @@ export function PageTemplate({ doc }: { doc: PageDoc }) {
             </aside>
             <div className="prose">
               <Prose blocks={blocks} />
+              {(SCENE_SLOTS[doc.url] ?? []).map((s) => (
+                <DoctorFigure key={s} slot={s} />
+              ))}
             </div>
           </div>
         </div>
@@ -405,6 +394,9 @@ export function HubTemplate({ doc }: { doc: PageDoc }) {
 
   return (
     <article>
+      {treatmentHeroes[doc.url] ? (
+        <TreatmentHero doc={doc} h1={h1} intro={intro} />
+      ) : (
       <section className="phero">
         <div className="wrap">
           <div className="win" style={{ "--mp": "50% 18%" } as React.CSSProperties}>
@@ -427,7 +419,7 @@ export function HubTemplate({ doc }: { doc: PageDoc }) {
                 </div>
               </div>
               <div className="gcard">
-                <img src={d.portrait} alt="" />
+                <DoctorImg who={d.slug} kind="Headshot" />
                 <div>
                   <b>
                     Led by {d.name} {d.nameSoft}
@@ -442,6 +434,7 @@ export function HubTemplate({ doc }: { doc: PageDoc }) {
           </div>
         </div>
       </section>
+      )}
       <section className="sec" aria-labelledby="svc-h">
         <div className="wrap">
           <div className="shead">
@@ -494,6 +487,7 @@ export function DoctorsHubTemplate({ doc }: { doc: PageDoc }) {
             <BigDocCard doctor={doctors[0]} />
             <BigDocCard doctor={doctors[1]} />
           </div>
+          <DoctorFigure slot="together" className="together" />
           <p className="fnote" style={{ marginTop: 24 }}>
             Visiting consultants in anaesthesia, paediatrics and other fields work with our team when
             needed. <ConfirmChip note="names and roles if the client wants them listed" />
@@ -515,8 +509,8 @@ export function DoctorTemplate({ doc }: { doc: PageDoc }) {
         <div className="wrap">
           <div className="g">
             <div className="ph">
-              <img src={d.portrait} alt={`${d.name} ${d.nameSoft}`} />
-              <span className="confirm">CONFIRM: new portrait</span>
+              <DoctorImg who={d.slug} kind="Hero" />
+              <FallbackFlag slot={doctorSlot(d.slug, "Hero")} />
               <span className="nm">{d.marginNote.replace(/\.$/, "")}</span>
             </div>
             <div>
@@ -552,6 +546,9 @@ export function DoctorTemplate({ doc }: { doc: PageDoc }) {
         <div className="wrap">
           <div className="prose" style={{ maxWidth: "72ch" }}>
             <Prose blocks={blocks} />
+            <DoctorFigure slot={doctorSlot(d.slug, "Cutout")} sizes="(max-width: 900px) 60vw, 480px" />
+            <DoctorFigure slot={doctorSlot(d.slug, "Consult")} />
+            <DoctorFigure slot={doctorSlot(d.slug, "Note")} sizes="(max-width: 900px) 60vw, 480px" />
           </div>
         </div>
       </section>
@@ -598,6 +595,7 @@ export function FormTemplate({
               source={doc.url}
             />
             <div className="side">
+              <DoctorFigure slot="lakshmiConsult" style={{ marginTop: 0 }} sizes="(max-width: 900px) 88vw, 420px" />
               <div className="card">
                 <b>What happens next</b>
                 <p>
@@ -809,6 +807,10 @@ export function EmergencyTemplate({ doc }: { doc: PageDoc }) {
               </div>
             </div>
           </div>
+          <div className="prose">
+            <DoctorFigure slot="lakshmiCorridor" />
+            <DoctorFigure slot="ashishNight" />
+          </div>
         </div>
       </section>
       <FaqSection faqs={faqs} />
@@ -948,6 +950,13 @@ export function InfoTemplate({ doc }: { doc: PageDoc }) {
         <div className="wrap">
           <div className="prose">
             <Prose blocks={blocks} />
+            {doc.url === "/about/" ? (
+              <>
+                <DoctorFigure slot="together" className="together" />
+                <DoctorFigure slot="lakshmiCorridor" />
+              </>
+            ) : null}
+            {doc.url === "/plan-your-visit/" ? <DoctorFigure slot="lakshmiConsult" /> : null}
           </div>
         </div>
       </section>

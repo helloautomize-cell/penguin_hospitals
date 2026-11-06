@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { allPages, getPage, templateFor } from "@/lib/content";
+import { getPage, templateFor } from "@/lib/content";
 import { allPageSlugs } from "@/lib/nav";
 import {
   PageTemplate,
@@ -15,6 +15,9 @@ import {
   LegalTemplate,
 } from "@/components/templates/PageTemplate";
 import { doctors } from "@/lib/doctors";
+import { DoctorsPage } from "@/components/pages/DoctorsPage";
+import { AboutPage } from "@/components/pages/AboutPage";
+import { VisitPage } from "@/components/pages/VisitPage";
 
 const PROD = process.env.VERCEL_ENV === "production" || process.env.NODE_ENV === "production";
 
@@ -61,6 +64,9 @@ export default async function Page({ params, searchParams }: { params: Promise<{
   let el: React.ReactNode;
   switch (tpl) {
     case "hub": el = <HubTemplate doc={doc} />; break;
+    case "doctors-v2": el = <DoctorsPage />; break;
+    case "about-v2": el = <AboutPage />; break;
+    case "visit-v2": el = <VisitPage />; break;
     case "doctors-hub": el = <DoctorsHubTemplate doc={doc} />; break;
     case "doctor": el = <DoctorTemplate doc={doc} />; break;
     case "form": el = <FormTemplate doc={doc} doctor={sp.doctor} reason={sp.reason} />; break;

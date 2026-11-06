@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Life in Chapters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Instrument+Serif&display=swap">
+<style>
+:root{--night:#000E24;--navy:#001F43;--deep:#0A2B57;--blue:#17407E;--blue-5:#2A5BA8;--sky:#8FB8EA;--ice:#F4F8FC;--frost:#E8F0FA;--line:#DFE7F1;--paper:#F7F4F1;--ink:#0B1A30;--ink-2:#4A5970;--ink-3:#6B7A90;--mist:rgba(255,255,255,.78);--coral:#F4978E;--coral-d:#E77A70;--peach:#F9C9B6;--blush:#FDEDE8;
+--sans:"Figtree",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{font:400 17px/1.6 var(--sans);color:var(--ink);background:#fff;overflow-x:hidden}
+a{color:inherit}
+.ctx{min-height:62vh;display:grid;place-items:center;text-align:center;padding:80px 20px;background:linear-gradient(#fff,var(--ice))}
+.ctx p{max-width:560px;color:var(--ink-2)}
+.ctx small{display:block;font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.ctx b{font-weight:700;color:var(--navy)}
+.after{min-height:70vh;display:grid;place-items:center;background:var(--ice);color:var(--ink-3);font-size:15px;padding:40px 20px;text-align:center}
+
+/* ===== section ===== */
+.lc{position:relative;height:602vh;background:#FBFCFE}
+.lc-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.lc-track{display:flex;height:100%;width:500vw;will-change:transform}
+.pnl{position:relative;flex:none;width:100vw;height:100%;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);align-items:center;gap:clamp(24px,4vw,72px);padding:92px max(6vw,32px) 132px}
+.pnl.p0{grid-template-columns:1fr;place-items:center;text-align:center;background:radial-gradient(70% 60% at 50% 40%,#fff,#FBFCFE)}
+.p1{background:radial-gradient(55% 70% at 26% 50%,#FFF3EF 0,#FFF9F7 45%,#FBFCFE 100%)}
+.p2{background:radial-gradient(55% 70% at 26% 50%,#EDF4FC 0,#F6F9FD 50%,#FBFCFE 100%)}
+.p3{background:radial-gradient(55% 70% at 26% 50%,#FBF1EA 0,#FBF7F3 50%,#FBFCFE 100%)}
+.p4{background:radial-gradient(60% 75% at 26% 50%,#0B2D5C 0,#041A3A 45%,var(--night) 100%);color:#fff}
+
+/* intro */
+.tag{display:inline-flex;align-items:center;gap:10px;font:700 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 5px rgba(244,151,142,.22)}
+.p0 h2{margin:22px auto 0;max-width:19ch;font:800 clamp(38px,4.6vw,68px)/1.04 var(--sans);letter-spacing:-.035em;color:var(--navy)}
+.p0 h2 span{color:var(--ink-3);font-weight:700}
+.idx{display:flex;justify-content:center;gap:clamp(18px,3.4vw,52px);margin:48px auto 0;position:relative;padding:0;list-style:none}
+.idx::before{content:"";position:absolute;left:44px;right:44px;top:44px;height:1.5px;background:linear-gradient(90deg,var(--sky),var(--coral));opacity:.6}
+.idx a{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;font:600 14px/1.2 var(--sans);color:var(--ink-2)}
+.idx img{width:88px;height:88px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 14px 30px -14px rgba(0,31,67,.45);transition:transform .5s var(--ease)}
+.idx a:hover img,.idx a:focus-visible img{transform:translateY(-6px)}
+.idx em{font:400 15px/1 var(--serif);color:var(--ink-3);font-style:normal}
+.hint{margin-top:40px;font-size:14px;color:var(--ink-3);display:inline-flex;gap:10px;align-items:center}
+.hint svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;animation:nudge 2.4s var(--ease) infinite}
+@keyframes nudge{50%{transform:translateY(4px)}}
+
+/* stage */
+.stage{position:relative;justify-self:center;width:min(600px,calc(100vh - 230px),100%);aspect-ratio:1}
+.stage .ph{position:absolute;left:50%;top:50%;width:54%;aspect-ratio:1;border-radius:50%;object-fit:cover;transform:translate(-50%,-50%);box-shadow:0 0 0 7px #fff,0 40px 70px -28px rgba(0,31,67,.5)}
+.p4 .stage .ph{box-shadow:0 0 0 7px rgba(255,255,255,.08),0 0 0 8px rgba(143,184,234,.25),0 40px 90px -20px rgba(0,0,0,.7)}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ro{position:absolute;left:50%;top:70.5%;transform:translate(-50%,-50%);display:flex;align-items:baseline;gap:10px;white-space:nowrap;background:#fff;border-radius:999px;padding:11px 20px 11px 18px;box-shadow:0 18px 36px -18px rgba(0,31,67,.45),0 0 0 1px var(--line)}
+.ro b{font:400 28px/1 var(--serif);color:var(--navy);min-width:1.1em;text-align:center;font-variant-numeric:tabular-nums}
+.ro span{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.ro i{width:7px;height:7px;border-radius:50%;align-self:center;background:var(--coral)}
+.p4 .ro{background:rgba(10,43,87,.92);box-shadow:0 18px 40px -16px rgba(0,0,0,.7),0 0 0 1px rgba(143,184,234,.25)}
+.p4 .ro b{color:#fff}.p4 .ro span{color:var(--mist)}
+
+/* svg instrument classes */
+.trk{fill:none;stroke:var(--frost);stroke-width:12}
+.p4 .trk{stroke:rgba(143,184,234,.12)}
+.seg{fill:none;stroke-width:12;stroke-linecap:round}
+.tk{stroke:#B9C7DA;stroke-width:1.2;stroke-linecap:round}
+.tk.mj{stroke:var(--ink-3);stroke-width:1.8}
+.p4 .tk{stroke:rgba(143,184,234,.28)}.p4 .tk.mj{stroke:rgba(143,184,234,.6)}
+.num{font:600 12px/1 var(--sans);fill:var(--ink-3);letter-spacing:.04em}
+.lab{font:700 11.5px/1 var(--sans);letter-spacing:.2em;fill:var(--ink-2);text-transform:uppercase}
+.p4 .lab{fill:var(--sky)}
+.prog{fill:none;stroke:var(--blue);stroke-width:2;stroke-linecap:round}
+.mk circle.o{fill:#fff;stroke:var(--blue);stroke-width:3}
+.mk circle.i{fill:var(--blue)}
+.ms{fill:#fff;stroke:var(--blue);stroke-width:2}
+.ecg-b{fill:none;stroke:rgba(143,184,234,.3);stroke-width:1.6;stroke-linejoin:round}
+.ecg-f{fill:none;stroke:var(--coral);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(244,151,142,.55))}
+
+/* text */
+.txt{max-width:540px}
+.age{display:flex;align-items:flex-end;gap:16px;margin-bottom:18px}
+.age b{font:400 clamp(84px,9.6vw,158px)/.8 var(--serif);color:var(--blue);letter-spacing:-.02em}
+.age span{font:700 11.5px/1.65 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);padding-bottom:6px}
+.txt h3{font:800 clamp(32px,3.5vw,54px)/1.04 var(--sans);letter-spacing:-.035em;color:var(--navy);text-wrap:balance}
+.txt p{margin-top:18px;color:var(--ink-2);font-size:clamp(17px,1.25vw,19px);line-height:1.62;max-width:46ch}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.links a{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:#fff;border:1px solid var(--line);font:600 15px/1 var(--sans);color:var(--navy);text-decoration:none;transition:border-color .3s,transform .3s var(--ease)}
+.links a:hover,.links a:focus-visible{border-color:var(--blue);transform:translateY(-2px)}
+.by{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:var(--ink-2)}
+.by img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 14%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.p4 .age b{color:var(--peach)}.p4 .age span{color:var(--sky)}
+.p4 .txt h3{color:#fff}.p4 .txt p,.p4 .by{color:var(--mist)}
+.p4 .links a{background:rgba(255,255,255,.06);border-color:rgba(143,184,234,.3);color:#fff}
+.p4 .links a:hover{border-color:var(--sky)}
+.p4 .by img{border-color:var(--deep);box-shadow:none}
+
+/* chrome: counter + lifeline */
+.cnt{position:absolute;right:max(6vw,32px);top:34px;font:400 44px/1 var(--serif);color:var(--navy);z-index:3;transition:color .4s,opacity .4s}
+.cnt small{font-size:22px;color:var(--ink-3)}
+.life{position:absolute;left:max(6vw,32px);right:max(6vw,32px);bottom:30px;z-index:3;transition:opacity .4s}
+.life svg{display:block;width:100%;height:40px;overflow:visible}
+.life .bg{fill:none;stroke:var(--line);stroke-width:2}
+.life .fg{fill:none;stroke:url(#lg);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.life .mks{display:flex;justify-content:space-between;margin-top:10px}
+.life .mks a{font:700 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;transition:color .3s;padding:8px 0}
+.life .mks a.on{color:var(--coral-d)}
+.lc-pin[data-dark] .cnt{color:#fff}.lc-pin[data-dark] .cnt small{color:var(--sky)}
+.lc-pin[data-dark] .life .bg{stroke:rgba(143,184,234,.2)}
+.lc-pin[data-dark] .life .mks a{color:rgba(255,255,255,.6)}.lc-pin[data-dark] .life .mks a.on{color:var(--coral)}
+.lc-pin[data-intro] .cnt,.lc-pin[data-intro] .life{opacity:0}
+
+/* entrance of text inside each panel */
+.pnl .txt>*{transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.pnl:not(.in) .txt>*{opacity:0;transform:translateY(18px)}
+.pnl .txt>:nth-child(2){transition-delay:.06s}.pnl .txt>:nth-child(3){transition-delay:.12s}.pnl .txt>:nth-child(4){transition-delay:.18s}.pnl .txt>:nth-child(5){transition-delay:.24s}
+
+/* ===== stacked layout: phones, tablets portrait, reduced motion ===== */
+@media (max-width:900px),(prefers-reduced-motion:reduce){
+  .lc{height:auto}
+  .lc-pin{position:static;height:auto;overflow:visible}
+  .lc-track{display:block;width:auto;transform:none!important}
+  .pnl{width:auto;height:auto;grid-template-columns:1fr;gap:28px;padding:72px 20px}
+  .pnl.p0{padding:88px 20px 56px}
+  .stage{width:min(88vw,460px)}
+  .cnt,.life{display:none}
+  .txt{max-width:600px;justify-self:center}
+  .idx{gap:12px}.idx::before{left:30px;right:30px;top:30px}
+  .idx img{width:60px;height:60px;border-width:3px}
+  .idx a{font-size:12.5px;gap:8px}
+  .hint{display:none}
+}
+@media (max-width:900px){.age b{font-size:clamp(76px,22vw,120px)}.ro b{font-size:22px}.ro{padding:8px 14px;gap:8px}.ro span{font-size:10.5px;letter-spacing:.12em}.lab{font-size:16px;letter-spacing:.16em}.num{font-size:16px}}
+@media (prefers-reduced-motion:reduce){.pnl:not(.in) .txt>*{opacity:1;transform:none}.hint svg{animation:none}*{scroll-behavior:auto!important}}
+</style></head>
+<body>
+
+<div class="ctx"><div><small>Home page · section preview</small><p>This page shows only the redesigned <b>A life, in chapters</b> section. Scroll down: the story moves sideways on desktop and stacks on phones.</p></div></div>
+
+<section class="lc" id="lc" aria-labelledby="lc-h">
+ <div class="lc-pin" id="lcPin" data-intro>
+  <div class="lc-track" id="lcTrack">
+
+   <div class="pnl p0 in" id="ch0">
+    <div>
+     <span class="tag"><i></i>A life, in chapters</span>
+     <h2 id="lc-h">Every chapter of a woman's life. <span>And the heart that carries the family.</span></h2>
+     <ol class="idx">
+      <li><a href="#ch1" data-go="1"><img src="img/ch1.jpg" alt=""><em>13+</em>Growing up</a></li>
+      <li><a href="#ch2" data-go="2"><img src="img/ch2.jpg" alt=""><em>40 weeks</em>Nine months</a></li>
+      <li><a href="#ch3" data-go="3"><img src="img/ch3.jpg" alt=""><em>Day 1</em>First breath</a></li>
+      <li><a href="#ch4" data-go="4"><img src="img/ch4.jpg" alt=""><em>Always</em>The heart</a></li>
+     </ol>
+     <p class="hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Keep scrolling, the story moves sideways</p>
+    </div>
+   </div>
+
+   <article class="pnl p1" id="ch1" aria-labelledby="h1t">
+    <div class="stage" aria-hidden="true">
+     <img class="ph" src="img/ch1.jpg" alt="">
+     <svg viewBox="0 0 600 600" data-inst="cycle"></svg>
+     <div class="ro"><span>Day</span><b data-v>1</b><i></i><span data-l>Period</span></div>
+    </div>
+    <div class="txt">
+     <div class="age"><b>13+</b><span>Chapter one<br>Growing up</span></div>
+     <h3 id="h1t">Getting to know your body</h3>
+     <p>Periods that are too heavy, too painful or too irregular. A PCOS diagnosis that raises more questions than it answers. Dr. Lakshmi explains what your body is doing, then what can help.</p>
+     <div class="links"><a href="#">PCOS</a><a href="#">Heavy periods</a><a href="#">Irregular periods</a><a href="#">Fibroids</a></div>
+     <span class="by"><img src="img/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi Kalbande</span>
+    </div>
+   </article>
+
+   <article class="pnl p2" id="ch2" aria-labelledby="h2t">
+    <div class="stage" aria-hidden="true">
+     <img class="ph" src="img/ch2.jpg" alt="">
+     <svg viewBox="0 0 600 600" data-inst="weeks"></svg>
+     <div class="ro"><span>Week</span><b data-v>4</b><i></i><span data-l>First trimester</span></div>
+    </div>
+    <div class="txt">
+     <div class="age"><b>40</b><span>Chapter two<br>Weeks of pregnancy</span></div>
+     <h3 id="h2t">Nine months, one visit at a time</h3>
+     <p>Check-ups, scans and blood tests at the right weeks, with closer watch when a pregnancy needs it: twins, diabetes, high blood pressure or a history of loss.</p>
+     <div class="links"><a href="#">Your week by week</a><a href="#">High-risk pregnancy</a><a href="#">Preeclampsia</a></div>
+     <span class="by"><img src="img/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi Kalbande</span>
+    </div>
+   </article>
+
+   <article class="pnl p3" id="ch3" aria-labelledby="h3t">
+    <div class="stage" aria-hidden="true">
+     <img class="ph" src="img/ch3.jpg" alt="">
+     <svg viewBox="0 0 600 600" data-inst="hour"></svg>
+     <div class="ro"><span>Minute</span><b data-v>0</b><i></i><span data-l>First cry</span></div>
+    </div>
+    <div class="txt">
+     <div class="age"><b>Day 1</b><span>Chapter three<br>First breath</span></div>
+     <h3 id="h3t">The day your baby arrives</h3>
+     <p>Normal birth, painless delivery with an epidural, or a caesarean when it is the safer way. The labour team is here day and night, and newborn care is in the same building.</p>
+     <div class="links"><a href="#">Labour and delivery</a><a href="#">Painless delivery</a><a href="#">Newborn care</a></div>
+     <span class="by"><img src="img/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi and the night team</span>
+    </div>
+   </article>
+
+   <article class="pnl p4" id="ch4" aria-labelledby="h4t">
+    <div class="stage" aria-hidden="true">
+     <img class="ph" src="img/ch4.jpg" alt="">
+     <svg viewBox="0 0 600 600" data-inst="heart"></svg>
+     <div class="ro"><b>24</b><span>hours</span><i></i><span>Every day</span></div>
+    </div>
+    <div class="txt">
+     <div class="age"><b>Always</b><span>Chapter four<br>The heart</span></div>
+     <h3 id="h4t">A heart for the years ahead</h3>
+     <p>Chest pain, breathlessness or a worrying ECG. Tests happen here, and when surgery is needed, Dr. Ashish explains every option, including keyhole heart surgery through a small cut in the side.</p>
+     <div class="links"><a href="#">Explore the heart map</a><a href="#">Keyhole surgery</a><a href="#">Varicose veins</a></div>
+     <span class="by"><img src="img/dr-ashish-portrait.jpg" alt="">With Dr. Ashish Baviskar</span>
+    </div>
+   </article>
+  </div>
+
+  <div class="cnt" aria-hidden="true"><span id="cntN">01</span><small> / 04</small></div>
+  <div class="life" aria-hidden="true">
+   <svg viewBox="0 0 1000 40" preserveAspectRatio="none">
+    <defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#17407E"/><stop offset=".7" stop-color="#8E6F96"/><stop offset="1" stop-color="#F4978E"/></linearGradient></defs>
+    <path class="bg" id="lifeB"/><path class="fg" id="lifeF"/>
+   </svg>
+   <div class="mks"><a href="#ch1" data-go="1" tabindex="-1">Growing up</a><a href="#ch2" data-go="2" tabindex="-1">Nine months</a><a href="#ch3" data-go="3" tabindex="-1">First breath</a><a href="#ch4" data-go="4" tabindex="-1">The heart</a></div>
+  </div>
+ </div>
+</section>
+
+<div class="after">Next section on the home page continues here.</div>
+
+<script>
+(function(){
+ var NS='http://www.w3.org/2000/svg',C=300;
+ var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+ function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+ function pt(r,d){var a=d*Math.PI/180;return[C+r*Math.sin(a),C-r*Math.cos(a)]}
+ function f(n){return Math.round(n*100)/100}
+ function arc(r,a0,a1,rev){var p0=pt(r,rev?a1:a0),p1=pt(r,rev?a0:a1),lg=Math.abs(a1-a0)>180?1:0;return'M'+f(p0[0])+' '+f(p0[1])+'A'+r+' '+r+' 0 '+lg+' '+(rev?0:1)+' '+f(p1[0])+' '+f(p1[1])}
+ var uid=0;
+ /* curved label: reads upright on both halves of the ring */
+ function label(svg,txt,r,a0,a1){var mid=((a0+a1)/2+360)%360,low=mid>90&&mid<270,id='lp'+(uid++);
+  el('path',{id:id,d:arc(low?r+9:r,a0,a1,low),fill:'none'},svg);
+  var t=el('text',{'class':'lab','text-anchor':'middle'},svg),tp=el('textPath',{href:'#'+id,startOffset:'50%'},t);tp.textContent=txt}
+ function ticks(svg,n,r,isMajor){for(var i=0;i<n;i++){var a=i*360/n,mj=isMajor(i),p0=pt(r,a),p1=pt(r+(mj?14:7),a);el('line',{'class':'tk'+(mj?' mj':''),x1:f(p0[0]),y1:f(p0[1]),x2:f(p1[0]),y2:f(p1[1])},svg)}}
+ function num(svg,txt,r,a){var p=pt(r,a),t=el('text',{'class':'num',x:f(p[0]),y:f(p[1]+4),'text-anchor':'middle'},svg);t.textContent=txt}
+ function segs(svg,n,list,r){var per=360/n,g=1.7;list.forEach(function(s){el('path',{'class':'seg',d:arc(r,(s[0]-1)*per+g,s[1]*per-g),stroke:s[2]},svg)})}
+ function marker(svg){var g=el('g',{'class':'mk'},svg);el('circle',{'class':'o',r:12},g);el('circle',{'class':'i',r:4.5},g);return g}
+ var R=206,TR=230,NR=262,LR=284;
+ var inst={};
+
+ /* 1. 28-day cycle */
+ inst.cycle=function(svg){
+  var N=28,per=360/N,S=[[1,5,'#F4978E','Period'],[6,12,'#C3D7F1','Follicular'],[13,15,'#17407E','Ovulation'],[16,28,'#8FB8EA','Luteal']];
+  el('circle',{'class':'trk',cx:C,cy:C,r:R},svg);segs(svg,N,S,R);
+  ticks(svg,N,TR,function(i){return i%7===0});
+  [1,7,14,21,28].forEach(function(d){num(svg,d,NR-6,(d-.5)*per)});
+  S.forEach(function(s){label(svg,s[3],LR,(s[0]-1)*per,s[1]*per)});
+  var prog=el('path',{'class':'prog'},svg),mk=marker(svg),ro=svg.parentNode;
+  return function(t){var day=Math.max(1,Math.min(28,1+Math.floor(t*27.999))),a=(1+t*26.999-.5)*per;
+   prog.setAttribute('d',a>.5?arc(R-22,0,a):'');var p=pt(R,a);mk.setAttribute('transform','translate('+f(p[0])+' '+f(p[1])+')');
+   $('[data-v]',ro).textContent=day;var ph=S.filter(function(s){return day>=s[0]&&day<=s[1]})[0];$('[data-l]',ro).textContent=ph[3]}};
+
+ /* 2. 40 weeks */
+ inst.weeks=function(svg){
+  var N=40,per=360/N,S=[[1,13,'#C3D7F1','First trimester'],[14,27,'#F9C9B6','Second trimester'],[28,40,'#F4978E','Third trimester']];
+  el('circle',{'class':'trk',cx:C,cy:C,r:R},svg);segs(svg,N,S,R);
+  ticks(svg,N,TR,function(i){return i%4===0});
+  [12,20,28,36].forEach(function(w){num(svg,w,NR-6,w*per)});num(svg,40,NR-6,0);
+  [12,20,28,36].forEach(function(w){var p=pt(R,w*per);el('circle',{'class':'ms',cx:f(p[0]),cy:f(p[1]),r:4.5},svg)});
+  S.forEach(function(s){label(svg,s[3],LR,(s[0]-1)*per,s[1]*per)});
+  var prog=el('path',{'class':'prog'},svg),mk=marker(svg),ro=svg.parentNode;
+  return function(t){var wk=4+t*36,a=wk*per;prog.setAttribute('d',arc(R-22,0,a));var p=pt(R,a);mk.setAttribute('transform','translate('+f(p[0])+' '+f(p[1])+')');
+   var w=Math.round(wk);$('[data-v]',ro).textContent=w;$('[data-l]',ro).textContent=(w<=13?'First':w<=27?'Second':'Third')+' trimester'}};
+
+ /* 3. the first hour */
+ inst.hour=function(svg){
+  var N=60,per=360/N,S=[[1,5,'#17407E','First cry'],[6,15,'#C3D7F1','First check'],[16,45,'#F9C9B6','Skin to skin'],[46,60,'#F4978E','First feed']];
+  el('circle',{'class':'trk',cx:C,cy:C,r:R},svg);segs(svg,N,S,R);
+  ticks(svg,N,TR,function(i){return i%5===0});
+  [[15,'15'],[30,'30'],[45,'45'],[60,'60']].forEach(function(m){num(svg,m[1],NR-6,(m[0]%60)*per)});
+  S.forEach(function(s){label(svg,s[3],LR,(s[0]-1)*per,s[1]*per)});
+  var prog=el('path',{'class':'prog'},svg),mk=marker(svg),ro=svg.parentNode;
+  return function(t){var m=t*59.99,a=m*per;prog.setAttribute('d',a>.5?arc(R-22,0,a):'');var p=pt(R,a);mk.setAttribute('transform','translate('+f(p[0])+' '+f(p[1])+')');
+   var mi=Math.floor(m),ph=S.filter(function(s){return mi+1>=s[0]&&mi+1<=s[1]})[0];$('[data-v]',ro).textContent=mi;$('[data-l]',ro).textContent=ph[3]}};
+
+ /* 4. the heart: a monitor trace wrapped around the photo */
+ inst.heart=function(svg){
+  function ecg(x){function g(c,w,h){return h*Math.exp(-Math.pow((x-c)/w,2))}return g(.16,.035,.12)+g(.3,.008,-.14)+g(.33,.011,1)+g(.362,.01,-.3)+g(.6,.06,.26)}
+  var beats=9,pts=[],n=1440;for(var i=0;i<=n;i++){var a=i/n*360,ph=(a/360*beats)%1,r=R+ecg(ph)*34,p=pt(r,a);pts.push((i?'L':'M')+f(p[0])+' '+f(p[1]))}
+  var d=pts.join('');
+  ticks(svg,72,TR+18,function(i){return i%6===0});
+  el('path',{'class':'ecg-b',d:d},svg);var fg=el('path',{'class':'ecg-f',d:d},svg);
+  var L=fg.getTotalLength(),seg=L*.22;fg.style.strokeDasharray=seg+' '+(L-seg);
+  var H=[[0,'Check-up'],[72,'Keyhole surgery'],[144,'Valves'],[216,'Bypass'],[288,'Veins']];
+  H.forEach(function(h){label(svg,h[1],LR+14,h[0]-30,h[0]+30)});
+  var head=el('circle',{r:5,fill:'#FDEDE8',style:'filter:drop-shadow(0 0 8px #F4978E)'},svg);
+  return function(t){var off=t*L*1.4;fg.style.strokeDashoffset=-(off-seg)%L;var q=fg.getPointAtLength((off)%L);head.setAttribute('cx',q.x);head.setAttribute('cy',q.y)}};
+
+ var upd=[];$$('[data-inst]').forEach(function(s){upd.push(inst[s.getAttribute('data-inst')](s))});
+
+ /* lifeline */
+ var spikes=[333,666],lp='M0 20';[0,1,2].forEach(function(k){var x=k===0?0:spikes[k-1];});
+ var dl='M0 20H318l8-14 10 28 9-20 5 6H651l8-14 10 28 9-20 5 6H1000';
+ $('#lifeB').setAttribute('d',dl);var lf=$('#lifeF');lf.setAttribute('d',dl);var LL=lf.getTotalLength();lf.style.strokeDasharray=LL;lf.style.strokeDashoffset=LL;
+ var marks=$$('.life .mks a'),cnt=$('#cntN'),pinEl=$('#lcPin'),track=$('#lcTrack'),sec=$('#lc'),pnls=$$('.pnl');
+
+ var stacked=matchMedia('(max-width:900px),(prefers-reduced-motion:reduce)'),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ var REST=[.48,.55,.4,.6];
+ function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
+ var D=.62,T=.48; /* dwell and travel per panel, in viewport heights */
+ function frame(){
+  if(stacked.matches)return;
+  var vh=innerHeight,u=(scrollY-sec.offsetTop)/vh,x=0,loc=[0,0,0,0,0],a=0;
+  for(var k=0;k<5;k++){
+   if(u<a+D){x=k;loc[k]=Math.max(0,(u-a)/D);break}
+   loc[k]=1;
+   if(k<4&&u<a+D+T){x=k+ease((u-a-D)/T);break}
+   a+=D+T;x=k+1}
+  track.style.transform='translate3d('+(-x*100)+'vw,0,0)';
+  for(var i=1;i<5;i++)upd[i-1](Math.min(1,loc[i]));
+  var cur=Math.round(x);pnls.forEach(function(p,i){if(Math.abs(x-i)<.55)p.classList.add('in')});
+  cnt.textContent='0'+Math.max(1,cur);
+  marks.forEach(function(m,i){m.classList.toggle('on',i===cur-1)});
+  var lp=Math.max(0,Math.min(1,(x-1)/3));lf.style.strokeDashoffset=LL*(1-lp);
+  if(x>3.5)pinEl.setAttribute('data-dark','');else pinEl.removeAttribute('data-dark');
+  if(x<.5)pinEl.setAttribute('data-intro','');else pinEl.removeAttribute('data-intro');
+ }
+ var tick=false;function onS(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;frame()})}}
+ addEventListener('scroll',onS,{passive:true});addEventListener('resize',onS);
+
+ /* stacked mode: each instrument counts up once when it comes into view */
+ function stackInit(){
+  pnls.forEach(function(p){p.classList.add('in')});
+  upd.forEach(function(u,i){u(reduce?REST[i]:0)});
+  if(reduce||!('IntersectionObserver' in window)){upd.forEach(function(u,i){u(REST[i])});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var i=+e.target.id.slice(2)-1,t0=performance.now();
+   (function st(n){var k=Math.min(1,(n-t0)/1600);upd[i](REST[i]*ease(k));if(k<1)requestAnimationFrame(st)})(t0)})},{threshold:.45});
+  pnls.slice(1).forEach(function(p){io.observe(p)})}
+ function mode(){if(stacked.matches)stackInit();else{pnls.forEach(function(p,i){if(i)p.classList.remove('in')});frame()}}
+ (stacked.addEventListener?stacked.addEventListener('change',mode):stacked.addListener(mode));mode();
+
+ /* chapter links jump to the right scroll position */
+ $$('[data-go]').forEach(function(a){a.addEventListener('click',function(e){if(stacked.matches)return;e.preventDefault();var k=+a.getAttribute('data-go');
+  scrollTo({top:sec.offsetTop+(k*(D+T)+D*.15)*innerHeight,behavior:reduce?'auto':'smooth'})})});
+})();
+</script>
+</body></html>

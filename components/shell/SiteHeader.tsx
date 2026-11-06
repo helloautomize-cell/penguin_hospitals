@@ -9,7 +9,7 @@ import { doctors } from "@/lib/doctors";
 import { DoctorBadge } from "@/components/badges/ServiceBadge";
 import { MobileMenu } from "./MobileMenu";
 
-function Mega({ groups, doctorIndex, wide }: { groups: NavGroup[]; doctorIndex: number; wide: boolean }) {
+function Mega({ groups, doctorIndex, wide, img }: { groups: NavGroup[]; doctorIndex: number; wide: boolean; img?: string }) {
   const d = doctors[doctorIndex];
   return (
     <div className={`mega ${wide ? "mega-w" : "mega-h"}`}>
@@ -33,7 +33,7 @@ function Mega({ groups, doctorIndex, wide }: { groups: NavGroup[]; doctorIndex: 
         </div>
       ))}
       <Link className="mdoc" href={d.profileHref}>
-        <img src={d.portrait} alt="" />
+        <img src={img ?? d.portrait} alt="" />
         <span>
           <b>
             {d.name} {d.nameSoft}
@@ -49,7 +49,7 @@ function Mega({ groups, doctorIndex, wide }: { groups: NavGroup[]; doctorIndex: 
 }
 
 /** Floating pill nav + hover mega menus, ported from main-pages shell.css. */
-export function SiteHeader() {
+export function SiteHeader({ docImgs }: { docImgs?: [string, string] }) {
   const pathname = usePathname();
   const [small, setSmall] = useState(false);
   const [open, setOpen] = useState(false);
@@ -83,6 +83,7 @@ export function SiteHeader() {
                       groups={item.mega === "women" ? womenGroups : heartGroups}
                       doctorIndex={item.mega === "women" ? 0 : 1}
                       wide={item.mega === "women"}
+                      img={item.mega === "women" ? docImgs?.[0] : docImgs?.[1]}
                     />
                   </div>
                 ) : (

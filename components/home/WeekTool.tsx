@@ -4,8 +4,10 @@ import { useState } from "react";
 import { weekInfo, weekFromLmp, dueDateFromLmp, MIN_WEEK, MAX_WEEK } from "@/lib/pregnancy-weeks";
 
 /** Week-by-week tool page block (.tool/.lmp/.wkbig/.range/.now/.stgs). */
-export function WeekTool() {
-  const [week, setWeek] = useState(20);
+export function WeekTool({ initial }: { initial?: number }) {
+  const [week, setWeek] = useState(() =>
+    initial ? Math.max(MIN_WEEK, Math.min(MAX_WEEK, Math.round(initial))) : 20,
+  );
   const [lmpOut, setLmpOut] = useState<React.ReactNode | null>(null);
   const info = weekInfo(week);
   const tri = week < 14 ? "first" : week < 28 ? "second" : "third";
@@ -58,6 +60,7 @@ export function WeekTool() {
         max={MAX_WEEK}
         value={week}
         aria-label="Week of pregnancy"
+        aria-valuenow={week}
         style={{ "--p": `${(((week - MIN_WEEK) / (MAX_WEEK - MIN_WEEK)) * 100).toFixed(0)}%` } as React.CSSProperties}
         onChange={(e) => setWeek(+e.target.value)}
       />

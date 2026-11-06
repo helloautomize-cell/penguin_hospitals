@@ -52,3 +52,48 @@ export function dueDateFromLmp(lmp: Date): Date {
 
 export const MIN_WEEK = 4;
 export const MAX_WEEK = 40;
+
+// Fruit-stage rows for the "For mothers-to-be" dial
+// (resources/reference/sections-v2/), moved here unchanged.
+// [weekFrom, weekTo, fruit id, name shown, base scale, at-Penguin list,
+// you-may-notice list]. Weeks not in a row cannot occur (4..40 all covered).
+export type FruitId =
+  | "seed"
+  | "jamun"
+  | "lemon"
+  | "guava"
+  | "mango"
+  | "papaya"
+  | "coconut"
+  | "watermelon";
+
+// [weekFrom, weekTo, fruit id, name shown, base scale, at-Penguin list,
+// you-may-notice list]
+export type FruitWeek = [
+  from: number,
+  to: number,
+  fruit: FruitId,
+  name: string,
+  scale: number,
+  atPenguin: string[],
+  feel: string[],
+];
+
+export const FR: FruitWeek[] = [
+  [4, 7, "seed", "a pomegranate seed", 0.3, ["Confirm the pregnancy", "First visit and folic acid"], ["Tiredness", "Nausea, for some", "Sore breasts"]],
+  [8, 11, "jamun", "a jamun", 0.42, ["Booking visit with blood tests", "Dating scan"], ["Nausea may peak", "Needing to pee more often"]],
+  [12, 14, "lemon", "a lemon", 0.52, ["NT scan and first-trimester screening", "Diet, work and travel talk"], ["Energy often returns", "Nausea often eases"]],
+  [15, 19, "guava", "a guava", 0.6, ["Monthly check: weight, BP, urine", "Blood tests if due"], ["A small bump", "First flutters, for some"]],
+  [20, 23, "mango", "a mango", 0.7, ["Anomaly scan, usually 18 to 22 weeks", "Iron and calcium checked"], ["Clear baby movements", "Back ache, for some"]],
+  [24, 28, "papaya", "a papaya", 0.8, ["Sugar test for diabetes in pregnancy", "Blood pressure watched closely"], ["Heartburn", "Leg cramps at night"]],
+  [29, 34, "coconut", "a coconut", 0.9, ["Visits every two weeks", "Growth scan if needed, birth plan talk"], ["Breathless on stairs", "Practice tightenings"]],
+  [35, 40, "watermelon", "a watermelon", 1, ["Weekly visits and movement checks", "Painless delivery and hospital bag planned"], ["Baby moves lower", "Trouble sleeping"]],
+];
+
+export function fruitForWeek(week: number): { index: number; row: FruitWeek } {
+  let i = 0;
+  FR.forEach((row, k) => {
+    if (week >= row[0] && week <= row[1]) i = k;
+  });
+  return { index: i, row: FR[i] };
+}

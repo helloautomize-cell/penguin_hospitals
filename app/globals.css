@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "./ref.css";
 @import "./ref-home.css";
+@import "./home-v2.css";
+@import "./treatment-hero.css";
+@import "./pages-v2.css";
 
 /*
   Penguin Hospital design tokens.
@@ -246,17 +249,3 @@
 }
 
 html, body { overflow-x: clip; }
-
-/* Chapter story scenes (reference design) */
-@keyframes cs-rot { to { transform: rotate(360deg); } }
-@keyframes cs-br { 50% { transform: scale(1.04); } }
-@keyframes cs-run { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
-@keyframes cs-lub { 50% { transform: scale(1.05); } }
-.cs-spin { animation: cs-rot 28s linear infinite; transform-origin: 260px 260px; }
-.cs-breathe { animation: cs-br 4.6s ease-in-out infinite; transform-origin: 260px 260px; }
-.cs-ecg { stroke-dasharray: 60 540; animation: cs-run 2.4s linear infinite; }
-.cs-ecg-fast { animation-duration: 1.4s; }
-.cs-beat { animation: cs-lub 1.3s ease-in-out infinite; transform-origin: 260px 250px; }
-@media (prefers-reduced-motion: reduce) {
-  .cs-spin, .cs-breathe, .cs-ecg, .cs-beat { animation: none; }
-}

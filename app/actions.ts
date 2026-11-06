@@ -133,3 +133,30 @@ export async function submitForm(_prev: FormState, fd: FormData): Promise<FormSt
   }
   redirect(`/thank-you/?type=${isAppt ? "appointment" : "contact"}`);
 }
+
+export type LmpState =
+  | { status: "idle" }
+  | { status: "error"; message: string }
+  | { status: "ok"; week: number; days: number; due: string };
+
+// "For mothers-to-be" last-period calculator. Works without JS (plain form
+// POST to this action); the client also moves the dial to the result.
+export async function lmpCalc(_prev: LmpState, fd: FormData): Promise<LmpState> {
+  const v = String(fd.get("lmp") || "");
+  if (!v) return { status: "error", message: "Choose a date first." };
+  const d = new Date(v + "T00:00:00");
+  if (Number.isNaN(d.getTime()))
+    return { status: "error", message: "That date looks outside a pregnancy. Please check it." };
+  const t = new Date();
+  t.setHours(0, 0, 0, 0);
+  const days = Math.floor((t.getTime() - d.getTime()) / 864e5);
+  if (days < 0 || days > 300)
+    return { status: "error", message: "That date looks outside a pregnancy. Please check it." };
+  const due = new Date(d.getTime() + 280 * 864e5);
+  return {
+    status: "ok",
+    week: Math.floor(days / 7),
+    days: days % 7,
+    due: due.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }),
+  };
+}

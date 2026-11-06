@@ -69,7 +69,7 @@ export function allPosts(): PageDoc[] {
 export function templateFor(url: string): string {
   const u = url.replace(/\/+$/, "");
   if (u === "/obstetrics-gynaecology" || u === "/heart-and-vascular-surgery") return "hub";
-  if (u === "/doctors") return "doctors-hub";
+  if (u === "/doctors") return "doctors-v2";
   if (u.startsWith("/doctors/")) return "doctor";
   if (u === "/book" || u === "/contact") return "form";
   if (u === "/emergency") return "emergency";
@@ -80,6 +80,8 @@ export function templateFor(url: string): string {
   if (u === "/thank-you") return "thankyou";
   if (u === "/health-library" || u === "/services") return "hub";
   if (u === "/faqs") return "faqs";
-  if (u === "/about" || u === "/plan-your-visit" || u === "/patients-from-pcmc") return "info";
+  if (u === "/about") return "about-v2";
+  if (u === "/plan-your-visit") return "visit-v2";
+  if (u === "/patients-from-pcmc") return "info";
   return "service";
 }

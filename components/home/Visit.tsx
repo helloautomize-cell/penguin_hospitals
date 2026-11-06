@@ -8,6 +8,7 @@ import { WhatsAppIcon } from "@/components/icons";
 import { ConfirmChip } from "@/components/Tag";
 
 const NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const FULL = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const ORDER = [1, 2, 3, 4, 5, 6, 0];
 const OPD: Record<number, [number, number]> = { 0: [16, 18], 1: [0, 24], 2: [0, 24], 3: [0, 24], 4: [0, 24], 5: [0, 24], 6: [0, 24] };
 
@@ -151,6 +152,23 @@ export function Visit() {
                 <i style={{ background: "var(--navy)" }}></i>OPD <ConfirmChip />
               </span>
             </div>
+            <p
+              data-hours-text
+              aria-live="polite"
+              style={{
+                position: "absolute",
+                width: 1,
+                height: 1,
+                overflow: "hidden",
+                clip: "rect(0 0 0 0)",
+                clipPath: "inset(50%)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {`${FULL[sel]}: emergency open all day; ${
+                o[1] - o[0] === 24 ? "OPD all day" : "OPD 4 pm to 6 pm"
+              }`}
+            </p>
           </div>
           <div className="addr rv" style={{ "--d": ".1s" } as React.CSSProperties}>
             <h3>Penguin Hospital, Chinchwad Gaon</h3>

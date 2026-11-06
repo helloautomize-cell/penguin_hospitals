@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ConfirmChip } from "./Tag";
+import { DoctorImg, FallbackFlag } from "./DoctorImage";
+import { doctorSlot } from "@/lib/doctor-images";
 import type { Doctor } from "@/lib/doctors";
 
 /** Home + profile doctor block (.doc/.ph/.idcard/.three/.note). */
@@ -9,9 +11,9 @@ export function DoctorCard({ doctor, flip = false }: { doctor: Doctor; flip?: bo
     <article className={`doc${flip ? " flip" : ""}`}>
       <div className="ph rv">
         <div className="frame">
-          <img src={doctor.portrait} alt={`${doctor.name} ${doctor.nameSoft} at Penguin Hospital`} />
+          <DoctorImg who={doctor.slug} kind="Hero" />
         </div>
-        <span className="confirm lowres">CONFIRM: new 4:5 portrait</span>
+        <FallbackFlag slot={doctorSlot(doctor.slug, "Hero")} text="CONFIRM: new 4:5 portrait" className="lowres" />
         <span className="note">
           <span dangerouslySetInnerHTML={{ __html: doctor.marginNote.replace(/\.$/, "").replace(" ", " ") }} />
         </span>
@@ -59,8 +61,8 @@ export function DoctorMiniCard({ doctor }: { doctor: Doctor }) {
   return (
     <Link href={doctor.profileHref} className="dmini">
       <span className="ph">
-        <img src={doctor.portrait} alt="" />
-        <span className="confirm">CONFIRM</span>
+        <DoctorImg who={doctor.slug} kind="Headshot" />
+        <FallbackFlag slot={doctorSlot(doctor.slug, "Headshot")} text="CONFIRM" />
       </span>
       <span className="tx">
         <small>{doctor.shortRole}</small>
@@ -81,8 +83,8 @@ export function BigDocCard({ doctor, facts }: { doctor: Doctor; facts?: { label:
   return (
     <article className="bigdoc">
       <div className="ph">
-        <img src={doctor.portrait} alt={`${doctor.name} ${doctor.nameSoft}`} />
-        <span className="confirm">CONFIRM: new portrait</span>
+        <DoctorImg who={doctor.slug} kind="Hero" />
+        <FallbackFlag slot={doctorSlot(doctor.slug, "Hero")} />
         <span className="nm">
           {doctor.name.replace("Dr. ", "Dr. ")}
         </span>

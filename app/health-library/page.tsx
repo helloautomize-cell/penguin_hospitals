@@ -7,6 +7,7 @@ import { CtaBand } from "@/components/Callouts";
 import { ServiceBadge } from "@/components/badges/ServiceBadge";
 import { slugFor } from "@/lib/service-badges";
 import { doctors } from "@/lib/doctors";
+import { DoctorImg } from "@/components/DoctorImage";
 
 export const metadata: Metadata = {
   title: "Health library | Penguin Hospital, Chinchwad",
@@ -31,7 +32,7 @@ function Byline({ author }: { author?: string }) {
   const d = doctors.find((x) => author?.includes(x.nameSoft.split(" ")[0]) || author?.includes(x.name.split(" ")[1]));
   return (
     <span className="by">
-      {d ? <img src={d.portrait} alt="" /> : null}
+      {d ? <DoctorImg who={d.slug} kind="Headshot" /> : null}
       {author ?? "Penguin Hospital"} {d ? null : <ConfirmChip />}
     </span>
   );
@@ -69,12 +70,9 @@ export default async function HealthLibrary({
               <Link
                 key={c}
                 href={c === "All" ? "/health-library/" : `/health-library/?cat=${encodeURIComponent(c)}`}
+                aria-pressed={active === c}
               >
-                <span role="button" aria-pressed={active === c} style={{ display: "contents" }}>
-                  <button type="button" aria-pressed={active === c} style={{ pointerEvents: "none" }}>
-                    {c}
-                  </button>
-                </span>
+                {c}
               </Link>
             ))}
           </div>

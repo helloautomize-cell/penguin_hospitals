@@ -31,7 +31,26 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       document.body.style.overflow = "";
     }
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open) onClose();
+      if (!open) return;
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const root = document.getElementById("msheet");
+        if (!root) return;
+        const list = [...root.querySelectorAll<HTMLElement>(
+          "a[href], button, summary, [tabindex]:not([tabindex='-1'])",
+        )].filter((el) => el.offsetParent !== null);
+        if (!list.length) return;
+        const first = list[0];
+        const last = list[list.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+        if (e.shiftKey && (active === first || !root.contains(active))) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && (active === last || !root.contains(active))) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

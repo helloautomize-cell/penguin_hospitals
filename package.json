@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "images": "node scripts/process-images.mjs",
+    "images:doctors": "node scripts/doctor-images.mjs",
     "test": "playwright test",
     "launch-check": "node scripts/launch-check.mjs"
   },

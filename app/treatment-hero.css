@@ -1,0 +1,200 @@
+/*
+  TreatmentHero styles (split + badge variants; cinema reuses .phero/.win).
+  Navy panel with the heart-map faint grid, photo card right, glass doctor
+  card overlay. Tokens and type follow ref.css — do not "improve" values.
+*/
+
+/* --- cinema compat: next/image `fill` sets inline height; the approved
+   mobile crop (.win>img at 62% height) must win over it. --- */
+@media (max-width: 760px) {
+  .win > img {
+    height: 62% !important;
+  }
+}
+
+/* ===== split hero: navy panel, never full-bleed ===== */
+.thero {
+  padding-top: calc(124px + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+.thero-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: 56px;
+  align-items: center;
+  padding: 56px;
+  max-height: 640px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--navy);
+  color: #fff;
+}
+/* faint grid from the heart-map section (.home .hm::before) */
+.thero-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(143, 184, 234, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(143, 184, 234, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(60% 60% at 30% 50%, #000, transparent);
+  mask-image: radial-gradient(60% 60% at 30% 50%, #000, transparent);
+}
+
+/* left column — sized to fit inside the 640px panel cap */
+.thero-copy {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  align-content: center;
+  min-width: 0;
+}
+.thero-copy .crumbs {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+.thero-copy .crumbs a:hover {
+  color: #fff;
+}
+.thero-pill {
+  gap: 10px;
+  min-height: 56px;
+  padding: 2px 16px 2px 2px;
+}
+.thero-pill .badge {
+  flex: none;
+}
+.thero h1 {
+  font: 700 clamp(30px, 3.2vw, 46px) / 1.02 var(--sans);
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+.thero .intro {
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 52ch;
+}
+.thero .ctas {
+  margin-top: 2px;
+}
+.thero .meta {
+  margin-top: 4px;
+  color: var(--on-dark-2);
+}
+.thero .meta a {
+  color: #fff;
+}
+
+/* right column */
+.thero-media {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-items: center;
+}
+.thero-ph {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 5/4;
+  max-height: calc(640px - 112px);
+  animation: thero-in 0.9s var(--ease) both;
+}
+.thero-ph.tall {
+  aspect-ratio: 4/5;
+}
+@keyframes thero-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.thero-ph .gcard {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  width: min(330px, calc(100% - 28px));
+  background: rgba(0, 20, 46, 0.66);
+  border-color: rgba(255, 255, 255, 0.22);
+  animation: thero-rise 0.5s var(--ease) 0.55s both;
+}
+@keyframes thero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* badge fallback: same panel, large badge on a soft navy tile */
+.thero-tile {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 4/5;
+  max-height: calc(640px - 112px);
+  border-radius: 24px;
+  border: 1px solid rgba(143, 184, 234, 0.16);
+  background: rgba(143, 184, 234, 0.08);
+  animation: thero-in 0.9s var(--ease) both;
+}
+.thero-tile .badge {
+  filter: drop-shadow(0 18px 34px rgba(0, 14, 36, 0.5));
+}
+
+/* ===== mobile (below 1024): photo first, full width, 4/3 ===== */
+@media (max-width: 1023.98px) {
+  .thero .wrap {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .thero-panel {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    padding: 24px;
+    max-height: none;
+  }
+  .thero-media {
+    order: -1;
+  }
+  .thero-ph,
+  .thero-tile {
+    aspect-ratio: 4/3;
+    max-height: none;
+  }
+  .thero h1 {
+    font-size: clamp(30px, 6.4vw, 44px);
+  }
+  .thero .ctas .btn {
+    flex: 1 1 0;
+    padding: 0 14px;
+  }
+}
+@media (max-width: 760px) {
+  .thero {
+    padding-top: calc(100px + env(safe-area-inset-top, 0px));
+  }
+  .thero .intro {
+    font-size: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .thero-ph,
+  .thero-tile,
+  .thero-ph .gcard {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await p.goto("http://localhost:3000/", { waitUntil: "networkidle" });
+const top = await p.evaluate(() => document.querySelector(".lc").getBoundingClientRect().top + scrollY);
+await p.evaluate((y) => scrollTo(0, y), top + 4.9 * 900);
+await p.waitForTimeout(900);
+const el = await p.$(".p4 .stage");
+await el.screenshot({ path: "shots-v2/heart-inst-1beat.png" });
+await b.close();

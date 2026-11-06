@@ -1,0 +1,1288 @@
+<title>Penguin Doctors, About, Visit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Instrument+Serif&display=swap">
+<style>
+/* Layout: each page is a scroll story of full-bleed photo scenes, alternating light ice bands and deep navy night bands; one interactive moment per section. */
+:root{
+  --navy:#001F43; --navy-2:#0A2A55; --primary:#17407E; --p500:#2A5BA8; --p100:#E7EEF8; --p50:#F4F7FC;
+  --ink:#13223A; --ink-2:#4B5A70; --line:#E3E8F0; --white:#FFFFFF; --coral:#F4978E; --red:#E40913;
+  --amber:#F1B45B; --ok:#1E9E6A; --confirm-bg:#FFF2B8; --confirm-fg:#6B5300;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --r-lg:28px; --r-md:18px; --r-sm:12px;
+  --wrap:1240px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--p50);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--p50)}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--p500);outline-offset:3px;border-radius:8px}
+h1,h2,h3{text-wrap:balance;margin:0;letter-spacing:-.025em;line-height:1.05}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:900px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+.h-xl{font-size:clamp(44px,7.2vw,104px);font-weight:700}
+.h-l{font-size:clamp(34px,4.8vw,64px);font-weight:700}
+.h-m{font-size:clamp(24px,2.6vw,34px);font-weight:700}
+.lead{font-size:clamp(18px,1.5vw,21px);color:var(--ink-2);max-width:60ch}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--primary)}
+.night .kicker{color:var(--coral)}
+.night{background:var(--navy);color:var(--white)}
+.night .lead{color:#B9C6DA}
+.confirm{display:inline-block;background:var(--confirm-bg);color:var(--confirm-fg);font-size:11.5px;font-weight:700;letter-spacing:.02em;padding:1px 7px;border-radius:6px;vertical-align:middle;line-height:1.6;white-space:nowrap}
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 22px;font-weight:600;font-size:15.5px;text-decoration:none;transition:transform .25s,background .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-coral{background:var(--coral);color:var(--navy)}
+.btn-navy{background:var(--navy);color:var(--white)}
+.btn-ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn .ico{width:18px;height:18px}
+section{position:relative}
+.band{padding-block:clamp(72px,10vw,140px)}
+.rev{transition:transform 1.1s cubic-bezier(.22,1,.36,1),opacity 1s cubic-bezier(.22,1,.36,1)}
+.js .rev:not(.in){transform:translateY(32px);opacity:0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* ---------- preview bar + site header ---------- */
+.pbar{background:var(--navy);color:#B9C6DA;font-size:13px}
+.pbar .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-block:8px;flex-wrap:wrap}
+.pbar b{color:var(--white);font-weight:600}
+.pbar nav{display:flex;gap:6px;flex-wrap:wrap}
+.pbar nav a{color:var(--white);text-decoration:none;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.08)}
+.pbar nav a.on{background:var(--coral);color:var(--navy);font-weight:700}
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;padding-block:12px;pointer-events:none}
+.hdr .pill{pointer-events:auto;display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;padding:8px 8px 8px 22px;box-shadow:0 8px 30px rgba(0,31,67,.10)}
+.hdr img{height:40px;width:auto}
+.hdr nav{display:flex;gap:4px;margin-left:auto;font-size:15px;color:var(--ink-2)}
+.hdr nav a{text-decoration:none;padding:8px 13px;border-radius:999px}
+.hdr nav a.on{background:var(--p100);color:var(--navy);font-weight:600}
+.hdr .em{color:var(--red);font-weight:600;font-size:14.5px;text-decoration:none;display:flex;gap:6px;align-items:center}
+.hdr .em .ico{width:17px;height:17px}
+@media(max-width:980px){.hdr nav .hide-m{display:none}.hdr .em{display:none}}
+@media(max-width:640px){.hdr nav{display:none}.hdr .pill{justify-content:space-between}}
+
+.page{display:none}
+.page.on{display:block}
+.crumb{font-size:14px;color:var(--ink-2)}
+.crumb a{text-decoration:none}
+.night .crumb{color:#9DB0CC}
+
+/* ---------- shared: FAQ + CTA + footer ---------- */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(28px,5vw,80px);align-items:start}
+.faq details{background:var(--white);border-radius:var(--r-md);margin-bottom:12px;box-shadow:0 1px 0 var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 24px;font-weight:600;font-size:18px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{width:30px;height:30px;border-radius:50%;background:var(--p100);flex:none;position:relative;transition:transform .3s,background .3s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:9px;right:9px;top:14px;height:2px;background:var(--navy);border-radius:2px}
+.faq summary i::after{transform:rotate(90deg);transition:transform .3s}
+.faq details[open] summary i{background:var(--coral)}
+.faq details[open] summary i::after{transform:rotate(0)}
+.faq details p{padding:0 24px 22px;color:var(--ink-2)}
+.faq .aside{position:sticky;top:110px;display:grid;gap:18px}
+.faq .aside img{border-radius:var(--r-lg);aspect-ratio:4/3;object-fit:cover;width:100%}
+@media(max-width:820px){.faq{grid-template-columns:1fr}.faq .aside{position:static}}
+.cta{position:relative;overflow:hidden;border-radius:var(--r-lg);min-height:420px;display:flex;align-items:flex-end;color:var(--white)}
+.cta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 6s ease-out}
+.cta.in>img{transform:scale(1)}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,31,67,.92) 0%,rgba(0,31,67,.55) 45%,rgba(0,31,67,.05) 80%);z-index:1}
+.cta .in-c{position:relative;z-index:2;padding:clamp(28px,5vw,64px);display:grid;gap:18px;max-width:620px}
+.cta .acts{display:flex;gap:10px;flex-wrap:wrap}
+.foot{background:var(--navy);color:#9DB0CC;font-size:14px}
+.foot .wrap{padding-block:36px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot b{color:var(--white)}
+
+/* =========================================================
+   DOCTORS (v2: calmer, precise motion)
+   ========================================================= */
+:root{--ez:cubic-bezier(.22,1,.36,1)}
+.d-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:end;padding-block:36px 40px}
+.d-head h1{font-size:clamp(56px,8vw,118px);font-weight:700;letter-spacing:-.04em;line-height:.95}
+.d-head h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.d-head h1 .ln span{display:block;transform:translateY(105%);animation:lineup 1.1s var(--ez) forwards}
+.d-head h1 .ln:nth-child(2) span{animation-delay:.12s}
+@keyframes lineup{to{transform:none}}
+.d-head .side{display:grid;gap:22px;opacity:0;animation:fadeup 1s .45s var(--ez) forwards}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.d-nums{display:flex;gap:0;border-top:1px solid var(--line);padding-top:18px}
+.d-nums div{flex:1;padding-right:18px;display:grid;gap:4px}
+.d-nums div+div{padding-left:18px;border-left:1px solid var(--line)}
+.d-nums b{font-family:var(--f-num);font-weight:400;font-size:44px;line-height:1;color:var(--navy)}
+.d-nums span{font-size:13.5px;color:var(--ink-2);line-height:1.35}
+@media(max-width:820px){.d-head{grid-template-columns:1fr}}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;transition:grid-template-columns 1s var(--ez)}
+@media(hover:hover) and (min-width:861px){
+  .duo:has(.pane:nth-child(1):hover){grid-template-columns:1.22fr .78fr}
+  .duo:has(.pane:nth-child(2):hover){grid-template-columns:.78fr 1.22fr}
+}
+.pane{position:relative;display:block;height:clamp(540px,76vh,740px);border-radius:var(--r-lg);overflow:hidden;isolation:isolate;color:var(--white);text-decoration:none;background:var(--navy);clip-path:inset(100% 0 0 0 round 28px);animation:curtain 1.4s .2s var(--ez) forwards}
+.pane:nth-child(2){animation-delay:.36s}
+@keyframes curtain{to{clip-path:inset(0 0 0 0 round 28px)}}
+.pane .pic{position:absolute;inset:0;z-index:-2;transform:scale(1.18);animation:settle 2.2s .2s var(--ez) forwards}
+.pane:nth-child(2) .pic{animation-delay:.36s}
+@keyframes settle{to{transform:scale(1)}}
+.pane .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 16%;transition:transform 1.6s var(--ez)}
+.pane:hover .pic img{transform:scale(1.045)}
+.pane::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,31,67,.25) 0%,rgba(0,31,67,0) 22%,rgba(0,31,67,0) 48%,rgba(0,31,67,.82) 100%)}
+.pane .lbl{position:absolute;top:20px;left:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);color:var(--navy);font-size:13px;font-weight:700;padding:8px 14px 8px 10px;border-radius:999px;opacity:0;animation:fadeup .8s 1.1s var(--ez) forwards}
+.pane .lbl .ico{width:16px;height:16px;color:var(--primary)}
+.pane .info{position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,2.6vw,36px);display:grid;gap:14px;opacity:0;animation:fadeup 1s 1.05s var(--ez) forwards}
+.pane:nth-child(2) .info,.pane:nth-child(2) .lbl{animation-delay:1.2s}
+.pane h2{font-size:clamp(30px,3.3vw,48px);letter-spacing:-.03em}
+.pane .role{color:#D3DDEB;font-size:15.5px;margin-top:-6px}
+.pane .row{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,255,255,.22);padding-top:16px}
+.pane .tags{display:flex;gap:6px;flex-wrap:wrap;min-width:0}
+.pane .tags span{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pane .tags .ico{width:15px;height:15px}
+.pane .arw{flex:none;width:52px;height:52px;border-radius:50%;background:var(--white);color:var(--navy);display:grid;place-items:center;transition:transform .6s var(--ez),background .4s}
+.pane:hover .arw{transform:rotate(-45deg);background:var(--coral)}
+@media(max-width:860px){.duo{grid-template-columns:1fr}.pane{height:500px}}
+
+/* picker */
+.pk{background:var(--white);border-radius:32px;padding:clamp(22px,4vw,52px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start;margin-top:40px;box-shadow:0 1px 0 var(--line),0 30px 80px -40px rgba(0,31,67,.25)}
+.pk h3{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 12px}
+.pk .grp+.grp{margin-top:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:9px;border:0;background:var(--p50);border-radius:999px;padding:9px 16px 9px 9px;font-size:15px;font-weight:500;color:var(--ink);transition:background .35s var(--ez),color .35s,transform .35s var(--ez)}
+.chip i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--white);color:var(--primary);transition:background .35s,color .35s,transform .5s var(--ez)}
+.chip i .ico{width:17px;height:17px}
+.chip:hover{background:var(--p100)}
+.chip:hover i{transform:scale(1.08)}
+.chip[aria-pressed="true"]{background:var(--navy);color:var(--white)}
+.chip[aria-pressed="true"] i{background:var(--coral);color:var(--navy)}
+.chip.sos i{color:var(--red)}
+.ans{position:sticky;top:104px;border-radius:24px;overflow:hidden;background:var(--navy);color:var(--white)}
+.ans .ph{position:relative;aspect-ratio:5/4;overflow:hidden}
+.ans .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .8s var(--ez),transform 1.6s var(--ez)}
+.ans .ph img.show{opacity:1;transform:scale(1)}
+.ans .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,31,67,0) 50%,var(--navy))}
+.ans .who{position:absolute;left:22px;right:22px;bottom:16px;z-index:1;display:flex;gap:12px;align-items:center}
+.ans .who img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:50% 20%;box-shadow:0 0 0 2px var(--white)}
+.ans .who b{display:block;font-size:18px;line-height:1.2}
+.ans .who span{font-size:13.5px;color:#B9C6DA}
+.ans .body{padding:6px 22px 24px;display:grid;gap:18px}
+.ans .why{color:#D3DDEB;font-size:16px;min-height:4.8em}
+.ans .acts{display:flex;gap:8px;flex-wrap:wrap}
+.ans .acts .btn{padding:12px 18px;font-size:14.5px}
+.ans .fade{transition:opacity .35s,transform .5s var(--ez)}
+.ans.swap .fade{opacity:0;transform:translateY(8px)}
+@media(max-width:900px){.pk{grid-template-columns:1fr}.ans{position:relative;top:0}}
+
+/* journey */
+.journey{height:360vh}
+.journey .stick{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:center;padding-block:96px 32px}
+.journey h2{font-size:clamp(32px,3.6vw,52px)}
+.jtoggle{display:inline-flex;background:rgba(255,255,255,.08);border-radius:999px;padding:4px;gap:2px;margin:24px 0 28px;position:relative}
+.jtoggle .knob{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--white);transition:transform .6s var(--ez),width .6s var(--ez);z-index:0}
+.jtoggle button{position:relative;z-index:1;border:0;background:transparent;color:#B9C6DA;padding:8px 16px 8px 8px;border-radius:999px;font-weight:600;font-size:15px;display:flex;gap:8px;align-items:center;transition:color .4s}
+.jtoggle button img{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+.jtoggle button[aria-pressed="true"]{color:var(--navy)}
+.jsteps{list-style:none;padding:0 0 0 28px;margin:0;display:grid;gap:22px;position:relative}
+.jsteps::before,.jsteps .bar{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;border-radius:2px;background:rgba(255,255,255,.12)}
+.jsteps .bar{background:var(--coral);transform-origin:top;transform:scaleY(0);box-shadow:0 0 12px rgba(244,151,142,.7)}
+.jsteps li{display:grid;grid-template-columns:44px 1fr;gap:10px;opacity:.32;transition:opacity .6s var(--ez)}
+.jsteps li.on{opacity:1}
+.jsteps .no{font-family:var(--f-num);font-size:26px;line-height:1.1;color:var(--coral)}
+.jsteps b{font-size:18.5px;display:block;line-height:1.3}
+.jsteps p{font-size:15px;color:#B9C6DA;margin-top:4px;max-width:42ch}
+.jph{position:relative;height:min(74vh,660px);border-radius:var(--r-lg);overflow:hidden;background:var(--navy-2);transition:opacity .5s}
+.jph.fading{opacity:0}
+.jph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(100% 0 0 0);transform:scale(1.12);transition:clip-path 1.1s var(--ez),transform 1.6s var(--ez)}
+.jph img.on{clip-path:inset(0 0 0 0);transform:scale(1)}
+.jph .segs{position:absolute;top:18px;left:18px;right:18px;display:flex;gap:6px;z-index:5}
+.jph .segs i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3);overflow:hidden}
+.jph .segs i b{display:block;height:100%;width:100%;background:var(--white);transform:scaleX(0);transform-origin:left;transition:transform .3s linear}
+.jph .cap{position:absolute;left:18px;bottom:18px;z-index:5;display:flex;gap:10px;align-items:center;background:rgba(0,31,67,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:8px 14px 8px 8px;border-radius:999px;font-size:14px;font-weight:600}
+.jph .cap img{position:static;width:30px;height:30px;border-radius:50%;clip-path:none;transform:none;object-position:50% 20%}
+@media(max-width:860px){
+  .journey{height:auto}
+  .journey .stick{position:relative;height:auto;grid-template-columns:1fr;padding-block:80px}
+  .jph{height:auto;aspect-ratio:4/3;order:-1}
+  .jsteps li{opacity:1}
+}
+
+/* profiles */
+.prof{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,88px);align-items:start}
+.prof+.prof{margin-top:clamp(100px,12vw,170px);padding-top:clamp(60px,8vw,110px);border-top:1px solid var(--line)}
+.prof.flip .pp{order:2}
+.pp{position:sticky;top:100px}
+.pp .main{aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;position:relative}
+.pp .main img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;transform:scale(var(--s,1.1));transition:transform .2s linear}
+.pp .live{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.94);color:var(--navy);font-weight:600;font-size:13.5px;padding:8px 14px;border-radius:999px}
+.pp .live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.8s infinite;box-shadow:0 0 0 4px rgba(30,158,106,.22)}
+.pp .strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.pp .strip figure{margin:0;border-radius:18px;overflow:hidden;aspect-ratio:4/3}
+.pp .strip img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ez)}
+.pp .strip figure:hover img{transform:scale(1.06)}
+.pi{display:grid;gap:44px;min-width:0}
+.pi .kicker{display:block;margin-bottom:12px}
+.pi .role{font-size:17px;color:var(--ink-2);margin-top:12px}
+.pi .intro{font-size:clamp(19px,1.6vw,22px);line-height:1.5;color:var(--ink);max-width:56ch}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line)}
+.nums>div{padding:20px 18px 20px 0;display:grid;gap:6px;align-content:start}
+.nums>div+div{padding-left:18px;border-left:1px solid var(--line)}
+.nums .n{font-family:var(--f-num);font-size:clamp(46px,4.6vw,64px);line-height:.95;color:var(--navy);font-variant-numeric:tabular-nums}
+.nums .l{font-size:14px;color:var(--ink-2);line-height:1.4}
+.sub{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:18px}
+.hw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.hw div{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+.hw i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:var(--p100);transition:background .4s,color .4s,transform .6s var(--ez)}
+.hw div:hover i{background:var(--navy);color:var(--coral);transform:rotate(-8deg) scale(1.05)}
+.hw b{display:block;font-size:16.5px;line-height:1.3}
+.hw p{font-size:15px;color:var(--ink-2);margin-top:4px}
+@media(max-width:600px){.hw{grid-template-columns:1fr}.nums{grid-template-columns:1fr 1fr}.nums>div:nth-child(3){grid-column:span 2;border-left:0;padding-left:0;border-top:1px solid var(--line)}}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative;padding-top:28px}
+.steps::before,.steps::after{content:"";position:absolute;left:6px;right:6px;top:7px;height:2px;border-radius:2px;background:var(--line)}
+.steps::after{background:linear-gradient(90deg,var(--p500),var(--coral));transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ez)}
+.steps.in::after{transform:scaleX(1)}
+.steps li{position:relative;font-size:14.5px;line-height:1.4;opacity:0;transform:translateY(10px);transition:opacity .6s,transform .8s var(--ez)}
+.steps.in li{opacity:1;transform:none}
+.steps li:nth-child(2){transition-delay:.3s}.steps li:nth-child(3){transition-delay:.6s}.steps li:nth-child(4){transition-delay:.9s}.steps li:nth-child(5){transition-delay:1.2s}
+.steps li::before{content:"";position:absolute;top:-28px;left:0;width:16px;height:16px;border-radius:50%;background:var(--white);box-shadow:inset 0 0 0 3px var(--p500)}
+.steps li:last-child::before{background:var(--coral);box-shadow:0 0 0 5px rgba(244,151,142,.25)}
+.steps b{display:block;font-size:15px;margin-bottom:4px}
+.steps span{color:var(--ink-2)}
+@media(max-width:760px){.steps{grid-template-columns:1fr;padding:0 0 0 30px;gap:18px}.steps::before,.steps::after{left:7px;right:auto;top:6px;bottom:6px;width:2px;height:auto}.steps::after{transform:scaleY(0);transform-origin:top}.steps.in::after{transform:scaleY(1)}.steps li::before{top:2px;left:-30px}}
+.kv{display:grid;grid-template-columns:150px 1fr;margin:0;font-size:15.5px}
+.kv dt,.kv dd{margin:0;padding:12px 0;border-top:1px solid var(--line)}
+.kv dt{color:var(--ink-2);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:14px}
+.treats{display:flex;flex-wrap:wrap;gap:8px}
+.treats a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:9px 15px 9px 12px;border-radius:999px;background:var(--white);box-shadow:inset 0 0 0 1px var(--line);color:var(--navy);font-size:14.5px;font-weight:500;transition:background .35s var(--ez),color .35s,box-shadow .35s}
+.treats a:hover{background:var(--navy);color:var(--white);box-shadow:none}
+.treats .ico{width:16px;height:16px;color:var(--primary);transition:color .35s}
+.treats a:hover .ico{color:var(--coral)}
+.pacts{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:860px){.prof,.prof.flip{grid-template-columns:1fr}.prof.flip .pp{order:0}.pp{position:relative;top:0}}
+
+@keyframes breathe{50%{transform:scale(1.08)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* team */
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+.tm{background:var(--p50);border-radius:22px;padding:26px 24px;display:grid;gap:14px;transition:transform .6s var(--ez),background .4s}
+.tm:hover{transform:translateY(-4px);background:var(--p100)}
+.tm i{width:52px;height:52px;border-radius:16px;background:var(--white);display:grid;place-items:center;color:var(--primary)}
+.tm b{font-size:18px}
+.tm p{font-size:14.5px;color:var(--ink-2)}
+@media(max-width:860px){.team{grid-template-columns:1fr 1fr}}
+
+/* =========================================================
+
+   ABOUT
+   ========================================================= */
+.a-hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:flex-end;overflow:hidden;color:var(--white);margin-top:-72px}
+.a-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;animation:kb 22s ease-out forwards}
+@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1)}}
+.a-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,31,67,.25) 0%,rgba(0,31,67,0) 40%,rgba(0,31,67,.7) 62%,rgba(0,31,67,.95) 100%);z-index:1}
+.a-hero .wrap{position:relative;z-index:2;width:100%;padding-block:150px 48px;display:grid;gap:26px}
+.a-hero h1 .w{display:inline-block;opacity:0;transform:translateY(40%);animation:wordup .9s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wordup{to{opacity:1;transform:none}}
+.a-hero .strip{display:flex;gap:10px;flex-wrap:wrap}
+.a-hero .strip span{display:inline-flex;gap:9px;align-items:center;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:9px 15px;border-radius:999px;font-size:15px}
+.a-hero .strip .ico{width:18px;height:18px;color:var(--coral)}
+.a-hero .lead{color:#D5DFEC}
+
+/* penguin story */
+.peng{height:460vh;background:var(--navy)}
+.peng .stick{position:sticky;top:0;height:100vh;overflow:hidden;color:var(--white)}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#00122A 0%,#06264F 55%,#16407A 100%)}
+.sky.dawn{background:linear-gradient(180deg,#0C2C5A 0%,#3C5E92 50%,#E8A79A 100%)}
+.sky-d{position:absolute;inset:0;background:linear-gradient(180deg,#183E73 0%,#5578AA 45%,#F0B9A4 88%,#F7D6C2 100%);opacity:0;transition:opacity 1.6s}
+.stars{position:absolute;inset:0;transition:opacity 1.6s}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2}}
+.snow{position:absolute;inset:0;pointer-events:none;transition:opacity 1.2s}
+.snow i{position:absolute;top:-10px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.8);animation:fall linear infinite}
+@keyframes fall{to{transform:translate3d(-40px,105vh,0)}}
+.ice{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,#DCE8F6 0%,#F4F8FD 60%);clip-path:polygon(0 18%,22% 10%,48% 16%,70% 6%,100% 14%,100% 100%,0 100%)}
+.sea{position:absolute;right:0;bottom:22%;width:34%;height:7%;background:linear-gradient(90deg,transparent,#0F3A70 30%,#1D4E8C);opacity:.9}
+.sea::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 30px,rgba(255,255,255,.2) 30px 46px);animation:wave 3s linear infinite;mix-blend-mode:screen}
+@keyframes wave{to{background-position:76px 0}}
+.pg{position:absolute;bottom:13%;width:clamp(90px,10vw,150px);transition:left 2.2s cubic-bezier(.45,.05,.3,1),transform 1s,opacity 1.2s;transform-origin:50% 100%}
+.pg svg{width:100%;height:auto;overflow:visible}
+.pg.walk svg{animation:waddle .5s ease-in-out infinite alternate}
+@keyframes waddle{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+.pg.face-l svg{transform:scaleX(-1)}
+.pg.face-l.walk svg{animation:waddleL .5s ease-in-out infinite alternate}
+@keyframes waddleL{from{transform:scaleX(-1) rotate(-4deg)}to{transform:scaleX(-1) rotate(4deg)}}
+.egg{position:absolute;bottom:13.4%;width:clamp(22px,2.4vw,34px);aspect-ratio:3/4;border-radius:50% 50% 48% 48%/60% 60% 40% 40%;background:radial-gradient(circle at 35% 30%,#fff,#DCE6F2);box-shadow:0 0 24px rgba(255,236,200,.6),0 3px 8px rgba(0,31,67,.45),inset -3px -4px 6px rgba(23,64,126,.25);transition:left 2.2s cubic-bezier(.45,.05,.3,1),opacity .8s,transform .8s}
+.egg.glow{animation:eggglow 2.4s ease-in-out infinite}
+@keyframes eggglow{50%{box-shadow:0 0 40px rgba(255,220,170,.95)}}
+.chick{position:absolute;bottom:13%;width:clamp(44px,4.6vw,66px);opacity:0;transform:scale(.4);transform-origin:50% 100%;transition:opacity .8s .6s,transform .8s .6s cubic-bezier(.3,1.6,.5,1)}
+.chick.on{opacity:1;transform:scale(1)}
+.ptext{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));top:clamp(90px,14vh,150px);max-width:var(--wrap);margin:0 auto;display:grid;gap:14px;pointer-events:none}
+@media(min-width:900px){.ptext{left:max(40px,env(safe-area-inset-left,0px))}}
+.ptext .beats{position:relative;min-height:240px;max-width:560px}
+.ptext .beat{position:absolute;inset:0 auto auto 0;opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}
+.ptext .beat.on{opacity:1;transform:none}
+.ptext .beat h2{font-size:clamp(32px,4.2vw,58px)}
+.ptext .beat p{margin-top:14px;color:#C9D5E6;font-size:clamp(17px,1.4vw,20px);max-width:46ch}
+.pprog{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.pprog i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .4s,transform .4s}
+.pprog i.on{background:var(--coral);transform:scale(1.5)}
+.pdocs{position:absolute;right:clamp(16px,8vw,140px);top:clamp(110px,18vh,180px);display:flex;gap:14px;opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s}
+.pdocs.on{opacity:1;transform:none}
+.pdocs figure{margin:0;width:clamp(110px,13vw,190px);border-radius:var(--r-md);overflow:hidden;background:var(--white);color:var(--navy);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.pdocs figure:nth-child(2){margin-top:40px}
+.pdocs img{aspect-ratio:1;object-fit:cover;width:100%}
+.pdocs figcaption{padding:10px 12px;font-size:13px;line-height:1.3}
+.pdocs figcaption b{display:block;font-size:14px}
+.tagline{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);color:var(--navy);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:13px;white-space:nowrap}
+@media(max-width:760px){.pdocs{top:auto;bottom:40%;right:16px}.pdocs figure{width:96px}.pdocs figcaption{font-size:11px}.pdocs figcaption b{font-size:12px}.ptext .beats{min-height:260px}}
+
+/* care bento */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:minmax(150px,auto);gap:14px;margin-top:48px}
+.tile{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--white);box-shadow:inset 0 0 0 1px var(--line);isolation:isolate;min-width:0}
+.tile.ph{color:var(--white);box-shadow:none}
+.tile.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile.ph:hover>img{transform:scale(1.05)}
+.tile.ph::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,31,67,0) 30%,rgba(0,31,67,.88))}
+.tile .tx{position:absolute;left:0;right:0;bottom:0;padding:26px;display:grid;gap:8px}
+.tile.plain .tx{position:relative;padding:28px}
+.tile h3{font-size:clamp(22px,2vw,28px)}
+.tile p{font-size:15.5px;opacity:.88;max-width:44ch}
+.t1{grid-column:span 4;grid-row:span 3}
+.t2{grid-column:span 2;grid-row:span 3}
+.t3{grid-column:span 3;grid-row:span 2;background:var(--p100);box-shadow:none}
+.t4{grid-column:span 3;grid-row:span 2}
+.bubble{position:absolute;top:22px;left:22px;right:22px;display:grid;gap:8px}
+.bubble span{justify-self:start;background:var(--white);color:var(--navy);padding:9px 14px;border-radius:16px 16px 16px 4px;font-size:14.5px;font-weight:500;box-shadow:0 8px 20px rgba(0,0,0,.18);opacity:0;transform:translateY(10px) scale(.95);transition:opacity .5s,transform .5s}
+.bubble span:nth-child(2){justify-self:end;background:var(--coral);border-radius:16px 16px 4px 16px;transition-delay:.9s}
+.bubble span:nth-child(3){transition-delay:1.8s}
+.tile.in .bubble span{opacity:1;transform:none}
+.roof{display:flex;gap:10px;align-items:end;padding:28px 28px 0}
+.roof .rm{flex:1;display:grid;justify-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--navy);text-align:center}
+.roof .rm i{width:54px;height:54px;border-radius:16px;background:var(--white);display:grid;place-items:center;color:var(--primary);transform:translateY(16px);opacity:0;transition:transform .6s cubic-bezier(.3,1.5,.5,1),opacity .6s}
+.tile.in .roof .rm i{transform:none;opacity:1}
+.roof .rm:nth-child(2) i{transition-delay:.15s}.roof .rm:nth-child(3) i{transition-delay:.3s}.roof .rm:nth-child(4) i{transition-delay:.45s}.roof .rm:nth-child(5) i{transition-delay:.6s}
+.roofline{margin:14px 28px 0;height:10px;border-radius:0 0 10px 10px;border:2px solid var(--p500);border-top:0}
+.t3 .tx{color:var(--ink)}
+.t3 p{color:var(--ink-2);opacity:1}
+.clockchip{position:absolute;top:22px;right:22px;display:flex;align-items:center;gap:12px;background:rgba(0,31,67,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:10px 16px}
+.clockchip .t{font-family:var(--f-num);font-size:34px;line-height:1}
+.clockchip small{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:600}
+.clockchip small::before{content:"";width:8px;height:8px;border-radius:50%;background:#3DDC97;box-shadow:0 0 0 4px rgba(61,220,151,.25);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(61,220,151,0)}}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}.t1,.t2,.t3,.t4{grid-column:span 2;grid-row:auto;min-height:340px}.t3{min-height:0}}
+
+/* building */
+.bld{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:center;margin-top:48px}
+.tower{position:relative;max-width:420px;width:100%;justify-self:center}
+.tower svg{width:100%;height:auto;overflow:visible}
+.tower .fl{cursor:pointer}
+.tower .fl rect.room{fill:#0E3466;stroke:#2A5BA8;stroke-width:1.5;transition:fill .4s}
+.tower .fl text{fill:#C9D5E6;font:600 15px var(--f-body);transition:fill .4s}
+.tower .fl .win{fill:#18447F;transition:fill .4s}
+.tower .fl.on rect.room{fill:var(--coral)}
+.tower .fl.on text{fill:var(--navy)}
+.tower .fl.on .win{fill:#FFE3D6}
+.tower .fl:hover rect.room{fill:#1B4A8A}
+.tower .fl.on:hover rect.room{fill:var(--coral)}
+.tower .fl:focus-visible{outline:none}
+.tower .fl:focus-visible rect.room{stroke:var(--white);stroke-width:3}
+.tower .glow{fill:var(--amber);opacity:.0;animation:winglow 4s ease-in-out infinite}
+@keyframes winglow{50%{opacity:.85}}
+.roomview{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:3/2;background:var(--navy-2)}
+.roomview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s,transform 1.4s}
+.roomview img.out{opacity:0;transform:scale(1.05)}
+.roomview .cap{position:absolute;left:16px;right:16px;bottom:16px;background:rgba(0,31,67,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:var(--r-md);padding:18px 20px;display:grid;gap:6px}
+.roomview .cap b{font-size:21px}
+.roomview .cap p{font-size:15.5px;color:#C9D5E6}
+.roomview .real{position:absolute;top:16px;left:16px;background:var(--white);color:var(--navy);font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;letter-spacing:.04em}
+.rooms-note{font-size:13.5px;color:#9DB0CC;margin-top:14px}
+@media(max-width:860px){.bld{grid-template-columns:1fr}.tower{max-width:340px}}
+
+/* facts + story */
+.glance{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:44px}
+.gl{background:var(--white);border-radius:var(--r-md);padding:24px 20px;display:grid;gap:10px;align-content:start;box-shadow:inset 0 0 0 1px var(--line)}
+.gl i{color:var(--primary)}
+.gl .n{font-family:var(--f-num);font-size:clamp(46px,4.4vw,64px);line-height:.95;color:var(--navy);font-variant-numeric:tabular-nums}
+.gl .l{font-size:14.5px;color:var(--ink-2);line-height:1.4}
+@media(max-width:900px){.glance{grid-template-columns:1fr 1fr}.gl:last-child{grid-column:span 2}}
+.story{margin-top:56px;overflow-x:auto;padding-bottom:20px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.story ol{list-style:none;margin:0;padding:0;display:flex;gap:16px;min-width:max-content;position:relative;padding-top:40px}
+.story ol::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:linear-gradient(90deg,var(--p500),var(--coral))}
+.story li{width:min(78vw,300px);scroll-snap-align:start;position:relative}
+.story li::before{content:"";position:absolute;top:-32px;left:0;width:16px;height:16px;border-radius:50%;background:var(--p50);box-shadow:inset 0 0 0 3px var(--p500)}
+.story li.now::before{background:var(--coral);box-shadow:0 0 0 6px rgba(244,151,142,.3)}
+.story .yr{font-family:var(--f-num);font-size:34px;color:var(--navy);line-height:1}
+.story .card{margin-top:10px;background:var(--white);border-radius:var(--r-md);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.story .card img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.story .card div{padding:16px 18px;font-size:15.5px}
+.story .card b{display:block;margin-bottom:4px}
+
+/* =========================================================
+   PLAN YOUR VISIT
+   ========================================================= */
+.v-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,64px);align-items:center;padding-block:30px 70px}
+.v-hero .txt{display:grid;gap:24px}
+.status{display:flex;gap:18px;align-items:center;background:var(--navy);color:var(--white);border-radius:var(--r-lg);padding:18px 22px;max-width:520px;flex-wrap:wrap}
+.status .t{font-family:var(--f-num);font-size:52px;line-height:1;font-variant-numeric:tabular-nums}
+.status .rows{display:grid;gap:4px;font-size:14.5px}
+.status .rows span{display:flex;gap:8px;align-items:center}
+.status .rows span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,#3DDC97);box-shadow:0 0 0 4px color-mix(in srgb,var(--c,#3DDC97) 25%,transparent)}
+.status .rows .closed{--c:#F4978E}
+.jump{display:flex;gap:8px;flex-wrap:wrap}
+.jump a{display:inline-flex;gap:8px;align-items:center;text-decoration:none;background:var(--white);padding:9px 14px 9px 10px;border-radius:999px;font-size:14.5px;font-weight:500;box-shadow:inset 0 0 0 1px var(--line);transition:background .25s,color .25s}
+.jump a:hover{background:var(--navy);color:var(--white)}
+.jump a .ico{width:18px;height:18px;color:var(--primary)}
+.jump a:hover .ico{color:var(--coral)}
+.v-photo{position:relative}
+.v-photo .main{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3.4}
+.v-photo .main img{width:100%;height:100%;object-fit:cover;animation:kb 18s ease-out forwards}
+.ticket{position:absolute;left:-28px;bottom:-30px;background:var(--white);border-radius:var(--r-md);padding:18px 20px;display:flex;gap:16px;align-items:center;box-shadow:0 24px 60px rgba(0,31,67,.18);max-width:300px}
+.ticket svg{width:62px;height:62px;flex:none}
+.ticket b{display:block;font-size:17px;line-height:1.25}
+.ticket span{font-size:13.5px;color:var(--ink-2)}
+.ticket .arc{fill:none;stroke:var(--coral);stroke-width:6;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:176;animation:arc 2.4s .6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes arc{to{stroke-dashoffset:10}}
+@media(max-width:900px){.v-hero{grid-template-columns:1fr}.ticket{left:12px;bottom:-24px}}
+
+/* first visit horizontal */
+.hscroll{background:var(--navy);color:var(--white)}
+.hscroll .stick{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,4vh,48px);padding-top:70px}
+.hs-head{width:100%}
+.hs-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.ringclock{display:flex;gap:14px;align-items:center}
+.ringclock svg{width:84px;height:84px}
+.ringclock .bg{fill:none;stroke:rgba(255,255,255,.12);stroke-width:7}
+.ringclock .fg{fill:none;stroke:var(--coral);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;stroke-dasharray:226;stroke-dashoffset:226}
+.ringclock .hand{stroke:var(--white);stroke-width:2.5;stroke-linecap:round;transform-origin:42px 42px}
+.ringclock b{display:block;font-size:17px}
+.ringclock span{font-size:14px;color:#9DB0CC}
+.track{display:flex;gap:18px;align-items:center;will-change:transform;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:40vw}
+@media(min-width:900px){.track{padding-left:max(40px,env(safe-area-inset-left,0px))}}
+.vcard{flex:none;width:clamp(280px,30vw,420px);border-radius:var(--r-lg);overflow:hidden;background:var(--navy-2);position:relative}
+.vcard .im{aspect-ratio:4/3.2;overflow:hidden;position:relative}
+.vcard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.vcard:hover .im img{transform:scale(1.05)}
+.vcard .no{position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center;font-weight:800}
+.vcard .tx{padding:20px 22px 24px;display:grid;gap:6px}
+.vcard b{font-size:20px;line-height:1.25}
+.vcard p{font-size:15px;color:#B9C6DA}
+.vcard.icon .im{display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#1E4A86,#0A2A55 70%)}
+.bp{width:58%;height:auto}
+.bp .beat{fill:none;stroke:var(--coral);stroke-width:3;stroke-dasharray:300;stroke-dashoffset:300;animation:bpdraw 2.6s linear infinite}
+@keyframes bpdraw{to{stroke-dashoffset:-300}}
+.bp .pulse{transform-origin:100px 66px;animation:breathe 1.1s ease-in-out infinite}
+@media(max-width:760px){
+  .hscroll{height:auto!important}
+  .hscroll .stick{position:relative;height:auto;padding-block:80px 60px}
+  .track{transform:none!important;overflow-x:auto;scroll-snap-type:x mandatory;padding-right:16px;padding-bottom:10px;margin-top:30px}
+  .vcard{scroll-snap-align:start;width:82vw}
+}
+
+/* packing */
+.pack{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start;margin-top:44px}
+.bagwrap{position:sticky;top:110px;background:var(--white);border-radius:var(--r-lg);padding:30px;display:grid;gap:18px;justify-items:center;text-align:center;box-shadow:inset 0 0 0 1px var(--line)}
+.bagwrap svg{width:min(240px,70%);height:auto;overflow:visible}
+.bag-fill{transition:height .6s cubic-bezier(.2,.7,.2,1),y .6s cubic-bezier(.2,.7,.2,1)}
+.bagwrap .cnt{font-family:var(--f-num);font-size:50px;line-height:1;color:var(--navy)}
+.bagwrap .meter{width:100%;height:8px;border-radius:8px;background:var(--p100);overflow:hidden}
+.bagwrap .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p500),var(--coral));transition:width .6s}
+.bagwrap .msg{font-size:15px;color:var(--ink-2);min-height:3em}
+.bag-items{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.bag-bounce{animation:bagb .5s}
+@keyframes bagb{40%{transform:translateY(-6px) rotate(-2deg)}}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;background:var(--white);padding:6px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);width:max-content;max-width:100%}
+.tabs button{border:0;background:transparent;padding:10px 16px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--navy);color:var(--white)}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.item{display:flex;gap:14px;align-items:center;text-align:left;border:0;background:var(--white);border-radius:var(--r-md);padding:14px 16px;box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,box-shadow .3s,transform .2s}
+.item:active{transform:scale(.98)}
+.item i{width:46px;height:46px;border-radius:14px;background:var(--p100);color:var(--primary);display:grid;place-items:center;flex:none;transition:background .3s,color .3s}
+.item b{display:block;font-size:16px;line-height:1.3}
+.item span{font-size:13.5px;color:var(--ink-2);line-height:1.35;display:block}
+.item .tick{margin-left:auto;width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line);display:grid;place-items:center;color:transparent;flex:none;transition:all .3s}
+.item .tick .ico{width:15px;height:15px;stroke-width:2.6}
+.item[aria-pressed="true"]{background:#EAF6F0;box-shadow:inset 0 0 0 1.5px rgba(30,158,106,.5)}
+.item[aria-pressed="true"] i{background:var(--ok);color:var(--white)}
+.item[aria-pressed="true"] .tick{background:var(--ok);color:var(--white);box-shadow:none}
+@media(max-width:900px){.pack{grid-template-columns:1fr}.bagwrap{position:relative;top:0;grid-template-columns:120px 1fr;justify-items:start;text-align:left;align-items:center}.bagwrap svg{width:120px;grid-row:span 3}}
+@media(max-width:560px){.items{grid-template-columns:1fr}}
+
+/* hours */
+.hours{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(24px,4vw,64px);align-items:center}
+.week{display:grid;grid-template-columns:44px repeat(7,minmax(0,1fr));gap:8px;height:360px;position:relative}
+.week .axis{display:grid;grid-template-rows:repeat(4,1fr);font-size:12px;color:#9DB0CC;text-align:right;padding-right:6px;padding-bottom:28px}
+.day{display:grid;grid-template-rows:1fr 22px;gap:6px;text-align:center;font-size:13px;font-weight:600;color:#B9C6DA}
+.day .col{position:relative;border-radius:12px;background:rgba(255,255,255,.06);overflow:hidden}
+.day .open{position:absolute;left:0;right:0;border-radius:10px;background:linear-gradient(180deg,#2A5BA8,#17407E);transform:scaleY(0);transform-origin:top;transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.week.in .day .open{transform:scaleY(1)}
+.day:nth-child(3) .open{transition-delay:.08s}.day:nth-child(4) .open{transition-delay:.16s}.day:nth-child(5) .open{transition-delay:.24s}.day:nth-child(6) .open{transition-delay:.32s}.day:nth-child(7) .open{transition-delay:.4s}.day:nth-child(8) .open{transition-delay:.48s}.day:nth-child(9) .open{transition-delay:.56s}
+.day .em{position:absolute;right:4px;top:4px;bottom:4px;width:4px;border-radius:4px;background:var(--coral);box-shadow:0 0 8px var(--coral)}
+.day.today{color:var(--white)}
+.day.today .col{box-shadow:inset 0 0 0 2px var(--coral)}
+.nowline{position:absolute;left:44px;right:0;height:2px;background:var(--white);box-shadow:0 0 10px #fff;pointer-events:none}
+.nowline::before{content:"Now";position:absolute;left:-44px;top:-9px;font-size:11px;font-weight:700;background:var(--white);color:var(--navy);padding:1px 6px;border-radius:6px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:#B9C6DA;margin-top:18px}
+.legend span{display:flex;gap:8px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:4px;background:var(--p500)}
+.legend i.c{background:var(--coral);width:5px}
+@media(max-width:860px){.hours{grid-template-columns:1fr}.week{height:300px}}
+
+/* map */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:18px;margin-top:44px;align-items:stretch}
+.map{position:relative;background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.map svg{width:100%;height:auto;display:block}
+.map .rt{fill:none;stroke:#C7D4E6;stroke-width:3;stroke-linecap:round;transition:stroke .3s,stroke-width .3s}
+.map .rt.on{stroke:var(--p500);stroke-width:5}
+.map .flow{fill:none;stroke:var(--coral);stroke-width:3;stroke-linecap:round;stroke-dasharray:4 14;animation:flow 1.4s linear infinite;opacity:0;transition:opacity .3s}
+.map .flow.on{opacity:1}
+@keyframes flow{to{stroke-dashoffset:-36}}
+.map .area{cursor:pointer}
+.map .area circle{fill:var(--white);stroke:var(--p500);stroke-width:2;transition:fill .3s}
+.map .area text{font:600 14px var(--f-body);fill:var(--ink)}
+.map .area.on circle{fill:var(--p500)}
+.map .river{fill:none;stroke:#D6E6F7;stroke-width:14;stroke-linecap:round}
+.map .hosp .halo{fill:var(--coral);opacity:.3;transform-origin:center;transform-box:fill-box;animation:halo 2.2s ease-out infinite}
+@keyframes halo{from{transform:scale(.6);opacity:.55}to{transform:scale(2.4);opacity:0}}
+.map .note{position:absolute;right:14px;bottom:12px;font-size:12px;color:var(--ink-2)}
+.addr{display:grid;gap:14px;align-content:start}
+.addr .card{background:var(--navy);color:var(--white);border-radius:var(--r-lg);padding:26px;display:grid;gap:12px}
+.addr .card p{color:#C9D5E6;font-size:15.5px}
+.addr .lm{border-radius:var(--r-lg);overflow:hidden;position:relative;min-height:220px;flex:1}
+.addr .lm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.addr .lm span{position:absolute;left:14px;bottom:14px;background:var(--white);border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;display:flex;gap:7px;align-items:center}
+.addr .lm .ico{width:16px;height:16px;color:var(--red)}
+.copyrow{display:flex;gap:8px;flex-wrap:wrap}
+.copyrow button{border:0;background:rgba(255,255,255,.12);color:var(--white);padding:10px 14px;border-radius:999px;font-size:14px;font-weight:600;display:flex;gap:7px;align-items:center}
+.copyrow .ico{width:16px;height:16px}
+@media(max-width:860px){.mapgrid{grid-template-columns:1fr}}
+
+/* admitted */
+.adm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:44px}
+.acard{border-radius:var(--r-lg);overflow:hidden;background:var(--white);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column}
+.acard .im{aspect-ratio:4/3;overflow:hidden;position:relative}
+.acard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.acard:hover .im img{transform:scale(1.05)}
+.acard .im .badge{position:absolute;left:14px;bottom:14px;width:48px;height:48px;border-radius:14px;background:var(--white);display:grid;place-items:center;color:var(--primary);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.acard .tx{padding:22px 24px 26px;display:grid;gap:8px}
+.acard b{font-size:20px}
+.acard p{font-size:15.5px;color:var(--ink-2)}
+@media(max-width:860px){.adm{grid-template-columns:1fr}}
+
+/* insurance */
+.ins{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.pcard{perspective:1200px;width:min(440px,100%);aspect-ratio:1.586;justify-self:center;cursor:pointer;border:0;background:none;padding:0}
+.pcard .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.7,.2,1);animation:floaty 6s ease-in-out infinite}
+.pcard.flip .in{transform:rotateY(180deg)}
+@keyframes floaty{50%{translate:0 -8px}}
+.pcard .side{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;color:var(--white);overflow:hidden}
+.pcard .front{background:linear-gradient(135deg,#17407E,#001F43 70%);box-shadow:0 30px 60px rgba(0,31,67,.35)}
+.pcard .front::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(244,151,142,.5),transparent 70%)}
+.pcard .back{background:var(--white);color:var(--ink);transform:rotateY(180deg);box-shadow:0 30px 60px rgba(0,31,67,.2),inset 0 0 0 1px var(--line)}
+.pcard .chipg{width:46px;height:34px;border-radius:7px;background:linear-gradient(135deg,#F7D58A,#C99A3B)}
+.pcard .num{font-family:var(--f-num);font-size:26px;letter-spacing:.12em}
+.pcard small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.pcard .back ol{margin:0;padding-left:20px;font-size:15px;display:grid;gap:6px}
+.paths{display:grid;gap:12px;margin-top:22px}
+.paths div{display:flex;gap:14px;align-items:flex-start;background:var(--white);border-radius:var(--r-md);padding:16px 18px;box-shadow:inset 0 0 0 1px var(--line)}
+.paths i{width:42px;height:42px;border-radius:12px;background:var(--p100);color:var(--primary);display:grid;place-items:center;flex:none}
+.paths b{display:block}
+.paths span{font-size:15px;color:var(--ink-2)}
+@media(max-width:860px){.ins{grid-template-columns:1fr}}
+
+.reviewer{display:flex;gap:14px;align-items:center;background:var(--p100);border-radius:var(--r-md);padding:16px 20px;font-size:14.5px;color:var(--ink-2);margin-top:40px}
+.reviewer img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+.reviewer b{color:var(--ink)}
+
+/* overflow guards */
+.ecg-run{width:100%}
+.pick>*,.pack>*,.bld>*,.hours>*,.ins>*,.mapgrid>*,.orbit>*,.faq>*,.dossier>*,.v-hero>*{min-width:0}
+.confirm{white-space:normal}
+.tabs{overflow-x:auto;scrollbar-width:none}
+.tabs button{white-space:nowrap}
+@media(max-width:760px){.orb{max-width:290px}.orb .sat{width:80px;font-size:12px}.orb .sat i{width:50px;height:50px}.ecg-run{display:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bump" viewBox="0 0 24 24"><path d="M11 2.5a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5Z"/><path d="M9.5 9c-1 2.2-1 4.2 0 6"/><path d="M9.5 9h2.5c3.2.8 5.4 3.8 4.6 7-.5 2-2.6 3-4.6 3h-2.5"/><path d="M9.5 15v6.5"/></symbol>
+  <symbol id="i-cycle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="4" r="1.6"/><circle cx="20" cy="12" r="1"/><circle cx="12" cy="20" r="1"/><circle cx="4" cy="12" r="1"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-ecg" viewBox="0 0 24 24"><path d="M2 12h4.5l2-5 3.5 10 2.2-5H22"/></symbol>
+  <symbol id="i-vein" viewBox="0 0 24 24"><path d="M9 2.5v5.5c0 3-2.2 4.8-2.2 8.2 0 2.8 2 4.8 4.4 5.3"/><path d="M15 2.5v4.5c0 2 1.2 3 1.2 5.5"/><path d="M9.2 10.5c1.8.4 2.4 2 1.4 3.6"/></symbol>
+  <symbol id="i-lungs" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M12 9c-.8 1-2.4 1.2-3.6.4C6 11.6 4 15.6 4 18.6c0 1.2 1 2 2 2 3.2 0 5.4-2.2 6-5.6"/><path d="M12 9c.8 1 2.4 1.2 3.6.4C18 11.6 20 15.6 20 18.6c0 1.2-1 2-2 2-3.2 0-5.4-2.2-6-5.6"/></symbol>
+  <symbol id="i-scope" viewBox="0 0 24 24"><circle cx="16.5" cy="7.5" r="3.5"/><path d="M14 10 4 20"/><path d="M7 17l-2-2"/></symbol>
+  <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-8"/><path d="M12 13c-4.2 0-6.5-2.8-6.5-7 4.2 0 6.5 2.8 6.5 7Z"/><path d="M12 13c4.2 0 6.5-2.8 6.5-7-4.2 0-6.5 2.8-6.5 7Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.8 6 11a6 6 0 0 1-12 0c0-4.2 6-11 6-11Z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20h-19Z"/><path d="M12 10v4.5"/><path d="M12 17.3v.1"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="2.8" y="8.5" width="18.4" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="m9.5 9.5 5 5"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><circle cx="8.5" cy="11" r="1.8"/><path d="M5.8 15.5c.6-1.6 4.8-1.6 5.4 0"/><path d="M14 10h4M14 13.5h3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/><path d="m9.5 15 1.8 1.8 3.4-3.4"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 5a3 3 0 0 1 0 6"/><path d="M18 14.3c1.8.8 3 2.8 3 5.7"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 4 3.5 6.8l1.8 4 2.7-1V20h8V9.8l2.7 1 1.8-4L15.5 4c-.8 1.6-2 2.4-3.5 2.4S9.3 5.6 8.5 4Z"/></symbol>
+  <symbol id="i-slipper" viewBox="0 0 24 24"><path d="M7 21c-1.7 0-2.6-1.6-2.4-4L5.5 8C6 4.8 8 3 10.5 3S15 4.8 15 8v9c0 2.4-1.5 4-3.5 4Z"/><path d="M5.3 11.5c2.5-1.2 7-1.2 9.6 0"/><path d="M17.5 7.5h3M17.5 11h2"/></symbol>
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M7 21V10"/><rect x="5" y="3" width="4" height="7" rx="1"/><path d="M15 21V12"/><path d="M13.5 3h3l.8 9h-4.6Z"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5"/><path d="M7 8h10v3.5a5 5 0 0 1-10 0Z"/><path d="M12 16.5V21"/></symbol>
+  <symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M10.3 7.6v.1M13.7 7.6v.1"/><path d="M10.6 9.8c.8.6 2 .6 2.8 0"/><path d="M6 21c.4-3.8 2.9-6.5 6-6.5s5.6 2.7 6 6.5"/></symbol>
+  <symbol id="i-sock" viewBox="0 0 24 24"><path d="M9 2.5h6.5v8.5l-3.7 7.2c-1 2-3.3 2.9-5.2 1.9-1.8-1-2.3-3.2-1.2-5L9 11Z"/><path d="M9 6h6.5"/></symbol>
+  <symbol id="i-pad" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="5"/><path d="M10 9.5h4M10 13h4"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.5h19M6.5 15h4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 19.5 6v5.6c0 4.7-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.7-7.5-9.4V6Z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s7-6.2 7-12.2a7 7 0 0 0-14 0c0 6 7 12.2 7 12.2Z"/><circle cx="12" cy="9.3" r="2.4"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 19V6.5M3 15h18v4M21 15v-2.5a3 3 0 0 0-3-3h-7V15"/><circle cx="7" cy="11.6" r="1.8"/></symbol>
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v5.5a4 4 0 0 0 8 0V3"/><path d="M10 12.5v2.5a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 20.5h16"/><path d="M6 20.5V10a6 6 0 0 1 12 0v10.5"/><path d="M9 15c1.2-1.8 4.8-1.8 6 0"/><path d="M12 6.5v2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9.5L4 20Z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-bldg" viewBox="0 0 24 24"><path d="M4 21V6l8-3 8 3v15"/><path d="M9.5 21v-4.5h5V21"/><path d="M8 8.5h2M14 8.5h2M8 12.5h2M14 12.5h2"/><path d="M2.5 21h19"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-syringe" viewBox="0 0 24 24"><path d="m14.5 3.5 6 6M17.5 6.5l-9 9-4.2 1 1-4.2 9-9"/><path d="m10 9 5 5M3 21l2.5-2.5"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13.5" cy="4" r="1.8"/><path d="m10 21 2.2-6.5 3 3V21"/><path d="m8.5 12 2.2-3.2 4 1.2 2.3 3"/><path d="m10.7 8.8-1 5.7"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12 7.5c-2-1.8-7.5-1.3-7.5 4.8 0 5 3.2 9.2 5.3 9.2 1 0 1.4-.5 2.2-.5s1.2.5 2.2.5c2.1 0 5.3-4.2 5.3-9.2 0-6.1-5.5-6.6-7.5-4.8Z"/><path d="M12 7.5c0-2.2 1-4 3.2-4.5"/></symbol>
+  <symbol id="i-knife" viewBox="0 0 24 24"><path d="M3.5 20.5 15.5 8.5l2.8 2.8-11 9.2Z"/><path d="m15.5 8.5 3.5-4.8 1.8 1.8-2.5 5.8"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+  <symbol id="i-water" viewBox="0 0 24 24"><path d="M8 3h8l-1 3v14a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6Z"/><path d="M9 11h6"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0Z"/><path d="M3 16h18v2.5H3Z"/><path d="M12 8V5.5"/><circle cx="12" cy="4.5" r="1.2"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.2-4A8.5 8.5 0 1 1 8.4 19Z"/><path d="M9 9.2c.3 2.5 2.8 5 5.6 5.6l1.1-1.4-1.8-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-1.8Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19Z"/><path d="m14 7 3 3"/></symbol>
+</svg>
+
+<div class="pbar"><div class="wrap"><span><b>Penguin Hospital, page redesign preview.</b> Three pages. Yellow tags are facts the hospital still has to confirm.</span>
+<nav aria-label="Preview pages"><a href="#doctors" data-go="doctors">Doctors</a><a href="#about" data-go="about">About</a><a href="#visit" data-go="visit">Plan your visit</a></nav></div></div>
+
+<header class="hdr"><div class="wrap"><div class="pill">
+  <img src="img/logo.png" alt="Dr. Lakshmi's Penguin Hospital" width="64" height="40">
+  <nav aria-label="Site"><a class="hide-m" href="#doctors">Women and pregnancy</a><a class="hide-m" href="#doctors">Heart and vessels</a><a href="#doctors" data-go="doctors">Doctors</a><a href="#about" data-go="about">About</a><a href="#visit" data-go="visit">Plan your visit</a></nav>
+  <a class="em" href="#visit"><svg class="ico"><use href="#i-alert"/></svg>Emergency 108 / 112</a>
+  <a class="btn btn-navy" href="#visit">Book a visit</a>
+</div></div></header>
+
+<!-- =================================================== DOCTORS -->
+<main class="page" id="p-doctors" data-page="doctors">
+  <div class="wrap d-head">
+    <div><p class="crumb"><a href="#">Home</a> / Doctors</p><h1 style="margin-top:16px"><span class="ln"><span>Our</span></span><span class="ln"><span>doctors</span></span></h1></div>
+    <div class="side">
+      <p class="lead">Two specialists lead the care at Penguin Hospital. You see them yourself, at your first visit and at every follow-up, and they explain each step in plain words before anything is decided.</p>
+      <div class="d-nums"><div><b>2</b><span>Specialists, both seeing patients themselves</span></div><div><b>15+</b><span>Years of heart surgery, Dr. Ashish</span></div><div><b>24h</b><span>Emergency, day and night</span></div></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="duo">
+      <a class="pane" href="#lakshmi">
+        <div class="pic"><img src="img/dr-lakshmi-hero.jpg" alt="Dr. Lakshmi Vijay Kalbande, obstetrician and gynaecologist"></div>
+        <span class="lbl"><svg class="ico"><use href="#i-bump"/></svg>Women and pregnancy</span>
+        <div class="info">
+          <h2>Dr. Lakshmi Vijay Kalbande</h2>
+          <p class="role">Obstetrician and gynaecologist · Laparoscopic surgeon · Founder</p>
+          <div class="row"><div class="tags"><span><svg class="ico"><use href="#i-baby"/></svg>Pregnancy and birth</span><span><svg class="ico"><use href="#i-cycle"/></svg>Periods and PCOS</span><span><svg class="ico"><use href="#i-scope"/></svg>Keyhole surgery</span></div><span class="arw"><svg class="ico"><use href="#i-arrow"/></svg></span></div>
+        </div>
+      </a>
+      <a class="pane" href="#ashish">
+        <div class="pic"><img src="img/dr-ashish-hero.jpg" alt="Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon"></div>
+        <span class="lbl"><svg class="ico"><use href="#i-heart"/></svg>Heart, lungs and vessels</span>
+        <div class="info">
+          <h2>Dr. Ashish A. Baviskar</h2>
+          <p class="role">Cardiothoracic and vascular surgeon (CTVS)</p>
+          <div class="row"><div class="tags"><span><svg class="ico"><use href="#i-heart"/></svg>Bypass and valves</span><span><svg class="ico"><use href="#i-lungs"/></svg>Lung and chest</span><span><svg class="ico"><use href="#i-vein"/></svg>Veins and arteries</span></div><span class="arw"><svg class="ico"><use href="#i-arrow"/></svg></span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <section class="band"><div class="wrap">
+    <div class="rev" style="display:grid;gap:12px"><p class="kicker">Not sure who to see?</p><h2 class="h-l" style="max-width:16ch">Tell us what brings you in.</h2></div>
+    <div class="pk rev">
+      <div>
+        <div class="grp"><h3>Women and pregnancy</h3><div class="chips" id="chipsW"></div></div>
+        <div class="grp"><h3>Heart, lungs and vessels</h3><div class="chips" id="chipsH"></div></div>
+        <div class="grp"><h3>Right now</h3><div class="chips" id="chipsE"></div></div>
+      </div>
+      <div class="ans" id="answer" aria-live="polite">
+        <div class="ph"><img id="ansA" class="show" src="img/dr-lakshmi-pregnancy.jpg" alt=""><img id="ansB" src="img/dr-lakshmi-pregnancy.jpg" alt="">
+          <div class="who fade"><img id="ansFace" src="img/dr-lakshmi-headshot.jpg" alt=""><div><b id="ansName">Dr. Lakshmi Vijay Kalbande</b><span id="ansRole">Obstetrician and gynaecologist</span></div></div></div>
+        <div class="body">
+          <p class="why fade" id="ansWhy"></p>
+          <div class="acts fade"><a class="btn btn-coral" id="ansBook" href="#visit">Book with Dr. Lakshmi</a><a class="btn btn-ghost" id="ansLink" href="#doctors">Read about it</a></div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="journey night" id="journey"><div class="stick wrap">
+    <div>
+      <p class="kicker">One doctor, start to finish</p>
+      <h2 style="margin-top:12px;max-width:14ch">The doctor you meet is the doctor who stays.</h2>
+      <div class="jtoggle" role="group" aria-label="Choose doctor"><span class="knob" id="knob"></span>
+        <button type="button" aria-pressed="true" data-doc="l"><img src="img/dr-lakshmi-headshot.jpg" alt="">Dr. Lakshmi</button>
+        <button type="button" aria-pressed="false" data-doc="a"><img src="img/dr-ashish-headshot.jpg" alt="">Dr. Ashish</button>
+      </div>
+      <ol class="jsteps" id="jsteps"><i class="bar" id="jbar"></i></ol>
+    </div>
+    <div class="jph" id="jph"><div class="segs" id="jsegs"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div><div class="cap" id="jcap"><img id="jcapFace" src="img/dr-lakshmi-headshot.jpg" alt=""><span id="jcapTxt">Consultation</span></div></div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <article class="prof" id="lakshmi">
+      <div class="pp">
+        <div class="main"><img class="zoom" src="img/dr-lakshmi-note.jpg" alt="Dr. Lakshmi Vijay Kalbande, obstetrician and gynaecologist, seated in her consultation room"><span class="live">Sees every patient herself</span></div>
+        <div class="strip"><figure><img src="img/dr-lakshmi-consult.jpg" alt="Dr. Lakshmi talking with a couple at her desk"></figure><figure><img src="img/dr-lakshmi-scrubs.jpg" alt="Dr. Lakshmi in theatre scrubs" style="object-position:50% 22%"></figure></div>
+      </div>
+      <div class="pi">
+        <div class="rev"><span class="kicker">Women and pregnancy</span><h2 class="h-l">Dr. Lakshmi Vijay Kalbande</h2><p class="role">Obstetrician and gynaecologist · Laparoscopic surgeon · Founder, Penguin Hospital</p></div>
+        <p class="intro rev">The "Lakshmi" in our name. She looks after women from their first period problems through pregnancy, birth and menopause, and reads many scans herself, so you hear what they show in the same visit.</p>
+        <div class="nums rev">
+          <div><div class="n" data-count="3">0</div><div class="l">Qualifications, including an ultrasound fellowship</div></div>
+          <div><div class="n" data-count="2">0</div><div class="l">Memberships: Indian Menopause Society, IOTA group</div></div>
+          <div><div class="n" style="font-size:30px;padding-top:10px"><span class="confirm">CONFIRM</span></div><div class="l">Years in practice. Old site says "since 2017" and "12+"</div></div>
+        </div>
+        <div class="rev"><p class="sub">How she works</p>
+          <div class="hw">
+            <div><i><svg class="ico"><use href="#i-file"/></svg></i><span><b>Your pregnancy, your plan</b><p>Visits and scans are scheduled around your own risks, not a generic chart.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-baby"/></svg></i><span><b>Normal birth first, when it is safe</b><p>A caesarean only when it is the safer way for mother or baby.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-scope"/></svg></i><span><b>Keyhole surgery when it is right</b><p>Simpler treatment first. Laparoscopy when it suits you.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-chat"/></svg></i><span><b>Questions are part of the visit</b><p>Bring your list and your family. Nothing is decided until you understand it.</p></span></div>
+          </div></div>
+        <div><p class="sub">Training path</p>
+          <ol class="steps rev">
+            <li><b>MBBS</b><span class="confirm">CONFIRM</span></li>
+            <li><b>DNB, Obstetrics and Gynaecology</b><span class="confirm">CONFIRM</span></li>
+            <li><b>Ultrasound fellowship</b><span>FOGSI recognised, Bangalore</span></li>
+            <li><b>Consultant</b><span>Amrutha Multi-specialty Hospital, Telangana</span></li>
+            <li><b>Founder</b><span>Penguin Hospital <span class="confirm">CONFIRM year</span></span></li>
+          </ol></div>
+        <dl class="kv rev"><dt>Registration</dt><dd>2013/04/1086 <span class="confirm">CONFIRM council</span></dd><dt>Languages</dt><dd><span class="confirm">CONFIRM</span></dd><dt>OPD</dt><dd><span class="confirm">CONFIRM days and times</span></dd></dl>
+        <div class="rev"><p class="sub">She treats</p>
+          <div class="treats"><a href="#"><svg class="ico"><use href="#i-bump"/></svg>Pregnancy care</a><a href="#"><svg class="ico"><use href="#i-alert"/></svg>High-risk pregnancy</a><a href="#"><svg class="ico"><use href="#i-baby"/></svg>Normal and painless delivery</a><a href="#"><svg class="ico"><use href="#i-cycle"/></svg>PCOS</a><a href="#"><svg class="ico"><use href="#i-drop"/></svg>Period problems</a><a href="#"><svg class="ico"><use href="#i-scope"/></svg>Fibroids and cysts</a><a href="#"><svg class="ico"><use href="#i-sprout"/></svg>Fertility evaluation</a><a href="#"><svg class="ico"><use href="#i-moon"/></svg>Menopause</a></div></div>
+        <div class="pacts rev"><a class="btn btn-navy" href="#visit"><svg class="ico"><use href="#i-cal"/></svg>Book with Dr. Lakshmi</a><a class="btn btn-ghost" href="#">Full profile</a></div>
+      </div>
+    </article>
+
+    <article class="prof flip" id="ashish">
+      <div class="pp">
+        <div class="main"><img class="zoom" src="img/dr-ashish-note.jpg" alt="Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon, seated by a window"><span class="live">Sees every patient himself</span></div>
+        <div class="strip"><figure><img src="img/dr-ashish-consult.jpg" alt="Dr. Ashish explaining a heart model to a patient and his daughter"></figure><figure><img src="img/dr-ashish-recovery.jpg" alt="Dr. Ashish walking with a recovering patient"></figure></div>
+      </div>
+      <div class="pi">
+        <div class="rev"><span class="kicker">Heart, lungs and vessels</span><h2 class="h-l">Dr. Ashish A. Baviskar</h2><p class="role">Cardiothoracic and vascular surgeon (CTVS)</p></div>
+        <p class="intro rev">A surgeon for the heart, the lungs and the blood vessels. Many patients come to him worried about an operation. Often the first step is simply tests and a clear explanation.</p>
+        <div class="nums rev">
+          <div><div class="n"><span data-count="15">0</span>+</div><div class="l">Years of practice in hospitals across India</div></div>
+          <div><div class="n" data-count="3">0</div><div class="l">Areas: heart, lungs and chest, blood vessels</div></div>
+          <div><div class="n">MCh</div><div class="l">Super-speciality degree in CTVS</div></div>
+        </div>
+        <div class="rev"><p class="sub">How he works</p>
+          <div class="hw">
+            <div><i><svg class="ico"><use href="#i-ecg"/></svg></i><span><b>Tests and a conversation first</b><p>No decision until the reports are in and you have understood them.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-heart"/></svg></i><span><b>Keyhole when it suits you</b><p>Minimally invasive heart surgery where your heart and body allow it.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-people"/></svg></i><span><b>Your family is in the room</b><p>Heart surgery affects the whole household. Bring them along.</p></span></div>
+            <div><i><svg class="ico"><use href="#i-walk"/></svg></i><span><b>Recovery is planned too</b><p>Medicines, wound care, walking and follow-up visits, written down.</p></span></div>
+          </div></div>
+        <div><p class="sub">Training path</p>
+          <ol class="steps rev">
+            <li><b>MBBS</b><span class="confirm">CONFIRM</span></li>
+            <li><b>MS, General Surgery</b><span class="confirm">CONFIRM</span></li>
+            <li><b>MCh, CTVS</b><span class="confirm">CONFIRM</span></li>
+            <li><b>15+ years</b><span>Hospitals in several Indian cities</span></li>
+            <li><b>Penguin Hospital</b><span>Heart, lung and vascular surgery</span></li>
+          </ol></div>
+        <dl class="kv rev"><dt>Registration</dt><dd><span class="confirm">CONFIRM number and council</span></dd><dt>Languages</dt><dd><span class="confirm">CONFIRM</span></dd><dt>OPD</dt><dd><span class="confirm">CONFIRM days and times</span></dd></dl>
+        <div class="rev"><p class="sub">He treats</p>
+          <div class="treats"><a href="#"><svg class="ico"><use href="#i-ecg"/></svg>Heart check-up</a><a href="#"><svg class="ico"><use href="#i-heart"/></svg>Bypass surgery</a><a href="#"><svg class="ico"><use href="#i-heart"/></svg>Heart valve surgery</a><a href="#"><svg class="ico"><use href="#i-knife"/></svg>Keyhole heart surgery</a><a href="#"><svg class="ico"><use href="#i-lungs"/></svg>Lung and chest surgery</a><a href="#"><svg class="ico"><use href="#i-vein"/></svg>Varicose veins</a><a href="#"><svg class="ico"><use href="#i-walk"/></svg>Leg artery disease</a><a href="#"><svg class="ico"><use href="#i-drop"/></svg>AV fistula</a></div></div>
+        <div class="pacts rev"><a class="btn btn-navy" href="#visit"><svg class="ico"><use href="#i-cal"/></svg>Book with Dr. Ashish</a><a class="btn btn-ghost" href="#">Full profile</a></div>
+      </div>
+    </article>
+  </div></section>
+
+  <section class="band" style="background:var(--white)"><div class="wrap">
+    <div class="rev" style="display:grid;gap:14px;max-width:760px"><p class="kicker">Around them</p><h2 class="h-l">A team that joins in when you need it.</h2><p class="lead">Visiting consultants work with our doctors when needed. Your own doctor arranges them and stays in charge of your care. <span class="confirm">CONFIRM names and roles</span></p></div>
+    <div class="team">
+      <div class="tm rev"><i><svg class="ico"><use href="#i-syringe"/></svg></i><b>Anaesthesia</b><p>For epidurals, caesarean births and surgery.</p></div>
+      <div class="tm rev"><i><svg class="ico"><use href="#i-baby"/></svg></i><b>Paediatrics</b><p>Your newborn is checked soon after birth.</p></div>
+      <div class="tm rev"><i><svg class="ico"><use href="#i-walk"/></svg></i><b>Physiotherapy</b><p>Getting moving again after surgery or birth.</p></div>
+      <div class="tm rev"><i><svg class="ico"><use href="#i-apple"/></svg></i><b>Nutrition</b><p>Food plans for pregnancy, diabetes and the heart.</p></div>
+    </div>
+    <div class="cta rev" style="margin-top:72px"><img src="img/doctors-together.jpg" alt="Dr. Lakshmi Vijay Kalbande and Dr. Ashish A. Baviskar at the hospital reception" style="object-position:70% 30%">
+      <div class="in-c"><h2 class="h-l">Talk to a specialist, not a switchboard.</h2><p style="color:#C9D5E6">Book a visit, call +91 95189 04156 or message us on WhatsApp.</p>
+      <div class="acts"><a class="btn btn-coral" href="#visit"><svg class="ico"><use href="#i-cal"/></svg>Book a visit</a><a class="btn btn-ghost" href="#visit"><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</a></div></div>
+    </div>
+  </div></section>
+</main>
+
+<!-- =================================================== ABOUT -->
+<main class="page" id="p-about" data-page="about">
+  <section class="a-hero">
+    <img src="img/doctors-together.jpg" alt="Dr. Lakshmi Vijay Kalbande and Dr. Ashish A. Baviskar at Penguin Hospital">
+    <div class="wrap">
+      <p class="crumb"><a href="#">Home</a> / About</p>
+      <h1 class="h-l" id="aboutH1" style="max-width:22ch;font-size:clamp(40px,5.4vw,78px)">A family hospital, named after the most devoted parents we know</h1>
+      <p class="lead">Run by two specialists in Chinchwad Gaon. We look after women through pregnancy and beyond, and families through problems of the heart.</p>
+      <div class="strip"><span><svg class="ico"><use href="#i-pin"/></svg>Chinchwad Gaon, PCMC</span><span><svg class="ico"><use href="#i-steth"/></svg>Two specialists</span><span><svg class="ico"><use href="#i-moon"/></svg>Open day and night</span></div>
+    </div>
+  </section>
+
+  <section class="peng night" id="peng" aria-label="Why a penguin">
+    <div class="stick">
+      <div class="sky"></div><div class="sky-d" id="skyD"></div>
+      <div class="stars" id="stars"></div>
+      <div class="snow" id="snow"></div>
+      <div class="sea"></div>
+      <div class="ice"></div>
+      <div class="pg" id="pgA" style="left:30%"></div>
+      <div class="pg face-l" id="pgB" style="left:44%"></div>
+      <div class="egg glow" id="egg" style="left:calc(30% + 3.6vw)"></div>
+      <svg class="chick" id="chick" viewBox="0 0 60 70" style="left:calc(37% + 1vw)"><ellipse cx="30" cy="44" rx="20" ry="24" fill="#B8C3D1"/><circle cx="30" cy="22" r="15" fill="#E9EEF4"/><path d="M17 22a13 13 0 0 1 26 0c-4-5-9-6-13-6s-9 1-13 6Z" fill="#26364F"/><circle cx="25" cy="22" r="2" fill="#13223A"/><circle cx="35" cy="22" r="2" fill="#13223A"/><path d="M28 27l2 3 2-3Z" fill="#7A6A55"/></svg>
+      <div class="ptext">
+        <p class="kicker">Why a penguin</p>
+        <div class="beats" id="beats">
+          <div class="beat on"><h2>Winter on the ice.</h2><p>Penguin parents share one egg. One keeps it warm on their feet through the long, cold nights.</p></div>
+          <div class="beat"><h2>The other goes out to sea.</h2><p>While one stays, the other walks to the water to find food. Neither can do both alone.</p></div>
+          <div class="beat"><h2>Then they swap.</h2><p>The one who ate comes back and takes the egg. The one who waited finally goes to eat.</p></div>
+          <div class="beat"><h2>Neither does it alone.</h2><p>That is the care we wanted to build. A team that takes turns staying with you, and a hospital that keeps the light on through the night. <span class="confirm">CONFIRM story wording</span></p></div>
+        </div>
+      </div>
+      <div class="pdocs" id="pdocs"><figure><img src="img/dr-lakshmi-headshot.jpg" alt="Dr. Lakshmi Vijay Kalbande"><figcaption><b>Dr. Lakshmi</b>Mothers and women</figcaption></figure><figure><img src="img/dr-ashish-headshot.jpg" alt="Dr. Ashish A. Baviskar"><figcaption><b>Dr. Ashish</b>Hearts and vessels</figcaption></figure></div>
+      <div class="pprog" id="pprog"><i class="on"></i><i></i><i></i><i></i></div>
+      <span class="tagline">Together through life</span>
+    </div>
+  </section>
+
+  <section class="band"><div class="wrap">
+    <p class="kicker">How care works here</p>
+    <h2 class="h-l" style="margin-top:12px;max-width:18ch">Four promises you can see on your first visit.</h2>
+    <div class="bento">
+      <div class="tile ph t1 rev"><img src="img/dr-lakshmi-consult.jpg" alt="Dr. Lakshmi listening to a couple at her desk"><div class="tx"><h3>You see your specialist.</h3><p>Your visits are with Dr. Lakshmi or Dr. Ashish, not handed down a chain.</p></div></div>
+      <div class="tile ph t2 rev"><img src="img/dr-ashish-consult.jpg" alt="Dr. Ashish explaining a heart model" style="object-position:40% 50%">
+        <div class="bubble" aria-hidden="true"><span>What is this test for?</span><span>Here is what it shows.</span><span>And our choices?</span></div>
+        <div class="tx"><h3>Explained in plain words.</h3><p>Before any test or operation. Bring your family. Questions are welcome.</p></div></div>
+      <div class="tile t3 rev"><div class="roof" aria-hidden="true">
+          <div class="rm"><i><svg class="ico"><use href="#i-steth"/></svg></i>Consult</div>
+          <div class="rm"><i><svg class="ico"><use href="#i-scan"/></svg></i>Scan</div>
+          <div class="rm"><i><svg class="ico"><use href="#i-baby"/></svg></i>Labour</div>
+          <div class="rm"><i><svg class="ico"><use href="#i-knife"/></svg></i>Theatre</div>
+          <div class="rm"><i><svg class="ico"><use href="#i-bed"/></svg></i>Ward</div>
+        </div><div class="roofline"></div>
+        <div class="tx" style="position:relative"><h3>Under one roof.</h3><p>Consultation, ultrasound, the labour room, the theatre and the wards are in the same building. You are not sent across the city between steps.</p></div></div>
+      <div class="tile ph t4 rev"><img src="img/night-corridor.jpg" alt="The hospital corridor lit at night">
+        <div class="clockchip"><span class="t" data-clock>--:--</span><small>Emergency open</small></div>
+        <div class="tx"><h3>Open at night.</h3><p>The emergency team is here around the clock. Labour does not wait for office hours.</p></div></div>
+    </div>
+  </div></section>
+
+  <section class="band night"><div class="wrap">
+    <p class="kicker">What the building holds</p>
+    <h2 class="h-l" style="margin-top:12px;max-width:18ch">Tap a floor to look inside.</h2>
+    <div class="bld">
+      <div class="tower">
+        <svg viewBox="0 0 360 470" role="group" aria-label="Rooms in the building">
+          <path d="M40 72 L180 18 L320 72Z" fill="#0E3466" stroke="#2A5BA8" stroke-width="1.5"/>
+          <rect x="150" y="40" width="60" height="22" rx="4" fill="#fff"/><text x="180" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#E40913" font-family="Figtree">PENGUIN</text>
+          <g id="floors"></g>
+          <rect x="10" y="452" width="340" height="6" rx="3" fill="#2A5BA8"/>
+        </svg>
+      </div>
+      <div>
+        <div class="roomview" id="roomview"><img id="roomImg" src="img/labour-room.jpg" alt=""><span class="real">Real photo</span><div class="cap"><b id="roomName">Labour room</b><p id="roomText"></p></div></div>
+        <p class="rooms-note">Illustration, not a floor plan. <span class="confirm">CONFIRM floor order, ICU or HDU, NICU, lab, pharmacy, lift, parking</span></p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <p class="kicker">Facts at a glance</p>
+    <div class="glance">
+      <div class="gl rev"><svg class="ico"><use href="#i-steth"/></svg><div class="n" data-count="2">0</div><div class="l">Specialists who see you themselves</div></div>
+      <div class="gl rev"><svg class="ico"><use href="#i-clock"/></svg><div class="n"><span data-count="24">0</span>h</div><div class="l">Emergency care, every day</div></div>
+      <div class="gl rev"><svg class="ico"><use href="#i-bldg"/></svg><div class="n" data-count="1">0</div><div class="l">Building for consult, scan, birth and surgery</div></div>
+      <div class="gl rev"><svg class="ico"><use href="#i-heart"/></svg><div class="n"><span data-count="15">0</span>+</div><div class="l">Years of heart surgery practice, Dr. Ashish</div></div>
+      <div class="gl rev"><svg class="ico"><use href="#i-flag"/></svg><div class="n" style="font-size:30px;padding-top:12px"><span class="confirm">CONFIRM</span></div><div class="l">Year founded. Registration under the Maharashtra Nursing Homes Act <span class="confirm">CONFIRM</span></div></div>
+    </div>
+
+    <h2 class="h-l" style="margin-top:100px">Our story</h2>
+    <p class="lead" style="margin-top:12px">Swipe the timeline. Years and wording come from the founders. <span class="confirm">CONFIRM all milestones</span></p>
+    <div class="story" tabindex="0" aria-label="Our story timeline">
+      <ol>
+        <li><div class="yr">20<span style="opacity:.35">__</span></div><div class="card"><img src="img/dr-lakshmi-review.jpg" alt="Dr. Lakshmi reviewing reports"><div><b>Training in obstetrics</b>MBBS, then a DNB in obstetrics and gynaecology.</div></div></li>
+        <li><div class="yr">20<span style="opacity:.35">__</span></div><div class="card"><img src="img/ultrasound-room.jpg" alt="The ultrasound room"><div><b>A fellowship in scans</b>Gynaecological and obstetric ultrasound, Bangalore.</div></div></li>
+        <li><div class="yr">20<span style="opacity:.35">__</span></div><div class="card"><img src="img/dr-lakshmi-corridor.jpg" alt="Dr. Lakshmi in a hospital corridor"><div><b>Consultant in Telangana</b>Amrutha Multi-specialty Hospital.</div></div></li>
+        <li><div class="yr">20<span style="opacity:.35">__</span></div><div class="card"><img src="img/labour-room.jpg" alt="The labour room"><div><b>Penguin Hospital opens</b>Chinchwad Gaon, with a labour room and theatre.</div></div></li>
+        <li class="now"><div class="yr">Today</div><div class="card"><img src="img/dr-ashish-recovery.jpg" alt="Dr. Ashish with a recovering patient"><div><b>Heart care joins in</b>Dr. Ashish Baviskar brings heart, lung and vascular surgery.</div></div></li>
+      </ol>
+    </div>
+  </div></section>
+
+  <section class="band" style="background:var(--white)"><div class="wrap faq">
+    <div class="aside"><p class="kicker">Questions</p><h2 class="h-l">Asked at the front desk.</h2><img src="img/faqs.jpg" alt="The front desk team on a call" style="object-position:50% 25%"></div>
+    <div>
+      <details open><summary>Who owns and runs Penguin Hospital?<i></i></summary><p>The hospital is led by Dr. Lakshmi Vijay Kalbande, obstetrician and gynaecologist, together with Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon. <span class="confirm">CONFIRM ownership wording</span> Both see patients themselves.</p></details>
+      <details><summary>Is Penguin Hospital only for women?<i></i></summary><p>No. Women's health and pregnancy are one half of what we do. The other half is heart, lung and vascular surgery for adults of any gender. Our emergency team sees anyone who needs urgent help.</p></details>
+      <details><summary>Can my family stay with me?<i></i></summary><p>One family member can usually stay with an admitted patient. In the labour room and theatre, the team will tell you when a companion can be present. <span class="confirm">CONFIRM visitor rules</span></p></details>
+      <details><summary>Is the hospital open at night?<i></i></summary><p>Yes. Emergency care is available day and night, including for women in labour. OPD consultations run at set hours, shown on the visit page.</p></details>
+      <div class="reviewer"><img src="img/dr-lakshmi-headshot.jpg" alt=""><span>Medically reviewed by <b>Dr. Lakshmi Vijay Kalbande</b>. <span class="confirm">CONFIRM date</span></span></div>
+    </div>
+  </div></section>
+</main>
+
+<!-- =================================================== VISIT -->
+<main class="page" id="p-visit" data-page="visit">
+  <div class="wrap v-hero">
+    <div class="txt">
+      <p class="crumb"><a href="#">Home</a> / Plan your visit</p>
+      <h1 class="h-xl">Plan your visit</h1>
+      <p class="lead">A little planning makes your visit shorter and calmer. What to bring, when to come, and what happens if you are admitted.</p>
+      <div class="status"><span class="t" data-clock>--:--</span><div class="rows"><span id="opdState">OPD open now</span><span>Emergency open, day and night</span></div></div>
+      <nav class="jump" aria-label="On this page">
+        <a href="#v-first"><svg class="ico"><use href="#i-clock"/></svg>Your first visit</a>
+        <a href="#v-pack"><svg class="ico"><use href="#i-file"/></svg>What to bring</a>
+        <a href="#v-hours"><svg class="ico"><use href="#i-cal"/></svg>Hours</a>
+        <a href="#v-map"><svg class="ico"><use href="#i-pin"/></svg>Getting here</a>
+        <a href="#v-adm"><svg class="ico"><use href="#i-bed"/></svg>If admitted</a>
+        <a href="#v-ins"><svg class="ico"><use href="#i-shield"/></svg>Insurance</a>
+      </nav>
+    </div>
+    <div class="v-photo">
+      <div class="main"><img src="img/step-2-arrive.jpg" alt="A couple arriving at the Penguin Hospital front desk"></div>
+      <div class="ticket"><svg viewBox="0 0 62 62" aria-hidden="true"><circle cx="31" cy="31" r="28" fill="none" stroke="#E7EEF8" stroke-width="6"/><circle class="arc" cx="31" cy="31" r="28" transform="rotate(-90 31 31)"/><text x="31" y="37" text-anchor="middle" font-family="Instrument Serif" font-size="20" fill="#001F43">1h</text></svg><div><b>A first visit takes about an hour</b><span>Registration, checks, your doctor, and often a scan the same day.</span></div></div>
+    </div>
+  </div>
+
+  <section class="hscroll" id="v-first"><div class="stick">
+    <div class="wrap hs-head">
+      <div><p class="kicker">Your first visit</p><h2 class="h-l" style="margin-top:10px;max-width:14ch">From the front door to a written plan.</h2></div>
+      <div class="ringclock"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="bg" cx="42" cy="42" r="36"/><circle class="fg" id="ringFg" cx="42" cy="42" r="36"/><line class="hand" id="ringHand" x1="42" y1="42" x2="42" y2="16"/><circle cx="42" cy="42" r="3.5" fill="#fff"/></svg><div><b id="ringLbl">Step 1 of 7</b><span>About an hour in total</span></div></div>
+    </div>
+    <div class="track" id="track">
+      <article class="vcard"><div class="im"><img src="img/step-1-book.jpg" alt="A woman booking a visit on WhatsApp from her sofa"><span class="no">1</span></div><div class="tx"><b>Book a slot</b><p>Online, by phone or on WhatsApp. Walk-ins are seen in OPD hours, but a booking saves you waiting.</p></div></article>
+      <article class="vcard"><div class="im"><img src="img/step-2-arrive.jpg" alt="A couple at the front desk"><span class="no">2</span></div><div class="tx"><b>Register at the front desk</b><p>Your name, mobile number and an ID. Bring every old report and scan.</p></div></article>
+      <article class="vcard icon"><div class="im"><svg class="bp" viewBox="0 0 200 130" aria-hidden="true"><path class="beat" d="M0 66 H60 l10 -14 8 14 H100 l12 -46 14 70 10 -24 H200"/><g class="pulse"><circle cx="100" cy="66" r="9" fill="#F4978E"/></g></svg><span class="no">3</span></div><div class="tx"><b>Quick checks with a nurse</b><p>Weight, blood pressure and pulse, before you see your doctor.</p></div></article>
+      <article class="vcard"><div class="im"><img src="img/step-3-consultation.jpg" alt="Dr. Lakshmi in consultation with a couple"><span class="no">4</span></div><div class="tx"><b>See your doctor</b><p>Your own specialist, with time for your questions and your family.</p></div></article>
+      <article class="vcard"><div class="im"><img src="img/ultrasound-room.jpg" alt="The ultrasound room next to the consultation room"><span class="no">5</span></div><div class="tx"><b>Scan next door, if needed</b><p>The ultrasound room is beside the consultation room. Many scans happen in the same visit.</p></div></article>
+      <article class="vcard"><div class="im"><img src="img/step-5-plan.jpg" alt="A doctor writing a care plan"><span class="no">6</span></div><div class="tx"><b>Leave with a written plan</b><p>Medicines, tests and the date of your next visit, on paper.</p></div></article>
+      <article class="vcard"><div class="im"><img src="img/step-6-follow-up.jpg" alt="A mother on a video follow-up with her baby"><span class="no">7</span></div><div class="tx"><b>Follow up with the same doctor</b><p>Questions after you go home? Message us on WhatsApp.</p></div></article>
+    </div>
+  </div></section>
+
+  <section class="band" id="v-pack"><div class="wrap">
+    <p class="kicker">What to bring</p>
+    <h2 class="h-l" style="margin-top:12px;max-width:18ch">Pack the bag. Tick as you go.</h2>
+    <div class="pack">
+      <div class="bagwrap">
+        <svg viewBox="0 0 200 200" aria-hidden="true" id="bagSvg">
+          <defs><clipPath id="bagClip"><path d="M30 70 Q30 60 40 60 H160 Q170 60 170 70 L162 180 Q161 190 150 190 H50 Q39 190 38 180Z"/></clipPath></defs>
+          <path d="M70 62 V44 Q70 26 100 26 Q130 26 130 44 V62" fill="none" stroke="#17407E" stroke-width="8" stroke-linecap="round"/>
+          <path d="M30 70 Q30 60 40 60 H160 Q170 60 170 70 L162 180 Q161 190 150 190 H50 Q39 190 38 180Z" fill="#E7EEF8"/>
+          <g clip-path="url(#bagClip)"><rect class="bag-fill" id="bagFill" x="20" y="190" width="160" height="0" fill="url(#bagGrad)"/></g>
+          <linearGradient id="bagGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4978E"/><stop offset="1" stop-color="#2A5BA8"/></linearGradient>
+          <path d="M30 70 Q30 60 40 60 H160 Q170 60 170 70 L162 180 Q161 190 150 190 H50 Q39 190 38 180Z" fill="none" stroke="#17407E" stroke-width="5"/>
+          <rect x="88" y="54" width="24" height="14" rx="4" fill="#17407E"/>
+          <path d="M100 118 l-14 -13 a8 8 0 0 1 14 -8 a8 8 0 0 1 14 8Z" fill="#fff" opacity=".9"/>
+        </svg>
+        <div class="cnt" id="packCnt">0 / 0</div>
+        <div class="meter"><i id="packMeter"></i></div>
+        <p class="msg" id="packMsg">Tap an item when it is in your bag.</p>
+      </div>
+      <div>
+        <div class="tabs" role="tablist" id="packTabs"></div>
+        <div class="items" id="packItems"></div>
+        <p style="font-size:14.5px;color:var(--ink-2);margin-top:16px">Some blood tests need you to fast. If you are not sure, ask us on WhatsApp the day before.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band night" id="v-hours"><div class="wrap hours">
+    <div style="display:grid;gap:18px">
+      <p class="kicker">When to come</p>
+      <h2 class="h-l">The lights are on more often than not.</h2>
+      <p class="lead">OPD Monday to Saturday, and a short Sunday evening session. Emergency is open every hour of every day, including for women in labour.</p>
+      <p style="color:#9DB0CC;font-size:14.5px">Hours below follow the Google profile. <span class="confirm">CONFIRM OPD hours and per-doctor timings</span></p>
+    </div>
+    <div>
+      <div class="week" id="week"><div class="axis"><span>12 am</span><span>6 am</span><span>12 pm</span><span>6 pm</span></div></div>
+      <div class="legend"><span><i></i>OPD open</span><span><i class="c"></i>Emergency, always</span></div>
+    </div>
+  </div></section>
+
+  <section class="band" id="v-map"><div class="wrap">
+    <p class="kicker">Getting here</p>
+    <h2 class="h-l" style="margin-top:12px;max-width:18ch">Where are you coming from?</h2>
+    <div class="mapgrid">
+      <div class="map">
+        <svg viewBox="0 0 640 460" id="mapSvg" role="group" aria-label="Routes to Penguin Hospital from nearby areas">
+          <rect width="640" height="460" fill="#F7FAFD"/>
+          <path class="river" d="M-10 300 C120 270 200 330 300 300 S470 230 650 260"/>
+          <g id="routes"></g>
+          <g class="hosp" transform="translate(320 250)"><circle class="halo" r="22"/><circle r="15" fill="#001F43"/><path d="M-5 0h10M0 -5v10" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+          <text x="320" y="292" text-anchor="middle" font-family="Figtree" font-weight="700" font-size="15" fill="#001F43">Penguin Hospital</text>
+          <text x="320" y="310" text-anchor="middle" font-family="Figtree" font-size="12.5" fill="#4B5A70">Chinchwad Gaon</text>
+          <g id="areas"></g>
+        </svg>
+        <span class="note">Not to scale</span>
+      </div>
+      <div class="addr">
+        <div class="card">
+          <b style="font-size:20px">Plot No. 59, New Pawana Nagar Society</b>
+          <p>Bijli Nagar Road, opposite Laxmi Medico and Mart, Chinchwad Gaon, Pimpri-Chinchwad, Maharashtra 411033</p>
+          <p id="routeHint">Tap an area on the map to see the way in.</p>
+          <div class="copyrow"><button type="button" id="copyAddr"><svg class="ico"><use href="#i-copy"/></svg><span>Copy address</span></button><a class="btn btn-coral" style="padding:10px 16px;font-size:14px" href="https://maps.app.goo.gl/StwJKYnv9kRLnd1k7" target="_blank" rel="noopener"><svg class="ico"><use href="#i-map"/></svg>Open in Google Maps</a></div>
+          <p style="font-size:13.5px"><span class="confirm">CONFIRM parking, lift and wheelchair access</span></p>
+        </div>
+        <div class="lm"><img src="img/patients-from-pcmc.jpg" alt="A tree-lined road in Pimpri-Chinchwad at dusk"><span><svg class="ico"><use href="#i-pin"/></svg>Look for Laxmi Medico, we are opposite</span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band" id="v-adm" style="background:var(--white)"><div class="wrap">
+    <p class="kicker">If you are admitted</p>
+    <h2 class="h-l" style="margin-top:12px;max-width:18ch">No surprises, from admission to going home.</h2>
+    <div class="adm">
+      <article class="acard rev"><div class="im"><img src="img/general-ward.jpg" alt="The general ward with curtained beds"><span class="badge"><svg class="ico"><use href="#i-file"/></svg></span></div><div class="tx"><b>Before admission</b><p>The desk explains the room options and gives an estimate of costs before you are admitted. <span class="confirm">CONFIRM room types</span></p></div></article>
+      <article class="acard rev"><div class="im"><img src="img/postnatal-care.jpg" alt="A mother resting with her newborn"><span class="badge"><svg class="ico"><use href="#i-people"/></svg></span></div><div class="tx"><b>One family member stays</b><p>One companion can usually stay with you. In the labour room and theatre, the team tells you when. <span class="confirm">CONFIRM</span></p></div></article>
+      <article class="acard rev"><div class="im"><img src="img/dr-ashish-recovery.jpg" alt="Dr. Ashish walking with a recovering patient"><span class="badge"><svg class="ico"><use href="#i-check"/></svg></span></div><div class="tx"><b>Going home</b><p>You get a discharge summary, your medicines and a follow-up date. Keep the summary safe; your future doctors will ask for it.</p></div></article>
+    </div>
+  </div></section>
+
+  <section class="band" id="v-ins" style="background:var(--white);padding-top:0"><div class="wrap ins">
+    <button type="button" class="pcard" id="pcard" aria-label="Flip the card to see what to bring">
+      <div class="in">
+        <div class="side front"><div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1"><span class="chipg"></span><svg class="ico" style="width:30px;height:30px;color:#F4978E"><use href="#i-shield"/></svg></div><div class="num">•••• •••• 0411</div><div style="display:flex;justify-content:space-between;align-items:end"><div><small>Health policy</small><div style="font-weight:600">Your name here</div></div><small>Tap to flip</small></div></div>
+        <div class="side back"><small style="color:var(--ink-2)">Bring on the day</small><ol><li>Your policy card</li><li>Photo ID</li><li>Any pre-authorisation forms</li></ol><small style="color:var(--ink-2)">Tap to flip back</small></div>
+      </div>
+    </button>
+    <div>
+      <p class="kicker">Insurance and payment</p>
+      <h2 class="h-l" style="margin-top:12px">Know before you are admitted.</h2>
+      <p class="lead" style="margin-top:14px">Many patients use health insurance with us. Our desk tells you before admission which way your policy works here.</p>
+      <div class="paths">
+        <div><i><svg class="ico"><use href="#i-shield"/></svg></i><p><b>Cashless</b><span>The insurer settles the bill with the hospital directly.</span></p></div>
+        <div><i><svg class="ico"><use href="#i-card"/></svg></i><p><b>Reimbursement</b><span>You pay, then claim back from your insurer with our papers.</span></p></div>
+      </div>
+      <p style="font-size:14px;margin-top:14px"><span class="confirm">CONFIRM TPA and insurer panel, payment modes</span></p>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap faq">
+    <div class="aside"><p class="kicker">Questions</p><h2 class="h-l">Before you leave home.</h2><img src="img/book.jpg" alt="A woman messaging the hospital on her phone" style="object-position:50% 30%"></div>
+    <div>
+      <details open><summary>How long does a first visit take?<i></i></summary><p>Plan for about an hour, including registration, checks and any scan done the same day. Visits are longer if blood tests or a scan are needed. Follow-up visits are usually shorter.</p></details>
+      <details><summary>Can I get my scan on the same day?<i></i></summary><p>Often, yes. Our ultrasound room is next to the consultation room. Some scans need a full bladder or a specific week of pregnancy, and the team will tell you when.</p></details>
+      <details><summary>Is there a pharmacy?<i></i></summary><p><span class="confirm">CONFIRM</span> If not in-house, Laxmi Medico is directly opposite the hospital.</p></details>
+      <details><summary>Can children visit an admitted patient?<i></i></summary><p><span class="confirm">CONFIRM visiting rules</span> To protect newborns and patients after surgery, we may limit visitors at times.</p></details>
+    </div>
+  </div></section>
+</main>
+
+<footer class="foot"><div class="wrap"><span><b>Dr. Lakshmi's Penguin Hospital</b> · Chinchwad Gaon, Pimpri-Chinchwad</span><span>Call or WhatsApp +91 95189 04156 · Emergency open day and night</span></div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const use=id=>`<svg class="ico"><use href="#${id}"/></svg>`;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- router ---------- */
+const PAGES=['doctors','about','visit'];
+let current=null;
+function route(){
+  let h=(location.hash||'').slice(1);
+  let page=PAGES.includes(h)?h:null;
+  if(!page){const el=h&&document.getElementById(h);const host=el&&el.closest('.page');page=host?host.dataset.page:(current||'doctors');}
+  if(page!==current){
+    $$('.page').forEach(p=>p.classList.toggle('on',p.dataset.page===page));
+    $$('[data-go]').forEach(a=>a.classList.toggle('on',a.dataset.go===page));
+    current=page;
+    if(PAGES.includes(h)) window.scrollTo(0,0);
+    setTimeout(()=>{measure();onScroll();moveKnob();},30);
+    if(page==='about') animateH1();
+  }
+}
+addEventListener('hashchange',route);
+
+/* ---------- reveal + counters ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');countUp(e.target);io.unobserve(e.target)}}),{threshold:.18});
+function countUp(root){$$('[data-count]',root).forEach(n=>{if(n.dataset.done)return;n.dataset.done=1;const to=+n.dataset.count,t0=performance.now(),d=reduce?1:1400;const f=t=>{const k=Math.min(1,(t-t0)/d);n.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)})}
+
+/* ---------- clock ---------- */
+function tick(){const d=new Date();const s=d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});$$('[data-clock]').forEach(e=>e.textContent=s.toUpperCase());
+  const ist=new Date(d.toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));const day=ist.getDay(),h=ist.getHours()+ist.getMinutes()/60;
+  const open=day!==0||(h>=16&&h<18);const st=$('#opdState');if(st){st.textContent=open?'OPD open now':'OPD closed now, opens '+(day===0&&h<16?'at 4 pm':'Monday');st.classList.toggle('closed',!open)}
+  placeNow(ist);}
+setInterval(tick,30000);
+
+/* =============== DOCTORS =============== */
+const L={face:'img/dr-lakshmi-headshot.jpg',name:'Dr. Lakshmi Vijay Kalbande',role:'Obstetrician and gynaecologist',book:'Book with Dr. Lakshmi'};
+const A={face:'img/dr-ashish-headshot.jpg',name:'Dr. Ashish A. Baviskar',role:'Cardiothoracic and vascular surgeon',book:'Book with Dr. Ashish'};
+const concerns=[
+ {g:'W',i:'i-bump',t:"I'm pregnant",d:L,img:'dr-lakshmi-pregnancy',why:'Pregnancy care from the first scan to the first cuddle, with visits planned around your own risks. Normal and painless delivery are discussed with every mother.',link:'Pregnancy care'},
+ {g:'W',i:'i-alert',t:'High-risk pregnancy',d:L,img:'dr-lakshmi-consult',why:'Twins, diabetes or high blood pressure in pregnancy, placenta previa, or a past loss. Each pregnancy gets its own plan, with closer visits.',link:'High-risk pregnancy'},
+ {g:'W',i:'i-cycle',t:'Irregular or heavy periods',d:L,img:'dr-lakshmi-review',why:'Most period problems settle with simple treatment once the cause is found. A scan is often done in the same visit.',link:'Period problems'},
+ {g:'W',i:'i-drop',t:'PCOS',d:L,img:'dr-lakshmi-note',why:'A plan for cycles, skin, weight and fertility, adjusted at each follow-up.',link:'PCOS'},
+ {g:'W',i:'i-scope',t:'Fibroids or cysts',d:L,img:'dr-lakshmi-scrubs',why:'Watchful care or medicines first. When surgery is needed, keyhole (laparoscopic) surgery where it suits you.',link:'Fibroids'},
+ {g:'W',i:'i-sprout',t:'Trying for a baby',d:L,img:'dr-lakshmi-consult',why:'A fertility evaluation for both partners, starting with the simplest tests.',link:'Fertility evaluation'},
+ {g:'W',i:'i-moon',t:'Menopause',d:L,img:'dr-lakshmi-note',why:'Hot flushes, sleep, bones and heart health. Dr. Lakshmi is a member of the Indian Menopause Society.',link:'Menopause care'},
+ {g:'H',i:'i-ecg',t:'Chest pain when I walk',d:A,img:'dr-ashish-ecg',why:'Start with a heart check-up: ECG, echo and a conversation. Many heart problems are managed without surgery.',link:'Heart check-up'},
+ {g:'H',i:'i-heart',t:'Told I need bypass or valve surgery',d:A,img:'dr-ashish-consult',why:'Bring your reports for a second look. If surgery is right, he explains it to you and your family, before and after.',link:'Bypass and valves'},
+ {g:'H',i:'i-knife',t:'Is keyhole heart surgery possible?',d:A,img:'dr-ashish-scrubs',why:'Minimally invasive surgery through a small cut between the ribs, for suitable patients. He tells you honestly when open surgery is safer.',link:'Keyhole heart surgery'},
+ {g:'H',i:'i-vein',t:'Swollen, twisted leg veins',d:A,img:'dr-ashish-recovery',why:'Varicose veins can ache, itch or cause ulcers. Treatment ranges from stockings to a short procedure.',link:'Varicose veins'},
+ {g:'H',i:'i-walk',t:'Leg pain when walking',d:A,img:'dr-ashish-consult',why:'Pain in the calf that eases with rest can mean narrowed leg arteries. A scan shows where and how much.',link:'Leg artery disease'},
+ {g:'H',i:'i-drop',t:'Need a fistula for dialysis',d:A,img:'dr-ashish-note',why:'An AV fistula gives dialysis a strong, lasting access point. It is planned weeks before dialysis starts.',link:'AV fistula'},
+ {g:'H',i:'i-lungs',t:'Lung or chest problem',d:A,img:'dr-ashish-night',why:'Lung growths, fluid or air around the lung, and chest injuries.',link:'Lung and chest surgery'},
+ {g:'E',i:'i-alert',t:'Something is wrong right now',d:null,img:'night-corridor',why:'Come straight in. Our emergency team is here day and night, including for women in labour. If you cannot travel safely, call 108.',link:'Emergency care'}
+];
+function buildChips(){
+  concerns.forEach((c,ix)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(c.g==='E'?' sos':'');b.setAttribute('aria-pressed',ix===0);b.innerHTML=`<i>${use(c.i)}</i>${c.t}`;b.onclick=()=>pickConcern(ix,b);$('#chips'+c.g).append(b)});
+  pickConcern(0,$('.chip'),true);
+}
+let ansFront='ansA',ansBusy=0;
+function pickConcern(ix,btn,first){
+  const c=concerns[ix];$$('.chip').forEach(b=>b.setAttribute('aria-pressed',b===btn));
+  const d=c.d||{face:'img/logo.png',name:'Emergency, open now',role:'Call or come in: +91 95189 04156',book:'How to reach us'};
+  const fill=()=>{$('#ansFace').src=d.face;$('#ansName').textContent=d.name;$('#ansRole').textContent=d.role;$('#ansWhy').textContent=c.why;
+    $('#ansBook').textContent=d.book;$('#ansLink').textContent=c.link+' →'};
+  const src='img/'+c.img+'.jpg';
+  if(first){$('#ansA').src=src;fill();return}
+  const back=ansFront==='ansA'?'ansB':'ansA';const bi=$('#'+back),fi=$('#'+ansFront);
+  const swapImg=()=>{bi.classList.add('show');fi.classList.remove('show');ansFront=back};
+  if(bi.getAttribute('src')===src&&bi.complete){swapImg()}else{bi.onload=swapImg;bi.src=src}
+  const a=$('#answer');a.classList.add('swap');clearTimeout(ansBusy);ansBusy=setTimeout(()=>{fill();a.classList.remove('swap')},280);
+}
+const journeys={
+ l:[{t:'First visit',p:'You meet Dr. Lakshmi herself. She listens, examines and explains what she thinks is going on.',img:'dr-lakshmi-consult',c:'Consultation'},
+    {t:'The scan, next door',p:'With a fellowship in ultrasound, she reads many scans herself and explains them in the same visit.',img:'dr-lakshmi-pregnancy',c:'Pregnancy check'},
+    {t:'Delivery or surgery',p:'The doctor who planned your care is the one in the labour room or theatre.',img:'dr-lakshmi-scrubs',c:'In theatre'},
+    {t:'Follow-up',p:'She reviews your reports and plans the next step, so nothing is lost between doctors.',img:'dr-lakshmi-review',c:'Reviewing reports'}],
+ a:[{t:'First visit, family included',p:'Dr. Ashish explains the heart with a model, to you and to whoever came with you.',img:'dr-ashish-consult',c:'Consultation'},
+    {t:'Tests, then a decision',p:'ECG, echo and other reports first. No decision until you understand them.',img:'dr-ashish-ecg',c:'Reading an ECG'},
+    {t:'Surgery, when it is right',p:'Bypass, valve or keyhole surgery, by the surgeon you already know.',img:'dr-ashish-scrubs',c:'Before theatre'},
+    {t:'Walking again',p:'He checks on your recovery and plans walking, wound care and follow-up visits.',img:'dr-ashish-recovery',c:'Recovery walk'}]
+};
+let jdoc='l',jstep=-1,jp=0;
+function buildJourney(){
+  const ol=$('#jsteps'),ph=$('#jph');$$('li',ol).forEach(x=>x.remove());$$('img.st',ph).forEach(x=>x.remove());
+  journeys[jdoc].forEach((s,i)=>{const li=document.createElement('li');li.innerHTML=`<span class="no">0${i+1}</span><div><b>${s.t}</b><p>${s.p}</p></div>`;ol.append(li);
+    const im=document.createElement('img');im.className='st';im.src=`img/${s.img}.jpg`;im.alt=s.c;im.style.zIndex=i+1;ph.insertBefore(im,$('#jsegs'))});
+  $('#jcapFace').src=jdoc==='l'?'img/dr-lakshmi-headshot.jpg':'img/dr-ashish-headshot.jpg';
+  const k=jstep;jstep=-1;setJStep(Math.max(0,k));moveKnob();
+}
+function setJStep(i){
+  if(i!==jstep){jstep=i;$$('#jsteps li').forEach((li,k)=>li.classList.toggle('on',innerWidth<=860||k<=i));
+    $$('#jph img.st').forEach((im,k)=>im.classList.toggle('on',k<=i));$('#jcapTxt').textContent=journeys[jdoc][i].c;}
+  $$('#jsegs b').forEach((b,k)=>b.style.transform=`scaleX(${k<i?1:k===i?Math.max(.04,jp*4-i):0})`);
+  $('#jbar').style.transform=`scaleY(${Math.min(1,(i+1)/4)})`;
+}
+function moveKnob(){const b=$(`.jtoggle button[data-doc="${jdoc}"]`),k=$('#knob');if(!b||!b.offsetWidth)return;k.style.width=b.offsetWidth+'px';k.style.transform=`translateX(${b.offsetLeft-4}px)`}
+$$('.jtoggle button').forEach(b=>b.onclick=()=>{if(b.dataset.doc===jdoc)return;jdoc=b.dataset.doc;$$('.jtoggle button').forEach(x=>x.setAttribute('aria-pressed',x===b));moveKnob();
+  const ph=$('#jph');ph.classList.add('fading');setTimeout(()=>{buildJourney();ph.classList.remove('fading')},420)});
+
+/* =============== ABOUT =============== */
+function animateH1(){const h=$('#aboutH1');if(!h||h.dataset.split)return;h.dataset.split=1;const words=h.textContent.trim().split(/\s+/);h.innerHTML=words.map((w,i)=>`<span class="w" style="animation-delay:${.15+i*.07}s">${w}</span>`).join(' ')}
+const PG=`<svg viewBox="0 0 120 200" aria-hidden="true"><ellipse cx="60" cy="196" rx="38" ry="5" fill="#000" opacity=".18"/>
+<path d="M60 8C40 8 32 28 32 48c0 18-12 42-12 76 0 42 18 70 40 70s40-28 40-70c0-34-12-58-12-76C88 28 80 8 60 8Z" fill="#0B1B33"/>
+<path d="M62 50c-14 4-22 32-22 72 0 36 9 62 22 62s20-26 20-62c0-40-8-68-20-72Z" fill="#F4F7FC"/>
+<path d="M62 50c-6 2-10 8-13 16 6-3 14-3 21 0-1-8-4-14-8-16Z" fill="#F1B45B" opacity=".9"/>
+<ellipse cx="78" cy="40" rx="6" ry="10" fill="#F1B45B" opacity=".9"/>
+<path d="M82 28l22 8-22 5Z" fill="#3A3F4A"/><path d="M84 34l18 2.6-18 3.4Z" fill="#E9A16A"/>
+<circle cx="74" cy="27" r="2.6" fill="#fff"/>
+<path d="M34 76c-12 14-16 40-12 62 6-12 12-26 14-44Z" fill="#14294A"/>
+<ellipse cx="50" cy="192" rx="12" ry="4" fill="#3A3F4A"/><ellipse cx="72" cy="192" rx="12" ry="4" fill="#3A3F4A"/></svg>`;
+function buildPeng(){
+  $('#pgA').innerHTML=PG;$('#pgB').innerHTML=PG;
+  const st=$('#stars');for(let i=0;i<70;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*62+'%';s.style.animationDelay=(-Math.random()*3)+'s';s.style.opacity=.3+Math.random()*.7;st.append(s)}
+  const sn=$('#snow');for(let i=0;i<46;i++){const s=document.createElement('i');s.style.left=Math.random()*110+'%';const sz=2+Math.random()*4;s.style.width=s.style.height=sz+'px';s.style.animationDuration=(7+Math.random()*9)+'s';s.style.animationDelay=(-Math.random()*16)+'s';sn.append(s)}
+}
+let beat=-1;
+function setBeat(b){if(b===beat)return;beat=b;
+  $$('#beats .beat').forEach((x,i)=>x.classList.toggle('on',i===b));$$('#pprog i').forEach((x,i)=>x.classList.toggle('on',i===b));
+  const A=$('#pgA'),B=$('#pgB'),egg=$('#egg');const wide=innerWidth>760;const base=wide?30:12,step=wide?14:26;
+  const walk=(el,to,dir)=>{el.classList.add('walk');el.classList.toggle('face-l',dir==='l');el.style.left=to+'%';clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('walk'),2200)};
+  $('#skyD').style.opacity=b>=2?1:0;$('#stars').style.opacity=b>=2?.15:1;$('#snow').style.opacity=b<=1?1:.15;
+  $('#pdocs').classList.toggle('on',b===3);$('#chick').classList.toggle('on',b===3);
+  egg.style.opacity=b===3?0:1;
+  if(b===0){walk(A,base,'r');walk(B,base+step,'l');egg.style.left=`calc(${base}% + 3.6vw)`;A.style.opacity=1;B.style.opacity=1}
+  if(b===1){walk(A,base,'r');walk(B,wide?82:84,'r');B.style.opacity=wide?1:.0;egg.style.left=`calc(${base}% + 3.6vw)`}
+  if(b===2){B.style.opacity=1;walk(B,base+step*.5,'l');walk(A,wide?80:84,'r');setTimeout(()=>{if(beat===2)egg.style.left=`calc(${base+step*.5}% + 2vw)`},1400)}
+  if(b===3){walk(A,base,'r');walk(B,base+step,'l');A.style.opacity=1}
+}
+const rooms=[
+ {k:'wards',n:'Wards',img:'general-ward',t:'Curtained beds, and private rooms for a quieter recovery.',c:true},
+ {k:'ot',n:'Operation theatre',img:'operation-theatre',t:'For caesarean births, laparoscopic surgery and other planned and emergency operations.'},
+ {k:'labour',n:'Labour room',img:'labour-room',t:'With a newborn warming station, so your baby is checked and kept warm the moment they are born.'},
+ {k:'scan',n:'Consultation and ultrasound',img:'ultrasound-room',t:'The scan room sits next to the consultation room, for pregnancy and gynaecology scans in the same visit.'},
+ {k:'er',n:'Emergency and front desk',img:'dr-ashish-night',t:'Open day and night. Walk in, or call ahead on +91 95189 04156.',ai:true}
+];
+let roomIx=2,roomTimer=null,roomUser=false;
+function buildTower(){
+  const g=$('#floors');const H=74,top=78;
+  g.innerHTML=rooms.map((r,i)=>{const y=top+i*H;let wins='';for(let w=0;w<5;w++)wins+=`<rect class="win" x="${178+w*28}" y="${y+16}" width="18" height="${H-36}" rx="3"/>`+(Math.random()>.55?`<rect class="glow" style="animation-delay:${-Math.random()*4}s" x="${178+w*28}" y="${y+16}" width="18" height="${H-36}" rx="3"/>`:'');
+    return `<g class="fl" tabindex="0" role="button" aria-label="${r.n}" data-i="${i}"><rect class="room" x="40" y="${y}" width="280" height="${H-6}" rx="6"/>${wins}<text x="56" y="${y+H/2+2}">${r.n.replace(' and ultrasound','').replace(' and front desk','')}</text></g>`}).join('');
+  $$('.fl',g).forEach(f=>{const go=()=>{roomUser=true;showRoom(+f.dataset.i)};f.onclick=go;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}}});
+  showRoom(roomIx,true);
+  roomTimer=setInterval(()=>{if(!roomUser&&current==='about')showRoom((roomIx+1)%rooms.length)},4200);
+}
+function showRoom(i,first){roomIx=i;const r=rooms[i];$$('.fl').forEach(f=>f.classList.toggle('on',+f.dataset.i===i));
+  const img=$('#roomImg');const set=()=>{img.src='img/'+r.img+'.jpg';img.alt=r.n};
+  if(first)set();else{img.classList.add('out');setTimeout(()=>{set();img.onload=()=>img.classList.remove('out')},350)}
+  $('#roomName').textContent=r.n;$('#roomText').innerHTML=r.t+(r.c?' <span class="confirm">CONFIRM room types, beds</span>':'');$('.roomview .real').textContent=r.ai?'Illustrative photo':'Real photo';}
+
+/* =============== VISIT =============== */
+const packs={
+ opd:{n:'OPD visit',items:[['i-file','Old reports and scans','Even old ones'],['i-pill','Your medicines','Or a list of them'],['i-id','Photo ID','For registration'],['i-phone','Booking message','If you booked'],['i-water','Water and a snack','If you are not fasting'],['i-people','A family member','Welcome in the room']]},
+ preg:{n:'Pregnancy check',items:[['i-file','Pregnancy file','Every scan and report'],['i-cal','Date of last period','Or your due date'],['i-pill','Supplements you take','Iron, folic acid, calcium'],['i-people','Partner or family','If you can'],['i-water','Water','Some scans need a full bladder'],['i-id','Photo ID','For registration']]},
+ adm:{n:'Admission',items:[['i-shirt','Loose, comfortable clothes','Two or three sets'],['i-slipper','Slippers',''],['i-brush','Toiletries','Toothbrush, soap, comb'],['i-pill','Medicines in their boxes','So doses are clear'],['i-plug','Phone charger',''],['i-card','Insurance card and ID','Plus pre-authorisation forms'],['i-file','All reports','Including old discharge summaries']]},
+ baby:{n:'Delivery bag',items:[['i-shirt','Clothes for you','Front-opening for feeding'],['i-pad','Maternity pads',''],['i-cap','Caps for the baby','Newborns lose heat fast'],['i-sock','Socks and mittens',''],['i-baby','Baby clothes and wraps','Soft cotton'],['i-brush','Toiletries',''],['i-plug','Phone charger',''],['i-file','Pregnancy file','Every scan and report']]}
+};
+let packKey='opd',packed=store.get('ph-packed',{});
+function buildPack(){const tabs=$('#packTabs');tabs.innerHTML='';Object.entries(packs).forEach(([k,p])=>{const b=document.createElement('button');b.type='button';b.role='tab';b.id='tab-'+k;b.setAttribute('aria-selected',k===packKey);b.textContent=p.n;b.onclick=()=>{packKey=k;buildPack()};tabs.append(b)});
+  const box=$('#packItems');box.innerHTML='';packs[packKey].items.forEach(([ic,t,s],i)=>{const id=packKey+i;const b=document.createElement('button');b.type='button';b.className='item';b.id='item-'+id;b.setAttribute('aria-pressed',!!packed[id]);b.innerHTML=`<i>${use(ic)}</i><span><b>${t}</b>${s?`<span>${s}</span>`:''}</span><span class="tick">${use('i-check')}</span>`;b.onclick=()=>{packed[id]=!packed[id];store.set('ph-packed',packed);b.setAttribute('aria-pressed',packed[id]);packStat(true)};box.append(b)});packStat()}
+function packStat(bounce){const it=packs[packKey].items,n=it.filter((_,i)=>packed[packKey+i]).length,k=n/it.length;
+  $('#packCnt').textContent=n+' / '+it.length;$('#packMeter').style.width=k*100+'%';const f=$('#bagFill');const h=130*k;f.setAttribute('height',h);f.setAttribute('y',190-h);
+  $('#packMsg').textContent=n===0?'Tap an item when it is in your bag.':n===it.length?'All packed. See you soon.':`${it.length-n} more to go.`;
+  if(bounce){const s=$('#bagSvg');s.classList.remove('bag-bounce');void s.getBoundingClientRect();s.classList.add('bag-bounce')}}
+const hours=[[16,18],[0,24],[0,24],[0,24],[0,24],[0,24],[0,24]];
+function buildWeek(){const w=$('#week');const names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];const order=[1,2,3,4,5,6,0];
+  order.forEach(d=>{const el=document.createElement('div');el.className='day';el.dataset.d=d;const [a,b]=hours[d];el.innerHTML=`<div class="col"><span class="open" style="top:${a/24*100}%;height:${(b-a)/24*100}%"></span><span class="em"></span></div><span>${names[d]}</span>`;w.append(el)});
+  const n=document.createElement('div');n.className='nowline';n.id='nowline';w.append(n)}
+function placeNow(ist){const nl=$('#nowline');if(!nl)return;const w=$('#week');const col=$('.day .col',w);if(!col)return;const h=ist.getHours()+ist.getMinutes()/60;nl.style.top=(col.offsetTop+col.offsetHeight*h/24)+'px';$$('.day',w).forEach(d=>d.classList.toggle('today',+d.dataset.d===ist.getDay()))}
+const areas=[
+ ['Nigdi',300,70,'From Nigdi, come south past Akurdi towards Chinchwad Gaon.'],
+ ['Akurdi',190,120,'From Akurdi, head for Chinchwad Gaon and Bijli Nagar Road.'],
+ ['Ravet',80,190,'From Ravet, cross towards Chinchwad Gaon and Bijli Nagar Road.'],
+ ['Moshi',540,90,'From Moshi, come west through Pimpri towards Chinchwad.'],
+ ['Pimpri',540,250,'From Pimpri, head west to Chinchwad Gaon and Bijli Nagar Road.'],
+ ['Punawale',100,340,'From Punawale, head north-east to Chinchwad Gaon.'],
+ ['Tathawade',210,410,'From Tathawade, head north to Chinchwad Gaon.'],
+ ['Wakad',380,415,'From Wakad, head north to Chinchwad Gaon.'],
+ ['Hinjawadi',40,425,'From Hinjawadi, come through Wakad or Tathawade to Chinchwad Gaon.']
+];
+function buildMap(){const R=$('#routes'),A=$('#areas');const hx=320,hy=250;let r='',a='';
+  areas.forEach(([n,x,y],i)=>{const mx=(x+hx)/2+(i%2?30:-30),my=(y+hy)/2+(i%2?-20:20);const d=`M${x} ${y} Q${mx} ${my} ${hx} ${hy}`;r+=`<path class="rt" data-i="${i}" d="${d}"/><path class="flow" data-i="${i}" d="${d}"/>`;
+   const anchor=x<120?'start':x>500?'end':'middle';const ty=y<hy?y-14:y+26;a+=`<g class="area" tabindex="0" role="button" data-i="${i}" aria-label="${n}"><circle cx="${x}" cy="${y}" r="8"/><text x="${x+(anchor==='start'?-6:anchor==='end'?6:0)}" y="${ty}" text-anchor="${anchor}">${n}</text></g>`});
+  R.innerHTML=r;A.innerHTML=a;
+  const pick=i=>{$$('#mapSvg [data-i]').forEach(e=>e.classList.toggle('on',+e.dataset.i===i));$('#routeHint').textContent=areas[i][3]+' We are opposite Laxmi Medico and Mart.'};
+  $$('.area',A).forEach(g=>{const i=+g.dataset.i;g.onmouseenter=()=>pick(i);g.onclick=()=>pick(i);g.onfocus=()=>pick(i)});
+  let auto=0;const t=setInterval(()=>{if(current!=='visit')return;if($('#mapSvg').matches(':hover')){clearInterval(t);return}pick(auto++%areas.length)},2600);pick(4)}
+$('#copyAddr').onclick=async()=>{const txt='Penguin Hospital, Plot No. 59, New Pawana Nagar Society, Bijli Nagar Road, opposite Laxmi Medico and Mart, Chinchwad Gaon, Pimpri-Chinchwad, Maharashtra 411033';const lab=$('#copyAddr span');try{await navigator.clipboard.writeText(txt);lab.textContent='Copied'}catch(e){lab.textContent='Select the address above to copy'}setTimeout(()=>lab.textContent='Copy address',2400)};
+$('#pcard').onclick=()=>$('#pcard').classList.toggle('flip');
+
+/* ---------- scroll engine ---------- */
+let hsMax=0;
+function measure(){const hs=$('#v-first'),tr=$('#track');if(hs&&tr&&innerWidth>760){hsMax=Math.max(0,tr.scrollWidth-innerWidth);hs.style.height=(innerHeight+hsMax)+'px'}else if(hs){hs.style.height='auto'}}
+function prog(el){const r=el.getBoundingClientRect();const span=el.offsetHeight-innerHeight;return span>0?Math.min(1,Math.max(0,-r.top/span)):0}
+function onScroll(){
+  if(current==='doctors'){const j=$('#journey');if(innerWidth>860){jp=prog(j);setJStep(Math.min(3,Math.floor(jp*4)))}
+    $$('.zoom').forEach(img=>{const r=img.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;const k=Math.min(1,Math.max(0,1-r.top/innerHeight));img.style.setProperty('--s',(1.12-k*.12).toFixed(3))})}
+  if(current==='about'){const p=prog($('#peng'));setBeat(Math.min(3,Math.floor(p*4.2)))}
+  if(current==='visit'&&innerWidth>760){const hs=$('#v-first');const p=prog(hs);$('#track').style.transform=`translateX(${-p*hsMax}px)`;
+    $('#ringFg').style.strokeDashoffset=226*(1-p);$('#ringHand').style.transform=`rotate(${p*360}deg)`;$('#ringLbl').textContent='Step '+(Math.min(7,Math.floor(p*6.99)+1))+' of 7'}
+}
+let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;onScroll()})},{passive:true});
+addEventListener('resize',()=>{measure();onScroll();moveKnob()});
+
+/* ---------- boot ---------- */
+buildChips();buildJourney();buildPeng();buildTower();buildPack();buildWeek();buildMap();
+$$('.rev,.stats,.path,.week,.tile,.cta,.gl').forEach(e=>io.observe(e));
+route();tick();
+</script>

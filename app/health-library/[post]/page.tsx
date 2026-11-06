@@ -13,6 +13,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
 import { doctors } from "@/lib/doctors";
 import { site } from "@/lib/site-config";
+import { DoctorImg } from "@/components/DoctorImage";
 
 export function generateStaticParams() {
   return allPosts().map((p) => ({ post: p.url.split("/").filter(Boolean).pop()! }));
@@ -75,7 +76,7 @@ export default async function PostPage({ params }: { params: Promise<{ post: str
           <span className="chip-c">{doc.category ?? "Article"}</span>
           <h1>{doc.title.split("|")[0].trim()}</h1>
           <div className="author">
-            <img src={d.portrait} alt="" />
+            <DoctorImg who={d.slug} kind="Headshot" />
             <span>
               <b>{d.name} {d.nameSoft}</b>
               {d.shortRole}
@@ -116,7 +117,7 @@ export default async function PostPage({ params }: { params: Promise<{ post: str
                 name={`${d.name} ${d.nameSoft}`}
                 qualifications={d.role}
                 lastReviewed={<ConfirmChip note="on sign-off" />}
-                portrait={d.portrait}
+                doctor={d.slug}
               />
             </div>
           </div>

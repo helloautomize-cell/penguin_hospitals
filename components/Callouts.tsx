@@ -3,6 +3,9 @@ import { CalendarDays, Phone, ShieldAlert, TriangleAlert } from "lucide-react";
 import { site } from "@/lib/site-config";
 import { doctors } from "@/lib/doctors";
 import { whatsappLink } from "@/lib/whatsapp";
+import { doctorImageSrcFor } from "@/lib/doctor-images.server";
+import { doctorSlot } from "@/lib/doctor-images";
+import { FallbackFlag } from "./DoctorImage";
 import { WhatsAppIcon } from "./icons";
 
 /** Emergency callout (.callem) inside prose. */
@@ -36,13 +39,16 @@ export function ReviewerBox({
   qualifications,
   lastReviewed,
   portrait,
+  doctor,
 }: {
   name: string;
   qualifications: string;
   lastReviewed: React.ReactNode;
   portrait?: string;
+  /** Doctor slug/name; resolves the matching headshot slot. */
+  doctor?: string;
 }) {
-  const img = portrait ?? "/images/clinic/dr-lakshmi-portrait.jpg";
+  const img = portrait ?? doctorImageSrcFor(doctor ?? "lakshmi", "Headshot");
   return (
     <div className="rev rv">
       <Image src={img} alt="" width={48} height={48} />
@@ -111,8 +117,8 @@ export function DocBand({ doctorIndex = 0 }: { doctorIndex?: number }) {
   return (
     <div className="docband rv">
       <div className="ph">
-        <Image src={d.portrait} alt={`${d.name} ${d.nameSoft}`} width={400} height={500} />
-        <span className="confirm">CONFIRM: new portrait</span>
+        <Image src={doctorImageSrcFor(d.slug, "Hero")} alt={`${d.name} ${d.nameSoft}`} width={400} height={500} />
+        <FallbackFlag slot={doctorSlot(d.slug, "Hero")} />
       </div>
       <div>
         <span className="tag">

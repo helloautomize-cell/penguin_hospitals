@@ -7,6 +7,7 @@ import { PcpndtLine, ReviewerBox, CtaBand } from "@/components/Callouts";
 import { WeekTool } from "@/components/home/WeekTool";
 import { ConfirmChip } from "@/components/Tag";
 import { doctors } from "@/lib/doctors";
+import { DoctorImg } from "@/components/DoctorImage";
 
 export const metadata: Metadata = {
   title: "Pregnancy week by week and due date calculator | Penguin Hospital",
@@ -15,7 +16,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://penguinhospitals.com/pregnancy-week-by-week/" },
 };
 
-export default function WeekByWeek() {
+export default async function WeekByWeek({
+  searchParams,
+}: {
+  searchParams: Promise<{ week?: string }>;
+}) {
+  const { week: weekParam } = await searchParams;
   const doc = getPage("/pregnancy-week-by-week/")!;
   const faqs = doc.body.match(/###\s*FAQs?\s*\n([\s\S]*?)(?=\n#{2,3}\s|\[Reviewer|$)/)
     ? [...doc.body.matchAll(/^\d+\.\s+\*\*(.+?)\*\*\s*([\s\S]*?)(?=^\d+\.\s+\*\*|$)/gm)].map((m) => ({
@@ -38,9 +44,9 @@ export default function WeekByWeek() {
       </section>
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <WeekTool />
+          <WeekTool initial={weekParam ? Number(weekParam) : undefined} />
           <div className="rev rv" style={{ marginTop: 24 }}>
-            <img src={d.portrait} alt="" />
+            <DoctorImg who={d.slug} kind="Headshot" />
             <p>
               A general guide for healthy pregnancies. Dr. Lakshmi sets your own schedule after your
               first visit. Reviewed by <b>{d.name} {d.nameSoft}</b>.

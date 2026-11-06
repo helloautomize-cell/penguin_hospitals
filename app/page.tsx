@@ -2,15 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroFilm } from "@/components/home/HeroFilm";
 import { ChapterCards } from "@/components/home/ChapterCards";
-import { ChapterStory } from "@/components/home/ChapterStory";
-import { WeekDial } from "@/components/home/WeekDial";
+import { LifeChapters } from "@/components/home/LifeChapters";
+import { MothersSection } from "@/components/home/MothersSection";
 import { HeartMap } from "@/components/home/HeartMap";
+import { SurgeonStrip } from "@/components/home/SurgeonStrip";
 import { Visit } from "@/components/home/Visit";
 import { CloseBand } from "@/components/home/CloseBand";
 import { DoctorCard } from "@/components/DoctorCard";
+import { DoctorFigure } from "@/components/DoctorImage";
 import { ChatFaq } from "@/components/ChatFaq";
 import { ConfirmChip } from "@/components/Tag";
 import { doctors } from "@/lib/doctors";
+import { doctorImage, doctorImageSrcFor } from "@/lib/doctor-images.server";
+import { DOCTOR_IMAGE_SLOTS } from "@/lib/doctor-images";
 import { site } from "@/lib/site-config";
 import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
@@ -66,13 +70,29 @@ const hospitalLd = {
 };
 
 export default function Home() {
+  const lak = doctorImage("lakshmiHeadshot");
+  const ash = doctorImage("ashishHeadshot");
   return (
     <div className="home">
-      <HeroFilm />
+      <HeroFilm
+        whoImgs={[
+          doctorImageSrcFor("lakshmi", "Headshot"),
+          doctorImageSrcFor("ashish", "Headshot"),
+        ]}
+      />
       <ChapterCards />
-      <ChapterStory />
-      <WeekDial />
-      <HeartMap />
+      <LifeChapters
+        lakshmiImg={{
+          src: lak.kind === "single" ? lak.src : DOCTOR_IMAGE_SLOTS.lakshmiHeadshot.fallback!,
+          alt: DOCTOR_IMAGE_SLOTS.lakshmiHeadshot.alt,
+        }}
+        ashishImg={{
+          src: ash.kind === "single" ? ash.src : DOCTOR_IMAGE_SLOTS.ashishHeadshot.fallback!,
+          alt: DOCTOR_IMAGE_SLOTS.ashishHeadshot.alt,
+        }}
+      />
+      <MothersSection />
+      <HeartMap strip={<SurgeonStrip />} />
 
       <section className="pad" id="doctors" aria-labelledby="d-h">
         <div className="wrap">
@@ -91,6 +111,34 @@ export default function Home() {
           </div>
           <DoctorCard doctor={doctors[0]} />
           <DoctorCard doctor={doctors[1]} flip />
+          <div className="dclose rv">
+            <DoctorFigure
+              slot="together"
+              className="dclose-ph"
+              aspectRatio={null}
+              maxHeight={null}
+              objectPosition={null}
+              sizes="(max-width: 1024px) 92vw, 760px"
+            />
+            <div className="dclose-tx">
+              <span className="tag">
+                <i></i>Under one roof
+              </span>
+              <h3>Two specialists who plan together</h3>
+              <p>
+                We look after women through pregnancy and beyond, and families through problems of the
+                heart.
+              </p>
+              <div className="ctas">
+                <Link className="btn btn-coral" href="/book/">
+                  Book a visit
+                </Link>
+                <Link className="btn btn-line" href="/doctors/">
+                  Meet both doctors
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -57,7 +57,7 @@ test("new pages: no horizontal overflow at all widths", async ({ page }) => {
 test("week tool: ?week= param presets the dial", async ({ page }) => {
   await page.goto("/pregnancy-week-by-week/?week=32", { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(800);
-  await expect(page.getByRole("slider", { name: "Pregnancy week" })).toHaveAttribute(
+  await expect(page.getByRole("slider", { name: "Week of pregnancy" })).toHaveAttribute(
     "aria-valuenow",
     "32",
   );

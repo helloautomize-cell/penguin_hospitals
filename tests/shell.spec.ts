@@ -39,28 +39,29 @@ test.describe("mega menu", () => {
       await page.setViewportSize({ width: w, height: 900 });
       await page.goto("/about/", { waitUntil: "networkidle" });
       await page.waitForTimeout(800); // hydration
+      // desktop mainnav is hidden under the burger below ~1080px
+      const navVisible = await page.locator(".mainnav").isVisible().catch(() => false);
+      test.skip(!navVisible, "mainnav hidden at this width");
       for (const label of ["Women and pregnancy", "Heart and vessels"]) {
-        const trigger = page.getByRole("button", { name: label });
-        const panel = page.locator("[data-mega-panel]").first();
-        // click may land before hydration; retry until the panel mounts
+        const trigger = page.locator(".mainnav").getByRole("link", { name: label }).first();
+        const panel = trigger.locator("..").locator(".mega");
+        // panels open on hover (CSS); retry in case hydration is late
         for (let i = 0; i < 5; i++) {
-          await trigger.click();
+          await trigger.hover();
           if (await panel.isVisible().catch(() => false)) break;
           if (i === 4) await panel.waitFor({ state: "visible" });
           else await page.waitForTimeout(400);
         }
-        const box = await page.locator("[data-mega-panel]:visible").first().boundingBox();
+        const box = await panel.boundingBox();
         expect(box).not.toBeNull();
         if (box) {
           expect(box.x).toBeGreaterThanOrEqual(0);
           expect(box.x + box.width).toBeLessThanOrEqual(w);
         }
-        const overlaps = await page.evaluate(() => {
+        const overlaps = await panel.evaluate((el) => {
           const links = Array.from(
-            document.querySelectorAll<HTMLElement>(
-              '[data-radix-navigation-menu-viewport] a, [data-radix-navigation-menu-viewport] button',
-            ),
-          ).filter((el) => el.offsetParent !== null);
+            el.querySelectorAll<HTMLElement>("a, button"),
+          ).filter((l) => l.offsetParent !== null);
           for (let i = 0; i < links.length; i++) {
             for (let j = i + 1; j < links.length; j++) {
               const a = links[i].getBoundingClientRect();

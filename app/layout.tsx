@@ -42,12 +42,18 @@ import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { CookieBanner, CookieSettingsLink } from "@/components/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { Reveal } from "@/components/Reveal";
+import { doctorImageSrcFor } from "@/lib/doctor-images.server";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${figtree.variable} ${instrument.variable} ${devanagari.variable}`}>
       <body suppressHydrationWarning>
-        <SiteHeader />
+        <SiteHeader
+          docImgs={[
+            doctorImageSrcFor("lakshmi", "Headshot"),
+            doctorImageSrcFor("ashish", "Headshot"),
+          ]}
+        />
         <main id="top">{children}</main>
         <SiteFooter />
         <MobileActionBar />

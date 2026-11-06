@@ -38,7 +38,7 @@ const FRAMES = [
 const DUR = 7000;
 
 /** Photo-film hero (.phs): three chapters, reel tabs, pause, live IST clock. */
-export function HeroFilm() {
+export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
   const [cur, setCur] = useState(0);
   const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -49,6 +49,7 @@ export function HeroFilm() {
   const t0 = useRef(performance.now());
   const pausedRef = useRef(false);
   const curRef = useRef(0);
+  const pAt = useRef(0);
 
   const OPD: Record<number, [number, number]> = { 0: [16, 18], 1: [0, 24], 2: [0, 24], 3: [0, 24], 4: [0, 24], 5: [0, 24], 6: [0, 24] };
 
@@ -65,12 +66,13 @@ export function HeroFilm() {
         setProgress(p);
         if (p >= 1) show((curRef.current + 1) % FRAMES.length);
       } else {
-        t0.current = now;
+        t0.current = now - pAt.current * DUR;
       }
       raf = requestAnimationFrame(loop);
     };
     const show = (i: number) => {
       curRef.current = i;
+      pAt.current = 0;
       setCur(i);
       setProgress(0);
       t0.current = performance.now();
@@ -100,16 +102,22 @@ export function HeroFilm() {
     };
     addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+    const onVis = () => {
+      if (!document.hidden && !pausedRef.current) t0.current = performance.now();
+    };
+    document.addEventListener("visibilitychange", onVis);
     return () => {
       cancelAnimationFrame(raf);
       clearInterval(id);
       removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVis);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const show = (i: number) => {
     curRef.current = i;
+    pAt.current = 0;
     setCur(i);
     setProgress(0);
     t0.current = performance.now();
@@ -117,7 +125,7 @@ export function HeroFilm() {
 
   return (
     <section className="phs" id="hero" aria-label="Welcome" ref={heroRef}>
-      <div className="film" ref={filmRef}>
+      <div className={`film${paused ? " paused" : ""}`} ref={filmRef}>
         {FRAMES.map((f, i) => (
           <div className={`fr ${f.cls}${i === cur ? " on" : ""}`} key={f.cls}>
             <img src={f.src} alt={f.alt} loading={i === 0 ? undefined : "lazy"} fetchPriority={i === 0 ? "high" : undefined} />
@@ -151,7 +159,7 @@ export function HeroFilm() {
                 <span className="pwho">
                   {f.who ? (
                     <>
-                      <img src={f.who.img} alt="" />
+                      <img src={whoImgs?.[i] ?? f.who.img} alt="" />
                       <span dangerouslySetInnerHTML={{ __html: f.who.text.replace(/Dr\. (Lakshmi Kalbande|Ashish Baviskar)/, "<b>Dr. $1</b>") }} />
                     </>
                   ) : (
@@ -179,8 +187,10 @@ export function HeroFilm() {
         <button
           className="pause"
           type="button"
-          aria-label={paused ? "Play the slideshow" : "Pause the slideshow"}
+          aria-label={paused ? "Play film" : "Pause film"}
+          aria-pressed={paused}
           onClick={() => {
+            if (!paused) pAt.current = Math.min(1, (performance.now() - t0.current) / DUR);
             setPaused(!paused);
             pausedRef.current = !paused;
           }}
