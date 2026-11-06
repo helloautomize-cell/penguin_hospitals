@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" role="img" aria-labelledby="t d">
+  <title id="t">Dr. Lakshmi's Penguin Hospital logo (draft redraw)</title>
+  <desc id="d">A navy circle holding a parent and chick penguin with a red heart, above a red Penguin wordmark and navy Hospital line.</desc>
+  <!-- DRAFT for agency approval. Approximate vector redraw of
+       resources/images/_source/brand/logo-penguin-hospital.png.
+       Not used on pages yet. Refine curves against the PNG before sign-off. -->
+  <style>
+    .navy{fill:#001F43}
+    .red{fill:#E40913}
+    .word{font-family:Figtree,Arial,Helvetica,sans-serif}
+  </style>
+
+  <!-- emblem -->
+  <g transform="translate(400,215)">
+    <circle r="205" fill="none" stroke="#001F43" stroke-width="34"/>
+    <!-- parent penguin: navy body sweeping down the right, head bent to chick -->
+    <path class="navy" d="M-40-118 C30-140 110-110 128-30 C140 30 120 95 72 128
+      C95 60 88-10 40-60 C10-90-20-105-40-118 Z"/>
+    <path class="navy" d="M-40-118 C-60-95-75-60-72-25 C-70 0-60 25-44 44
+      C-58 10-56-35-40-60 Z"/>
+    <!-- parent head + beak -->
+    <path class="navy" d="M-72-138 C-40-150-8-142 8-118 C20-100 18-78 4-64
+      C-8-52-28-50-44-58 C-30-70-24-88-32-104 C-42-92-58-86-74-90
+      C-92-96-94-118-72-138 Z"/>
+    <circle cx="-50" cy="-112" r="7" fill="#fff"/>
+    <circle cx="-50" cy="-112" r="3.2" class="navy"/>
+    <path fill="#F9C9B6" d="M-78-96 C-92-88-100-74-98-58 C-88-70-76-76-64-78 Z"/>
+    <!-- chick -->
+    <g transform="translate(-18,70)">
+      <ellipse rx="52" ry="62" class="navy"/>
+      <ellipse rx="34" ry="42" cy="6" fill="#fff"/>
+      <circle cx="-18" cy="-34" r="12" fill="#fff"/>
+      <circle cx="18" cy="-34" r="12" fill="#fff"/>
+      <circle cx="-18" cy="-34" r="4.5" class="navy"/>
+      <circle cx="18" cy="-34" r="4.5" class="navy"/>
+      <path fill="#F9C9B6" d="M-10-22 L0-12 L10-22 Z"/>
+      <!-- heart held below -->
+      <path class="red" d="M0 88 C-34 66-52 44-52 24 a26 26 0 0 1 52-8 a26 26 0 0 1 52 8 c0 20-18 42-52 64 z" transform="scale(.72)"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text class="word navy" x="10" y="505" font-size="42" font-weight="700" letter-spacing="1">Dr. Lakshmi&#8217;s</text>
+  <text class="word red" x="4" y="585" font-size="96" font-weight="800" letter-spacing="-2">Penguin</text>
+  <text class="word navy" x="10" y="618" font-size="38" font-weight="800" letter-spacing="6">HOSPITAL</text>
+  <text class="word navy" x="790" y="612" font-size="26" font-weight="600" text-anchor="end">Together Through Life</text>
+</svg>

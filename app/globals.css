@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "./ref.css";
+@import "./ref-home.css";
+
+/*
+  Penguin Hospital design tokens.
+  Source: resources/docs/design-development-plan.md, section 2.
+  Do not add colours beyond this palette.
+*/
+
+@theme {
+  /* Colour */
+  --color-night: #000e24;
+  --color-navy: #001f43;
+  --color-deep: #0a2b57;
+  --color-blue: #17407e;
+  --color-blue-5: #2a5ba8;
+  --color-sky: #8fb8ea;
+  --color-ice: #f4f8fc;
+  --color-frost: #e8f0fa;
+  --color-line: #dfe7f1;
+  --color-paper: #f7f4f1;
+  --color-ink: #0b1a30;
+  --color-ink-2: #4a5970;
+  --color-ink-3: #77869c;
+  --color-mist: rgba(255, 255, 255, 0.78);
+  --color-coral: #f4978e;
+  --color-coral-d: #e77a70;
+  /* Derived for accessibility: coral text on light needs >= 4.5:1.
+     #E77A70 is 2.8:1 on white, so text-level coral uses this darker shade.
+     Decorative coral (icons, rings, fills) keeps coral / coral-d. */
+  --color-coral-ink: #b24740;
+  --color-peach: #f9c9b6;
+  --color-blush: #fdede8;
+  --color-alert: #e40913;
+  --color-alert-dark-bg: #ff6b63;
+  --color-ok: #2f7d5b;
+  --color-ok-dark-bg: #3ddc97;
+  --color-wa: #1f7a55;
+  --color-confirm-bg: #fff1b8;
+  --color-confirm-ink: #5e4600;
+  --color-on-dark: #eef4fb;
+  --color-on-dark-2: #a6b7cf;
+
+  /* Type families (font variables are set by next/font on <html>) */
+  --font-sans: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
+  --font-deva: var(--font-devanagari), var(--font-figtree), sans-serif;
+
+  /* Radius */
+  --radius-chip: 8px;
+  --radius-input: 14px;
+  --radius-card: 24px;
+  --radius-hero: 36px;
+
+  /* Shadows */
+  --shadow-card:
+    0 1px 2px rgba(0, 31, 67, 0.06),
+    0 12px 32px -12px rgba(0, 31, 67, 0.18);
+  --shadow-card-hover:
+    0 1px 2px rgba(0, 31, 67, 0.06),
+    0 12px 32px -12px rgba(0, 31, 67, 0.18),
+    0 24px 48px -20px rgba(0, 31, 67, 0.28);
+  --shadow-lg: 0 40px 90px -36px rgba(0, 20, 50, 0.55);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-hover: 200ms;
+  --duration-reveal: 500ms;
+  --duration-crossfade: 900ms;
+}
+
+:root {
+  --grad-brand: linear-gradient(90deg, #17407e, #001f43);
+  --grad-warm: linear-gradient(135deg, #f9c9b6, #f4978e);
+  --gutter: 24px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-ice);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--color-sky);
+  }
+}
+
+/* Type scale (plan 2.2). Classes, not prose plugins. */
+.t-hero {
+  font-size: clamp(52px, 7.2vw, 118px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+@media (max-width: 720px) {
+  .t-hero {
+    font-size: clamp(50px, 14vw, 72px);
+  }
+}
+.t-h2-home {
+  font-size: clamp(38px, 4.4vw, 68px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+.t-h1-inner {
+  font-size: clamp(38px, 4.6vw, 64px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.t-h2-inner {
+  font-size: clamp(28px, 2.6vw, 40px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+.t-h3 {
+  font-size: clamp(22px, 1.8vw, 24px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.t-lede {
+  font-size: clamp(19px, 1.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.55;
+}
+.t-body {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 68ch;
+}
+.t-body-article {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 68ch;
+}
+.t-small {
+  font-size: 15px;
+  font-weight: 500;
+}
+.t-fine {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Page rhythm */
+.section-pad {
+  padding-block: clamp(80px, 10vw, 140px);
+}
+.section-pad-inner {
+  padding-block: clamp(56px, 7vw, 96px);
+}
+.wrap {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px))
+    max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+/* Reveal: content is visible without JS. JS adds .pre below the fold only. */
+.rv {
+  transition:
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+.rv.pre {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rv.pre {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-kb {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-hero-kb { animation: hero-kb 9s ease-out forwards; }
+.animate-fadein { animation: fadein .6s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-kb, .animate-fadein { animation: none !important; }
+}
+
+html, body { overflow-x: clip; }
+
+/* Chapter story scenes (reference design) */
+@keyframes cs-rot { to { transform: rotate(360deg); } }
+@keyframes cs-br { 50% { transform: scale(1.04); } }
+@keyframes cs-run { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+@keyframes cs-lub { 50% { transform: scale(1.05); } }
+.cs-spin { animation: cs-rot 28s linear infinite; transform-origin: 260px 260px; }
+.cs-breathe { animation: cs-br 4.6s ease-in-out infinite; transform-origin: 260px 260px; }
+.cs-ecg { stroke-dasharray: 60 540; animation: cs-run 2.4s linear infinite; }
+.cs-ecg-fast { animation-duration: 1.4s; }
+.cs-beat { animation: cs-lub 1.3s ease-in-out infinite; transform-origin: 260px 250px; }
+@media (prefers-reduced-motion: reduce) {
+  .cs-spin, .cs-breathe, .cs-ecg, .cs-beat { animation: none; }
+}

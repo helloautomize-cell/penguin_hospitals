@@ -1,0 +1,12 @@
+import { chromium } from "@playwright/test";
+const b = await chromium.launch();
+const p = await (await b.newContext({ viewport: { width: 1440, height: 1000 } })).newPage();
+await p.goto("http://localhost:3000/dev/badges/", { waitUntil: "networkidle" });
+await p.screenshot({ path: "review/p2b-badges-1440.png", fullPage: true });
+const p2 = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+await p2.goto("http://localhost:3000/obstetrics-gynaecology/", { waitUntil: "networkidle" });
+await p2.evaluate(async () => { await new Promise(r=>{let y=0;const s=()=>{scrollTo(0,y);y+=400;if(y<document.body.scrollHeight)setTimeout(s,40);else r()};s()}) });
+await p2.evaluate(()=>document.querySelectorAll('.pre,.hide').forEach(e=>e.classList.remove('pre','hide')));
+await p2.screenshot({ path: "review/p2b-hub-1440.png", fullPage: true });
+await b.close();
+console.log("done");

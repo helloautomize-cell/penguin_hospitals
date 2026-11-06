@@ -1,0 +1,1133 @@
+<meta charset="utf-8">
+<title>Penguin Hospital Preview</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Devanagari:wght@500;600&display=swap">
+<link rel="stylesheet" href="shell.css">
+<style>
+/* Concept: "Polar light". The penguin's world (polar night, ice, aurora) meets the hospital's two hearts (mother and heart care).
+   Bold tight Figtree display, Instrument Serif used for numbers and handwritten-style margin notes.
+   Signature moments: aurora hero window, two doors, a pinned horizontal "life in chapters", a draggable pregnancy dial,
+   a blueprint heart map, a 24-hour dial and a chat-style FAQ. Single light theme by design (client preview). */
+:root{
+  color-scheme:light;
+  --night:#000E24; --navy:#001F43; --deep:#0A2B57; --blue:#17407E; --blue-5:#2A5BA8; --sky:#8FB8EA; --sky-2:#C9DDF5;
+  --ice:#F4F8FC; --paper:#FFFFFF; --frost:#E8F0FA; --line:#DFE7F1; --line-2:#C8D5E6;
+  --ink:#0B1A30; --ink-2:#4A5970; --ink-3:#77869C;
+  --coral:#F4978E; --coral-d:#E77A70; --peach:#F9C9B6; --blush:#FDEDE8;
+  --alert:#E40913; --alert-ink:#B3060E; --ok:#2F7D5B; --wa:#1F7A55;
+  --on-dark:#EEF4FB; --on-dark-2:#A6B7CF;
+  --confirm-bg:#FFF1B8; --confirm-ink:#5E4600;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --sh:0 1px 2px rgba(11,26,48,.06),0 22px 50px -24px rgba(0,31,67,.35);
+  --sh-lg:0 40px 90px -36px rgba(0,20,50,.55);
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --deva:"Noto Sans Devanagari","Figtree",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--ice);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:100;background:var(--ice)}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+button,input{font-family:inherit}
+:focus-visible{outline:2px solid var(--blue-5);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.ico{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.confirm{background:var(--confirm-bg);color:var(--confirm-ink);font:600 12px/1.4 var(--sans);padding:2px 7px;border-radius:6px;white-space:nowrap;vertical-align:middle;letter-spacing:.01em}
+.sel{user-select:all;font-variant-numeric:tabular-nums}
+section{position:relative}
+.pad{padding-block:clamp(88px,11vw,150px)}
+.tag{display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 12px;border-radius:999px;border:1px solid var(--line-2);font:600 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);background:rgba(255,255,255,.6);width:max-content}
+.tag i{width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.tag.dk{border-color:rgba(255,255,255,.2);color:var(--on-dark-2);background:rgba(255,255,255,.06)}
+.h2{font:700 clamp(38px,4.8vw,68px)/1 var(--sans);letter-spacing:-.045em}
+.h2 .soft{color:var(--ink-3)}
+.lede{font-size:19px;line-height:1.6;color:var(--ink-2);max-width:52ch}
+.note{font:italic 400 24px/1.15 var(--serif);color:var(--coral-d);display:inline-flex;align-items:flex-start;gap:6px}
+.note svg{width:46px;height:34px;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}
+.sec-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-bottom:64px}
+.sec-head .l{display:grid;gap:22px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 26px;border-radius:999px;font:600 16px var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s,background .3s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-coral{background:var(--coral);color:var(--ink);box-shadow:0 14px 34px -14px rgba(244,151,142,.8)}
+.btn-coral:hover{background:var(--peach)}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:var(--sh)}
+.btn-navy:hover{background:var(--blue)}
+.btn-line{background:transparent;color:var(--ink);border:1.5px solid var(--line-2)}
+.btn-line:hover{border-color:var(--blue-5)}
+.btn-glass{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-glass:hover{background:rgba(255,255,255,.2)}
+.btn .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.6}
+
+/* reveal (visible at rest; JS marks below-the-fold) */
+.rv{transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.pre{opacity:0;transform:translateY(34px) scale(.985);filter:blur(6px)}
+
+/* ===== NAV: floating pill ===== */
+.navbar{position:fixed;left:0;right:0;top:calc(14px + env(safe-area-inset-top,0px));z-index:70;pointer-events:none}
+.navbar .wrap{display:flex}
+.pillnav{pointer-events:auto;flex:1;display:flex;align-items:center;gap:28px;height:68px;padding:0 10px 0 22px;border-radius:999px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(255,255,255,.9);box-shadow:0 10px 40px -18px rgba(0,31,67,.35);transition:height .4s var(--ease)}
+.navbar.small .pillnav{height:60px}
+.pillnav .logo{height:44px;width:auto}
+.pillnav nav{display:flex;gap:26px;margin-left:auto;font:500 15px var(--sans);color:var(--ink-2)}
+.pillnav nav a{text-decoration:none;transition:color .2s}
+.pillnav nav a:hover{color:var(--ink)}
+.pillnav .em{display:inline-flex;align-items:center;gap:7px;font:600 14px var(--sans);color:var(--alert-ink);text-decoration:none;padding-left:18px;border-left:1px solid var(--line)}
+.pillnav .btn{height:48px;padding:0 22px;font-size:15px}
+.burger{display:none;margin-left:auto;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;place-items:center;cursor:pointer;color:var(--ink)}
+.menu{display:none}
+
+/* ===== HERO: aurora window ===== */
+.hero{padding-top:calc(98px + env(safe-area-inset-top,0px))}
+.window{position:relative;border-radius:44px;overflow:hidden;background:radial-gradient(120% 90% at 80% 0%,#0B2E5E 0%,var(--night) 60%);min-height:min(88vh,860px);display:grid;align-items:end;isolation:isolate}
+.window canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.stars{position:absolute;inset:0;z-index:-1;background-image:radial-gradient(1.2px 1.2px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 28% 8%,#fff 50%,transparent 51%),radial-gradient(1.4px 1.4px at 44% 22%,#cfe0ff 50%,transparent 51%),radial-gradient(1px 1px at 63% 12%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 78% 26%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 90% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 8% 40%,#cfe0ff 50%,transparent 51%),radial-gradient(1.3px 1.3px at 54% 36%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 35% 44%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 86% 44%,#fff 50%,transparent 51%);opacity:.75;animation:twinkle 6s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.35}}
+.horizon{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:-1;pointer-events:none}
+.horizon svg{width:100%;height:100%}
+.hero-in{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end;padding:clamp(28px,5vw,72px);padding-bottom:clamp(120px,12vw,150px)}
+.hero-copy{display:grid;gap:26px;color:var(--on-dark);min-width:0}
+.namaskar{font:600 15px var(--deva);color:var(--peach);display:inline-flex;gap:10px;align-items:center}
+.namaskar span{font-family:var(--sans);font-weight:500;color:var(--on-dark-2)}
+.display{font:800 clamp(52px,8vw,124px)/.9 var(--sans);letter-spacing:-.055em;color:#fff}
+.display .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.display .ln>span{display:inline-block;transition:transform 1.1s var(--ease);transition-delay:var(--d,0s)}
+.display.pre .ln>span{transform:translateY(105%)}
+.display .hrt{display:inline-block;width:.62em;height:.62em;vertical-align:.02em;margin-left:.06em}
+.display .hrt path{fill:var(--coral)}
+.display .hrt{animation:lub 1.4s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes lub{0%,100%{transform:scale(1)}14%{transform:scale(1.12)}28%{transform:scale(1)}42%{transform:scale(1.07)}}
+.hero-copy .sub{font-size:20px;line-height:1.55;color:var(--on-dark-2);max-width:44ch}
+.hero-copy .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.livecard{justify-self:end;display:grid;gap:14px;width:min(320px,100%);padding:20px 22px;border-radius:26px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:var(--on-dark)}
+.livecard .row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px}
+.livecard .row span:first-child{display:inline-flex;align-items:center;gap:10px;color:var(--on-dark-2)}
+.livecard .t{font:400 46px/1 var(--serif);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.livecard .t small{font:600 12px var(--sans);letter-spacing:.14em;color:var(--on-dark-2);margin-left:6px}
+.pulse{width:9px;height:9px;border-radius:50%;background:#4ADE80;position:relative;flex:none}
+.pulse::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #4ADE80;opacity:.6;animation:ping 2s ease-out infinite}
+.pulse.off{background:var(--ink-3)}.pulse.off::after{display:none}
+@keyframes ping{from{transform:scale(.5);opacity:.8}to{transform:scale(1.7);opacity:0}}
+.livecard .bar{height:1px;background:rgba(255,255,255,.14)}
+/* doctor dock */
+.dock{position:relative;z-index:3;margin-top:-84px;display:flex;justify-content:flex-end;gap:14px;padding-right:clamp(28px,5vw,72px)}
+.dcard{display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:24px;background:#fff;box-shadow:var(--sh-lg);text-decoration:none;min-width:0;transition:transform .4s var(--ease)}
+.dcard:hover{transform:translateY(-4px)}
+.dcard img{width:64px;height:64px;border-radius:18px;object-fit:cover;object-position:50% 14%}
+.dcard b{display:block;font-weight:700;font-size:16px;letter-spacing:-.01em}
+.dcard span{font-size:14px;color:var(--ink-2)}
+.dcard .arr{width:40px;height:40px;border-radius:50%;background:var(--frost);display:grid;place-items:center;color:var(--blue);margin-left:6px;flex:none;transition:background .3s,color .3s}
+.dcard:hover .arr{background:var(--navy);color:#fff}
+
+/* ===== TWO DOORS ===== */
+.doors{display:flex;gap:16px;min-height:600px}
+.door{position:relative;flex:1;border-radius:40px;overflow:hidden;padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;text-decoration:none;transition:flex 1s var(--ease);isolation:isolate}
+.doors:hover .door:hover,.door:focus-within{flex:1.55}
+.door.a{background:linear-gradient(160deg,#FFF6F3,var(--blush) 55%,#FADAD0);color:var(--ink)}
+.door.b{background:linear-gradient(160deg,var(--deep),var(--night));color:var(--on-dark)}
+.door .art{position:absolute;right:-50px;top:-50px;width:min(340px,52%);aspect-ratio:1;z-index:-1;opacity:.9;transition:transform 1.2s var(--ease)}
+.door:hover .art{transform:scale(1.06) rotate(-4deg)}
+.door .art svg{width:100%;height:100%}
+.door h3{font:700 clamp(36px,4vw,58px)/.98 var(--sans);letter-spacing:-.045em}
+.door .who{display:inline-flex;align-items:center;gap:12px;font-size:15px}
+.door .who img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:50% 14%;border:2px solid #fff}
+.door.b .who{color:var(--on-dark-2)}
+.door .who b{display:block;font-weight:600;color:inherit}
+.door.a .who b{color:var(--ink)}.door.b .who b{color:#fff}
+.door ul{list-style:none;margin:0;padding:0;display:grid;gap:0;max-width:440px}
+.door li a{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid rgba(11,26,48,.1);text-decoration:none;font-size:17px;transition:padding .3s var(--ease)}
+.door.b li a{border-bottom-color:rgba(255,255,255,.12)}
+.door li a:hover{padding-left:8px}
+.door li a .ico{opacity:.5;transition:opacity .3s,transform .3s var(--ease)}
+.door li a:hover .ico{opacity:1;transform:translateX(3px)}
+.door li.more{max-height:0;overflow:hidden;opacity:0;transition:max-height .8s var(--ease),opacity .6s}
+.door:hover li.more,.door:focus-within li.more{max-height:60px;opacity:1}
+.door .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ===== CHAPTERS: pinned horizontal ===== */
+.hs{position:relative;height:460vh;background:var(--paper)}
+.pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.track{display:flex;height:100%;will-change:transform}
+.panel{flex:none;width:100vw;height:100%;position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:120px max(48px,6vw) 150px}
+.panel.intro{width:72vw;grid-template-columns:1fr;align-content:center;gap:28px}
+.panel.intro .h2{font-size:clamp(48px,6.4vw,96px)}
+.panel.intro .h2 .soft{display:block}
+.panel .txt{display:grid;gap:18px;max-width:560px;min-width:0}
+.panel .age{display:flex;align-items:baseline;gap:14px}
+.panel .age b{font:400 clamp(90px,10vw,150px)/.85 var(--serif);letter-spacing:-.03em;color:var(--blue)}
+.panel .age span{font:600 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.panel h3{font:700 clamp(32px,3.4vw,50px)/1.02 var(--sans);letter-spacing:-.04em}
+.panel p{font-size:18px;color:var(--ink-2);max-width:46ch}
+.panel .links{display:flex;flex-wrap:wrap;gap:8px}
+.panel .links a{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-size:15px;font-weight:500;transition:border-color .2s,transform .2s var(--ease)}
+.panel .links a:hover{border-color:var(--blue-5);transform:translateY(-1px)}
+.panel .by{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-2)}
+.panel .by img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 14%}
+.panel .scene{justify-self:center;width:min(560px,100%);aspect-ratio:1;position:relative}
+.panel .scene svg{width:100%;height:100%;overflow:visible}
+.p1{background:radial-gradient(70% 70% at 75% 50%,#FFF0EC,transparent 70%),#fff}
+.p2{background:radial-gradient(70% 70% at 75% 50%,#EDF4FD,transparent 70%),#FBFCFE}
+.p3{background:radial-gradient(70% 70% at 75% 50%,#FFF3EE,transparent 70%),#FFFDFC}
+.p4{background:radial-gradient(70% 70% at 75% 50%,#0D3570,transparent 70%),var(--night);color:var(--on-dark)}
+.p4 .age b{color:var(--peach)}.p4 .age span,.p4 p,.p4 .by{color:var(--on-dark-2)}
+.p4 .links a{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);color:var(--on-dark)}
+.lifeline{position:absolute;left:max(48px,6vw);right:max(48px,6vw);bottom:44px;height:70px;pointer-events:none;transition:color .6s}
+.lifeline svg{width:100%;height:46px;overflow:visible}
+.lifeline .bgp{fill:none;stroke:var(--line);stroke-width:2}
+.lifeline .fgp{fill:none;stroke:url(#llg);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.lifeline .marks{display:flex;justify-content:space-between;font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:6px}
+.lifeline .marks span{transition:color .4s}
+.lifeline .marks span.on{color:var(--coral-d)}
+.pin[data-a="4"] .lifeline .bgp{stroke:rgba(255,255,255,.14)}
+.pin[data-a="4"] .lifeline .marks{color:var(--on-dark-2)}
+.hs-count{position:absolute;right:max(48px,6vw);top:110px;font:400 22px var(--serif);color:var(--ink-3);font-variant-numeric:tabular-nums;transition:color .6s}
+.pin[data-a="4"] .hs-count{color:var(--on-dark-2)}
+.hs-count b{font-weight:400;color:var(--ink);font-size:34px}
+.pin[data-a="4"] .hs-count b{color:#fff}
+/* scenes */
+.sc .ring0{fill:none;stroke:var(--frost);stroke-width:1.5}
+.sc .lbl{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-3)}
+.sc .big{font:400 96px var(--serif);fill:var(--ink)}
+.sc .mid{font:600 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-3)}
+.spin{animation:rot 28s linear infinite;transform-origin:260px 260px}
+@keyframes rot{to{transform:rotate(360deg)}}
+.breathe{animation:br 4.6s ease-in-out infinite;transform-origin:260px 260px}
+@keyframes br{50%{transform:scale(1.04)}}
+.ecg-run{stroke-dasharray:60 540;animation:run 2.4s linear infinite}
+.ecg-run.fast{animation-duration:1.4s}
+@keyframes run{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+.beat2{animation:lub 1.3s ease-in-out infinite;transform-origin:260px 250px}
+
+/* ===== PREGNANCY COMPANION ===== */
+.comp{background:linear-gradient(180deg,var(--ice),#FFF7F4 60%,var(--ice))}
+.comp-card{position:relative;border-radius:48px;background:#fff;box-shadow:var(--sh);border:1px solid var(--line);padding:clamp(24px,4vw,56px);display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,4vw,64px);align-items:center;overflow:hidden}
+.comp-card::before{content:"";position:absolute;width:640px;height:640px;left:-260px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(244,151,142,.22),transparent 65%);pointer-events:none}
+.comp-card>*{position:relative}
+.dialw{position:relative;width:min(500px,100%);aspect-ratio:1;justify-self:center;touch-action:none;user-select:none}
+.dialw svg{width:100%;height:100%;overflow:visible}
+.dial .trk{fill:none;stroke:var(--frost);stroke-width:22}
+.dial .tri{fill:none;stroke-width:22;opacity:.55}
+.dial .prog{fill:none;stroke:url(#dg);stroke-width:22;stroke-linecap:round}
+.dial .tk{stroke:var(--line-2);stroke-width:1.4}
+.dial .tk.maj{stroke:var(--ink-3)}
+.dial .ms{fill:#fff;stroke:var(--ink-3);stroke-width:2;transition:fill .3s,stroke .3s}
+.dial .ms.done{fill:var(--navy);stroke:var(--navy)}
+.dial .ms.cur{fill:var(--coral);stroke:#fff;stroke-width:3}
+.dial .wl{font:600 11px var(--sans);fill:var(--ink-3);text-anchor:middle}
+.dial .knob{cursor:grab}
+.dial .knob circle.o{fill:#fff;filter:drop-shadow(0 6px 14px rgba(0,31,67,.35))}
+.dial .knob circle.i{fill:var(--navy)}
+.dial .wknum{font:400 104px/1 var(--serif);fill:var(--ink);text-anchor:middle;font-variant-numeric:tabular-nums}
+.dial .wksub{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-3);text-anchor:middle}
+.dial .baby{transition:transform .5s var(--ease);transform-origin:250px 168px}
+.dialw .hint{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);font:italic 400 19px var(--serif);color:var(--coral-d);white-space:nowrap}
+.comp-r{display:grid;gap:26px;min-width:0}
+.ddate{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;padding:18px;border-radius:24px;background:var(--ice);border:1px solid var(--line)}
+.ddate label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.ddate input{height:52px;border-radius:14px;border:1.5px solid var(--line-2);padding:0 14px;font-size:17px;color:var(--ink);background:#fff;width:100%}
+.ddate input:focus{outline:none;border-color:var(--blue-5)}
+.ddate .out{grid-column:1/-1;font-size:16px;color:var(--ink-2);min-height:26px}
+.ddate .out b{color:var(--ink)}
+.stage{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.st{border-radius:22px;padding:18px;background:var(--ice);border:1px solid var(--line);display:grid;gap:10px;align-content:start;min-width:0}
+.st .k{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.st .fruit{display:flex;align-items:center;gap:12px}
+.st .fruit svg{width:54px;height:54px;flex:none;transition:transform .5s var(--ease)}
+.st .fruit b{font:400 26px/1.05 var(--serif);color:var(--ink)}
+.st ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px;line-height:1.45;color:var(--ink-2)}
+.st li{display:flex;gap:8px}.st li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);margin-top:8px;flex:none}
+.st.dark{background:var(--navy);border-color:var(--navy)}
+.st.dark .k{color:var(--peach)}.st.dark ul{color:var(--on-dark)}
+.swap{animation:sw .5s var(--ease)}
+@keyframes sw{from{opacity:0;transform:translateY(8px)}}
+.miles{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:28px;padding-bottom:4px}
+.mile{flex:none;display:grid;gap:2px;padding:12px 16px;border-radius:18px;border:1px solid var(--line);background:#fff;font-size:14px;color:var(--ink-2);cursor:pointer;text-align:left;transition:background .3s,border-color .3s,color .3s}
+.mile b{font:400 22px/1 var(--serif);color:var(--ink)}
+.mile.done{background:var(--frost);border-color:var(--frost)}
+.mile.cur{background:var(--navy);border-color:var(--navy);color:var(--on-dark-2)}
+.mile.cur b{color:#fff}
+.fine{font-size:14px;color:var(--ink-3)}
+
+/* ===== HEART MAP (blueprint) ===== */
+.hm{background:var(--night);color:var(--on-dark);overflow:hidden}
+.hm::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(143,184,234,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(143,184,234,.07) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(70% 70% at 35% 50%,#000,transparent);-webkit-mask-image:radial-gradient(70% 70% at 35% 50%,#000,transparent)}
+.hm .wrap{position:relative}
+.hm .h2{color:#fff}.hm .h2 .soft{color:var(--on-dark-2)}.hm .lede{color:var(--on-dark-2)}
+.hm-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hm-art{position:relative;width:min(560px,100%);aspect-ratio:1;justify-self:center}
+.hm-art svg{width:100%;height:100%;overflow:visible}
+.hm-art .bp{fill:none;stroke:var(--sky);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hm-art .bp.soft{stroke:rgba(143,184,234,.35)}
+.hm-art .fillh{fill:rgba(42,91,168,.18)}
+.hm-art .cor{fill:none;stroke:var(--coral);stroke-width:2.2;stroke-linecap:round}
+.hm-art .zone{opacity:.0;transition:opacity .5s}
+.hm-art[data-z="1"] .z1,.hm-art[data-z="2"] .z2,.hm-art[data-z="3"] .z3,.hm-art[data-z="4"] .z4,.hm-art[data-z="5"] .z5{opacity:1}
+.hm-art .dim{transition:opacity .5s}
+.hspot{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--night);font:700 14px var(--sans)}
+.hspot span{width:28px;height:28px;border-radius:50%;background:var(--peach);display:grid;place-items:center;position:relative;z-index:1;transition:transform .3s var(--ease),background .3s}
+.hspot::before{content:"";position:absolute;inset:4px;border-radius:50%;border:2px solid var(--peach);animation:ping 2.2s ease-out infinite}
+.hspot[aria-pressed="true"] span{background:#fff;transform:scale(1.15)}
+.hm-card{display:grid;gap:22px;min-width:0}
+.hm-list{display:grid;gap:8px}
+.hm-item{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:center;padding:16px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--on-dark);text-align:left;cursor:pointer;transition:background .3s,border-color .3s}
+.hm-item .n{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:700 14px var(--sans);background:rgba(249,201,182,.14);color:var(--peach)}
+.hm-item b{display:block;font-weight:600;font-size:17px}
+.hm-item small{display:block;font-size:14px;color:var(--on-dark-2);max-height:0;overflow:hidden;transition:max-height .6s var(--ease),margin .6s}
+.hm-item[aria-pressed="true"]{background:rgba(255,255,255,.08);border-color:rgba(249,201,182,.4)}
+.hm-item[aria-pressed="true"] small{max-height:120px;margin-top:6px}
+.hm-item .ico{opacity:.5}
+.beyond{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:15px;color:var(--on-dark-2)}
+.beyond span.c{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:var(--on-dark)}
+
+/* ===== DOCTORS ===== */
+.doc{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,80px);align-items:center}
+.doc+.doc{margin-top:clamp(80px,9vw,130px)}
+.doc.flip .ph{order:2}
+.ph{position:relative}
+.ph .frame{border-radius:36px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--sh-lg);background:var(--navy)}
+.ph .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;transform:scale(1.03);transition:transform 1.4s var(--ease)}
+.ph:hover .frame img{transform:scale(1.07)}
+.ph .lowres{position:absolute;left:16px;top:16px}
+.ph .note{position:absolute;right:-30px;bottom:56px;max-width:220px;transform:rotate(-4deg)}
+.doc.flip .ph .note{right:auto;left:-30px}
+.ph .note span{background:#fff;padding:10px 14px;border-radius:14px;box-shadow:var(--sh)}
+.dinfo{display:grid;gap:24px;min-width:0}
+.dinfo h3{font:800 clamp(40px,5vw,76px)/.92 var(--sans);letter-spacing:-.055em}
+.dinfo h3 .soft{color:var(--ink-3)}
+.dinfo .role{font-size:19px;color:var(--blue);font-weight:500}
+.idcard{border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);overflow:hidden}
+.idcard .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--ice);border-bottom:1px solid var(--line);font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.idcard .hd svg{width:22px;height:22px}
+.idcard dl{margin:0;display:grid;grid-template-columns:150px 1fr}
+.idcard dt,.idcard dd{margin:0;padding:13px 20px;border-bottom:1px solid var(--line);font-size:16px}
+.idcard dt{color:var(--ink-3);font-size:14px;font-weight:500;padding-top:15px}
+.idcard dd{color:var(--ink);padding-left:0}
+.idcard dl>*:nth-last-child(-n+2){border-bottom:0}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.three div{display:grid;gap:4px;padding-top:14px;border-top:2px solid var(--navy)}
+.three b{font:400 30px/1 var(--serif);color:var(--coral-d)}
+.three span{font-size:15px;line-height:1.45;color:var(--ink-2)}
+
+/* ===== 24-HOUR DIAL + VISIT ===== */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.clockcard{border-radius:40px;background:#fff;border:1px solid var(--line);padding:clamp(24px,3vw,40px);display:grid;gap:22px;justify-items:center;box-shadow:var(--sh)}
+.days{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.days button{min-width:52px;height:44px;border-radius:999px;border:1px solid var(--line);background:#fff;font:600 14px var(--sans);color:var(--ink-2);cursor:pointer;transition:background .3s,color .3s}
+.days button[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.days button.today{box-shadow:inset 0 -3px 0 var(--coral)}
+.h24{width:min(420px,100%);aspect-ratio:1}
+.h24 svg{width:100%;height:100%;overflow:visible}
+.h24 .seg{transition:fill .5s}
+.h24 .hl{font:600 12px var(--sans);fill:var(--ink-3);text-anchor:middle}
+.h24 .ct{font:400 52px var(--serif);fill:var(--ink);text-anchor:middle;font-variant-numeric:tabular-nums}
+.h24 .cs{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-anchor:middle}
+.legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:14px;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:4px}
+.addr{border-radius:40px;background:var(--navy);color:var(--on-dark);padding:clamp(28px,3.4vw,48px);display:grid;gap:26px;align-content:space-between;position:relative;overflow:hidden}
+.addr::after{content:"";position:absolute;width:520px;height:520px;right:-200px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(244,151,142,.32),transparent 65%)}
+.addr>*{position:relative;z-index:1}
+.addr h3{font:700 clamp(30px,3vw,44px)/1.05 var(--sans);letter-spacing:-.04em;color:#fff}
+.addr p{color:var(--on-dark-2);font-size:18px}
+.addr .rows{display:grid}
+.addr .rows div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:16px}
+.addr .rows div span:first-child{color:var(--on-dark-2)}
+.addr .areas{display:flex;flex-wrap:wrap;gap:8px}
+.addr .areas span{padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.07);font-size:14px;color:var(--on-dark)}
+.minimap{height:180px;border-radius:24px;background:rgba(255,255,255,.05);position:relative;overflow:hidden}
+.minimap svg{position:absolute;inset:0;width:100%;height:100%}
+.minimap .pin{position:absolute;left:58%;top:46%;width:16px;height:16px;border-radius:50%;background:var(--coral);transform:translate(-50%,-50%)}
+.minimap .pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--coral);animation:ping 2.4s ease-out infinite}
+.minimap .lb{position:absolute;left:calc(58% + 18px);top:calc(46% - 13px);font-size:13px;padding:4px 10px;border-radius:999px;background:rgba(0,14,36,.7);white-space:nowrap}
+
+/* ===== CHAT FAQ ===== */
+.chatw{max-width:820px;margin:0 auto}
+.thread{display:grid;gap:14px;margin-top:48px}
+.b{max-width:78%;padding:16px 20px;border-radius:24px;font-size:17px;line-height:1.55;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.b.q{justify-self:end;background:var(--navy);color:#fff;border-bottom-right-radius:8px}
+.b.a{justify-self:start;background:#fff;border:1px solid var(--line);color:var(--ink-2);border-bottom-left-radius:8px;display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start}
+.b.a .av{width:36px;height:36px;border-radius:50%;background:var(--ice);display:grid;place-items:center;border:1px solid var(--line)}
+.b.a .av svg{width:24px;height:24px}
+.b.a b{color:var(--ink);display:block;font-size:14px;margin-bottom:2px}
+.b.sys{justify-self:center;max-width:none;background:#FFF2F1;border:1px solid #F5CFCB;color:var(--alert-ink);font-size:15px;font-weight:600;border-radius:999px;padding:10px 18px;display:inline-flex;gap:8px;align-items:center}
+.b.hide{opacity:0;transform:translateY(14px)}
+.typing{justify-self:start;display:none;gap:5px;padding:16px 18px;border-radius:24px;background:#fff;border:1px solid var(--line)}
+.typing.on{display:inline-flex}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--ink-3);animation:tp 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{50%{transform:translateY(-4px);opacity:.4}}
+.ask-more{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+
+/* ===== CLOSE + FOOTER ===== */
+.close{padding-block:24px 0}
+.closew{position:relative;border-radius:44px;overflow:hidden;background:var(--night);min-height:520px;display:grid;place-items:center;text-align:center;isolation:isolate;padding:72px 24px}
+.closew canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.closew h2{font:800 clamp(48px,7.4vw,112px)/.92 var(--sans);letter-spacing:-.055em;color:#fff}
+.closew p{color:var(--on-dark-2);font-size:19px;margin-top:20px}
+.closew .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.foot{padding-block:72px 40px;color:var(--ink-2);font-size:15px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.fgrid h4{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+.fgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fgrid a{text-decoration:none}.fgrid a:hover{color:var(--ink)}
+.fgrid .logo{height:52px;width:auto;margin-bottom:16px}
+.legal{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-3)}
+
+.wa{position:fixed;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -10px rgba(31,122,85,.6);z-index:60}
+.wa .ico{width:26px;height:26px}
+.mbar{display:none}
+
+/* ===== responsive ===== */
+@media (max-width:1100px){
+  .pillnav nav,.pillnav .em{display:none}
+  .burger{display:grid}.pillnav .btn{display:none}
+  .menu.open{display:grid;position:fixed;inset:0;z-index:110;background:var(--ice);align-content:center;justify-items:start;gap:4px;padding:40px max(28px,env(safe-area-inset-left,0px))}
+  .menu a{font:700 40px/1.25 var(--sans);letter-spacing:-.04em;text-decoration:none}
+  .menu button{position:absolute;right:20px;top:calc(20px + env(safe-area-inset-top,0px));width:48px;height:48px;border-radius:50%;border:1px solid var(--line-2);background:#fff;font-size:22px;cursor:pointer}
+  .hero-in{grid-template-columns:1fr}.livecard{justify-self:start}
+  .sec-head,.comp-card,.hm-grid,.doc,.visit-grid{grid-template-columns:1fr}
+  .doc.flip .ph{order:0}
+  .ph{max-width:460px}
+  .doors{flex-direction:column;min-height:0}
+  .door{min-height:520px}
+  .doors:hover .door:hover{flex:1}
+  .door li.more{max-height:60px;opacity:1}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .hs{height:auto;padding-block:80px 40px}
+  .pin{position:static;height:auto;overflow:visible}
+  .track{overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:0 20px 20px;scrollbar-width:none;transform:none!important}
+  .panel{width:86vw;height:auto;grid-template-columns:1fr;padding:28px 24px;border-radius:32px;scroll-snap-align:center;gap:12px;align-content:start;border:1px solid var(--line)}
+  .panel.intro{width:86vw;border:0;padding:0 4px;background:transparent}
+  .panel .scene{width:min(300px,80%);order:-1}
+  .panel .age b{font-size:72px}
+  .lifeline,.hs-count{display:none}
+}
+@media (max-width:760px){
+  .pad{padding-block:80px}
+  .navbar{top:calc(10px + env(safe-area-inset-top,0px))}
+  .pillnav{height:60px;padding:0 6px 0 16px}.pillnav .logo{height:36px}
+  .hero{padding-top:calc(82px + env(safe-area-inset-top,0px))}
+  .window{border-radius:30px;min-height:auto}
+  .hero-in{padding:28px 22px 120px;gap:22px}
+  .display{font-size:54px}
+  .hero-copy .sub{font-size:17px}
+  .hero-copy .ctas .btn{flex:1;justify-content:center;padding:0 16px}
+  .livecard{display:none}
+  .dock{margin-top:-96px;padding:0 14px;flex-direction:column;gap:10px}
+  .dcard{width:100%}
+  .door{padding:28px;border-radius:32px;min-height:0}
+  .door .art{width:70%;opacity:.5}
+  .comp-card{border-radius:32px}
+  .stage{grid-template-columns:1fr}
+  .ddate{grid-template-columns:1fr}
+  .hm-art{width:min(360px,100%)}
+  .idcard dl{grid-template-columns:1fr}
+  .idcard dd{padding-left:20px;padding-top:0}.idcard dt{border-bottom:0;padding-bottom:2px}
+  .three{grid-template-columns:1fr}
+  .ph .note{right:0;bottom:-26px;font-size:20px}
+  .doc.flip .ph .note{left:0}
+  .b{max-width:92%}
+  .closew{border-radius:30px;min-height:420px}
+  .fgrid{grid-template-columns:1fr}
+  .wa{display:none}
+  .mbar{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:90;grid-template-columns:repeat(3,1fr);background:rgba(0,14,36,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  .mbar a{min-height:64px;display:grid;place-items:center;align-content:center;gap:4px;color:#fff;text-decoration:none;font:600 13px/1 var(--sans)}
+  .mbar a:first-child{background:var(--coral);color:var(--ink);border-radius:20px 0 0 0}
+  body{padding-bottom:80px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .rv.pre{opacity:1;transform:none;filter:none}
+  .display.pre .ln>span{transform:none}
+  .b.hide{opacity:1;transform:none}
+}
+
+.phs /* Layout: one full-bleed cinematic film of three life chapters,.phs a reel to switch them,.phs then the frame settles into a rounded card as you scroll. Single dark look. */
+:root{
+  color-scheme:dark;
+  --night:#000E24;--navy:#001F43;--deep:#0A2B57;--sky:#8FB8EA;
+  --paper:#F7F4F1;--ink:#0B1A30;--ink-2:#4A5970;
+  --white:#FFFFFF;--mist:rgba(255,255,255,.72);--faint:rgba(255,255,255,.16);
+  --coral:#F4978E;--peach:#F9C9B6;--alert:#FF6B63;--ok:#3DDC97;
+  --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --num:'Instrument Serif',Georgia,serif;
+  --dev:'Noto Sans Devanagari','Figtree',sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+  --gl:max(20px,env(safe-area-inset-left,0px),4.5vw);--gr:max(20px,env(safe-area-inset-right,0px),4.5vw);
+}.__skip{box-sizing:border-box;margin:0}.__skip{background:var(--night);color:var(--white);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}.__skip{display:block;max-width:100%}.__skip{color:inherit}.__skip{outline:2px solid var(--peach);outline-offset:3px}.__skip{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.__skip{font-family:var(--dev)}.phs /* ===== HERO ===== */
+.hero{position:relative;height:min(100svh,980px);min-height:640px}.phs .film{position:absolute;inset:0;overflow:hidden;background:var(--night);will-change:clip-path}.phs .fr{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease)}.phs .fr.on{opacity:1}.phs .fr img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;transform:scale(1.12);transform-origin:var(--o,70% 45%)}.phs .fr.on img{animation:kb 9s linear forwards}@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1.0)}}.phs .fr .grade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(0,14,36,.92) 0%,rgba(0,14,36,.7) 30%,rgba(0,14,36,.15) 58%,rgba(0,14,36,0) 75%),
+  linear-gradient(0deg,rgba(0,14,36,.95) 0%,rgba(0,14,36,.25) 32%,rgba(0,14,36,0) 50%),
+  linear-gradient(180deg,rgba(0,14,36,.55) 0%,rgba(0,14,36,0) 18%)}.phs .f1 img{--o:72% 40%}.phs .f2 img{--o:60% 40%}.phs .f3 img{--o:55% 50%}.phs .copy{position:absolute;z-index:4;left:var(--gl);bottom:clamp(150px,21vh,210px);width:min(640px,calc(100% - var(--gl) - var(--gr)))}.phs .hello{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--mist);margin-bottom:22px}.phs .hello .dev{color:var(--peach);font-weight:600}.phs .hello i{width:4px;height:4px;border-radius:50%;background:var(--faint)}.phs h1{font:700 clamp(52px,7.2vw,118px)/.92 var(--sans);letter-spacing:-.05em;text-wrap:balance}.phs h1 .ln{display:block;overflow:hidden;padding-bottom:.05em}.phs h1 .ln span{display:inline-block;animation:rise 1.2s var(--ease) both}.phs h1 .ln:nth-child(2) span{animation-delay:.12s}.phs h1 .pdot{color:var(--coral)}@keyframes rise{from{transform:translateY(105%)}to{transform:none}}.phs .chap{position:relative;margin-top:26px;min-height:132px}.phs .cp{position:absolute;inset:0 0 auto 0;display:grid;gap:12px;opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .9s var(--ease);pointer-events:none}.phs .cp.on{opacity:1;transform:none;pointer-events:auto;transition-delay:.35s}.phs .cp h2{font:600 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--peach)}.phs .cp p{font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:var(--mist);max-width:44ch}.phs .pwho{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--mist)}.phs .pwho img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 18%;border:1.5px solid var(--white)}.phs .pwho b{color:var(--white);font-weight:600}.phs .pwho .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,107,99,.16);border:1px solid rgba(255,107,99,.4);color:var(--white);font-weight:600}.phs .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}.phs .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font:600 16px var(--sans);text-decoration:none;transition:transform .3s var(--ease),background .3s}.phs .btn:hover{transform:translateY(-2px)}.phs .btn-p{background:var(--coral);color:var(--night)}.phs .btn-g{background:rgba(255,255,255,.1);color:var(--white);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.phs /* the reel */
+.reel{position:absolute;z-index:4;left:var(--gl);right:var(--gr);bottom:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:end}.phs .rb{display:flex;align-items:center;gap:12px;padding:0;background:none;border:0;color:var(--mist);text-align:left;cursor:pointer;font:500 14px var(--sans);min-height:48px;position:relative;padding-bottom:14px}.phs .rb img{width:56px;height:40px;border-radius:9px;object-fit:cover;opacity:.55;transition:opacity .4s,transform .4s var(--ease)}.phs .rb span b{display:block;color:var(--white);font-weight:600;font-size:15px}.phs .rb .pbar{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--faint);border-radius:2px;overflow:hidden}.phs .rb .pbar i{position:absolute;inset:0;background:var(--white);transform:scaleX(0);transform-origin:left}.phs .rb.on img{opacity:1;transform:translateY(-2px)}.phs .rb.done .pbar i{transform:scaleX(1)}.phs .rb:hover img{opacity:1}.phs .live{display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:18px;background:rgba(0,14,36,.45);border:1px solid var(--faint);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);margin-left:20px}.phs .live .clock{font:400 34px/1 var(--num);letter-spacing:-.01em;white-space:nowrap}.phs .live .clock small{font:500 12px var(--sans);letter-spacing:.08em;margin-left:4px;color:var(--mist)}.phs .live .lst{display:grid;font-size:13px;color:var(--mist);line-height:1.35}.phs .live .lst b{display:flex;align-items:center;gap:7px;color:var(--white);font-weight:600;font-size:14px}.phs .live .lst b i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:phping 1.8s infinite}@keyframes phping{0%{box-shadow:0 0 0 0 rgba(61,220,151,.6)}70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}100%{box-shadow:0 0 0 0 rgba(61,220,151,0)}}.phs .pause{position:absolute;z-index:5;right:var(--gr);top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--faint);background:rgba(0,14,36,.3);color:var(--white);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(8px)}@media(max-width:1080px){.phs .reel{grid-template-columns:repeat(3,minmax(0,1fr))}.phs .live{position:absolute;right:0;bottom:calc(100% + 18px);margin:0}.phs .pause{display:none}
+}@media(max-width:720px){.phs{height:auto;min-height:max(100svh,760px)}.phs .fr .grade{background:linear-gradient(0deg,rgba(0,14,36,.98) 0%,rgba(0,14,36,.9) 36%,rgba(0,14,36,.25) 58%,rgba(0,14,36,0) 72%,rgba(0,14,36,.45) 100%)}.phs .fr img{height:72%}.phs .f1 img{object-position:74% 40%}.phs .f2 img{object-position:58% 40%}.phs .f3 img{object-position:55% 50%}.phs .copy{bottom:120px}.phs h1{font-size:clamp(50px,14vw,72px)}.phs .chap{min-height:168px;margin-top:18px}.phs .rb img{display:none}.phs .rb{font-size:12px}.phs .rb span b{font-size:13px}.phs .reel{bottom:24px}.phs .live{display:none}.phs .hello .long{display:none}.phs .copy .ctas{flex-wrap:nowrap}.phs .copy .ctas .btn{flex:1 1 0;padding:0 14px}.phs .cp p{font-size:16px}.phs .chap{min-height:150px}.phs .next .in{grid-template-columns:1fr}.phs .strip{grid-template-columns:repeat(3,72%);overflow-x:auto;scroll-snap-type:x mandatory;margin-right:calc(-1 * var(--gr));padding-right:var(--gr);scrollbar-width:none}.phs .card{scroll-snap-align:start;margin-top:0!important}
+}@media(prefers-reduced-motion:reduce){.phs .fr.on img{animation:none;transform:none}.phs h1 .ln span{animation:none}.phs .cp,.phs .fr{transition:none}
+}
+.phs{position:relative;padding-top:0;height:min(100svh,980px);min-height:640px;color:#fff;--white:#fff;--mist:rgba(255,255,255,.76);--faint:rgba(255,255,255,.16);--gl:max(20px,env(safe-area-inset-left,0px),4.5vw);--gr:max(20px,env(safe-area-inset-right,0px),4.5vw);--num:var(--serif);--dev:var(--deva);--alert2:#FF6B63;--ok2:#3DDC97;background:var(--night)}
+.phs .film{background:var(--night)}
+.phs .cp h2{letter-spacing:.14em}
+.phs .live .st b i{background:#3DDC97}
+.phs .who .pill{background:rgba(255,107,99,.16);border-color:rgba(255,107,99,.4)}
+.phs .btn{height:auto}
+.phs .btn-p{background:var(--coral);color:var(--night)}
+@media(max-width:720px){.phs{height:auto;min-height:max(100svh,760px)}}
+/* under one roof: three photo cards */
+.under{padding-block:clamp(88px,11vw,150px)}
+.under .in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,80px);align-items:start}
+.under .l{display:grid;gap:22px;position:sticky;top:120px}
+.pstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pcard{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:3/4.2;background:var(--navy);color:#fff;text-decoration:none;box-shadow:var(--sh)}
+.pcard:nth-child(2){margin-top:56px}.pcard:nth-child(3){margin-top:112px}
+.pcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.pcard:hover img{transform:scale(1.05)}
+.pcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,14,36,.9) 0%,rgba(0,14,36,0) 55%)}
+.pcard .cap{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:grid;gap:6px}
+.pcard .cap small{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--peach)}
+.pcard .cap b{font:600 19px/1.25 var(--sans)}
+.pcard .go{position:absolute;right:16px;top:16px;z-index:2;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.9);color:var(--navy);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.pcard:hover .go{transform:translateX(4px)}
+@media(max-width:1100px){.under .in{grid-template-columns:1fr}.under .l{position:static}}
+@media(max-width:760px){.under{padding-block:80px}.pstrip{grid-template-columns:repeat(3,80%);overflow-x:auto;scroll-snap-type:x mandatory;margin-right:-20px;padding-right:20px;scrollbar-width:none}.pcard{scroll-snap-align:start;margin-top:0!important}}
+
+.navbar .pillnav{background:rgba(255,255,255,.86)}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="llg" x1="0" x2="1"><stop offset="0" stop-color="#2A5BA8"/><stop offset="1" stop-color="#F4978E"/></linearGradient>
+    <linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17407E"/><stop offset="1" stop-color="#F4978E"/></linearGradient>
+    <symbol id="fetus" viewBox="0 0 200 200"><g transform="rotate(-28 100 110)" stroke="#17407E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M92 88C58 94 42 128 52 158c10 28 48 36 74 22 24-14 32-44 20-68-8-16-24-24-40-24z" fill="#F9C9B6"/><path d="M84 186c-6 8-4 16 4 20" fill="none" stroke="#F4978E" stroke-dasharray="2 6"/><circle cx="110" cy="62" r="38" fill="#FFF6F2"/><path d="M118 66q8 6 16 0" fill="none"/></g><circle cx="140" cy="62" r="5" fill="#F4978E" opacity=".5"/></symbol><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5BA8"/><stop offset="1" stop-color="#001F43"/></linearGradient>
+  </defs>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="pg" viewBox="0 0 40 40"><path d="M20 4c-7.5 0-12 6.5-12 16 0 9 4.6 16 12 16s12-7 12-16C32 10.5 27.5 4 20 4z" fill="#001F43"/><path d="M20 12c-4 0-6.5 4-6.5 9.5S16 32 20 32s6.5-5 6.5-10.5S24 12 20 12z" fill="#fff"/><circle cx="16.5" cy="10" r="1.4" fill="#fff"/><circle cx="23.5" cy="10" r="1.4" fill="#fff"/><path d="M18.8 12.4l1.2 2 1.2-2z" fill="#F9C9B6"/><path d="M20 28s-4.6-2.7-4.6-6a2.4 2.4 0 0 1 4.6-1 2.4 2.4 0 0 1 4.6 1c0 3.3-4.6 6-4.6 6z" fill="#E40913"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.5L16 9.5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.9-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.1-8 11-8 11z"/></symbol><symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 2.5-7 1.5 2H21"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></symbol><symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/><path d="M10.5 8.5h.01M13.5 8.5h.01"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4z"/><path d="M12 17s-3-1.8-3-3.6A1.6 1.6 0 0 1 12 12.6a1.6 1.6 0 0 1 3 .8C15 15.2 12 17 12 17z"/></symbol><symbol id="i-cycle" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-seed" viewBox="0 0 24 24"><path d="M12 21v-8"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7zM12 15c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5z"/></symbol><symbol id="i-scope" viewBox="0 0 24 24"><path d="M4 20l9-9"/><circle cx="15.5" cy="8.5" r="3.5"/><path d="M18 6l2-2"/></symbol><symbol id="i-lungs" viewBox="0 0 24 24"><path d="M12 4v8M12 12c-1 0-2 1-3 1M12 12c1 0 2 1 3 1"/><path d="M9 7c-3 0-5 5-5 10 0 2 1.5 3 3 3s2-1 2-3zM15 7c3 0 5 5 5 10 0 2-1.5 3-3 3s-2-1-2-3z"/></symbol><symbol id="i-leg" viewBox="0 0 24 24"><path d="M10 3v10l-2 7h6l1-2"/><path d="M14 3v8c0 2 1 3 1 5"/><path d="M12 6c1 1 0 2 1 3s0 2 1 3"/></symbol><symbol id="i-arm" viewBox="0 0 24 24"><path d="M3 15h11a3 3 0 0 0 0-6H8"/><path d="M14 12c2 0 3-2 5-2h2M14 12c2 0 3 2 5 2h2"/></symbol><symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0" opacity=".5"/></symbol><symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/><circle cx="12" cy="16" r="1.4"/></symbol><symbol id="i-bump" viewBox="0 0 24 24"><circle cx="10" cy="5" r="2.5"/><path d="M9 9c-2 2-2 5 0 7v5M11 9c4 1 6 4 4 7h-4"/></symbol><symbol id="i-dot" viewBox="0 0 24 24"><path d="M6 5c0 6 2 9 6 9s6-3 6-9"/><path d="M12 14v6"/><circle cx="14.5" cy="8.5" r="2"/></symbol><symbol id="i-dots" viewBox="0 0 24 24"><path d="M6 5c0 6 2 9 6 9s6-3 6-9"/><path d="M12 14v6"/><path d="M4 12h.01M20 12h.01M8 17h.01M16 17h.01M12 3h.01"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14c2.8 0 5 2.2 5 5"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3zM7 19v1M17 19v1M5 11h14"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></symbol></svg>
+<header class="navbar" id="navbar"><div class="wrap"><div class="pillnav">
+<a href="index.html" aria-label="Dr. Lakshmi's Penguin Hospital, home"><img class="logo" src="images/logo.png" alt="Dr. Lakshmi's Penguin Hospital"></a>
+<nav class="mainnav" aria-label="Main">
+<div class="mi has"><a href="obstetrics-gynaecology.html">Women and pregnancy<svg class="ico chev" aria-hidden="true"><use href="#i-chev"/></svg></a><div class="mega mega-w"><div><h5>Pregnancy and birth</h5><ul><li><a href="pregnancy-care.html">Pregnancy care</a></li><li><a href="#">High-risk pregnancy</a></li><li><a href="#">Preeclampsia</a></li><li><a href="#">Normal delivery</a></li><li><a href="#">Painless delivery</a></li><li><a href="#">Caesarean delivery</a></li><li><a href="#">After birth</a></li><li><a href="pregnancy-week-by-week.html">Pregnancy week by week</a></li></ul></div><div><h5>Gynaecology</h5><ul><li><a href="#">PCOS</a></li><li><a href="#">Irregular periods</a></li><li><a href="#">Heavy periods</a></li><li><a href="#">Fibroids</a></li><li><a href="#">Ovarian cysts</a></li><li><a href="#">Endometriosis</a></li><li><a href="#">Menopause care</a></li></ul></div><div><h5>Surgery and fertility</h5><ul><li><a href="#">Laparoscopic surgery</a></li><li><a href="#">Fertility evaluation</a></li><li><a href="obstetrics-gynaecology.html">All women's care</a></li></ul></div><a class="mdoc" href="dr-lakshmi-vijay-kalbande.html"><img src="images/dr-lakshmi-portrait.jpg" alt=""><span><b>Dr. Lakshmi Vijay Kalbande</b>Obstetrician and gynaecologist, laparoscopic surgeon</span><em>View profile <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></em></a></div></div>
+<div class="mi has"><a href="heart-and-vascular-surgery.html">Heart and vessels<svg class="ico chev" aria-hidden="true"><use href="#i-chev"/></svg></a><div class="mega mega-h"><div><h5>Heart</h5><ul><li><a href="#">Heart check-up</a></li><li><a href="#">Keyhole heart surgery</a></li><li><a href="#">Bypass surgery</a></li><li><a href="#">Heart valve surgery</a></li><li><a href="heart-and-vascular-surgery.html">All heart care</a></li></ul></div><div><h5>Chest and vessels</h5><ul><li><a href="#">Lung and chest surgery</a></li><li><a href="#">Varicose veins</a></li><li><a href="#">Leg artery disease</a></li><li><a href="#">AV fistula for dialysis</a></li></ul></div><a class="mdoc" href="#"><img src="images/dr-ashish-portrait.jpg" alt=""><span><b>Dr. Ashish A. Baviskar</b>Cardiothoracic and vascular surgeon</span><em>View profile <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></em></a></div></div>
+<div class="mi"><a href="doctors.html">Doctors</a></div>
+<div class="mi"><a href="about.html">About</a></div>
+<div class="mi"><a href="#">Plan your visit</a></div>
+</nav>
+<a class="em" href="emergency.html"><svg class="ico" aria-hidden="true"><use href="#i-alert"/></svg>Emergency 108 / 112</a>
+<a class="btn btn-navy" href="book.html">Book a visit<span class="dot"></span></a>
+<button class="burger" id="burger" type="button" aria-label="Open menu" aria-controls="msheet"><svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg></button>
+</div></div></header>
+<div class="msheet" id="msheet" role="dialog" aria-modal="true" aria-label="Menu"><div class="top"><img src="images/logo.png" alt="Dr. Lakshmi's Penguin Hospital"><button class="x" type="button" aria-label="Close menu">×</button></div>
+<div class="body">
+<details><summary>Women and pregnancy<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div><a href="pregnancy-care.html">Pregnancy care</a><a href="#">High-risk pregnancy</a><a href="#">Preeclampsia</a><a href="#">Normal delivery</a><a href="#">Painless delivery</a><a href="#">Caesarean delivery</a><a href="#">After birth</a><a href="pregnancy-week-by-week.html">Pregnancy week by week</a><a href="#">PCOS</a><a href="#">Irregular periods</a><a href="#">Heavy periods</a><a href="#">Fibroids</a><a href="#">Ovarian cysts</a><a href="#">Endometriosis</a><a href="#">Menopause care</a><a href="#">Laparoscopic surgery</a><a href="#">Fertility evaluation</a><a href="obstetrics-gynaecology.html">All women's care</a></div></details>
+<details><summary>Heart and vessels<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div><a href="#">Heart check-up</a><a href="#">Keyhole heart surgery</a><a href="#">Bypass surgery</a><a href="#">Heart valve surgery</a><a href="heart-and-vascular-surgery.html">All heart care</a><a href="#">Lung and chest surgery</a><a href="#">Varicose veins</a><a href="#">Leg artery disease</a><a href="#">AV fistula for dialysis</a></div></details>
+<a class="solo" href="doctors.html">Doctors</a><a class="solo" href="health-library.html">Health library</a><a class="solo" href="about.html">About</a><a class="solo" href="#">Plan your visit</a><a class="solo red" href="emergency.html">Emergency, day and night</a>
+</div>
+<div class="foot2"><a class="btn btn-coral" href="book.html"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Book</a><a class="btn btn-navy" href="tel:+919518904156"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call</a><p>Emergency open day and night</p></div></div>
+<main id="top">
+<section class="phs" id="hero" aria-label="Welcome">
+  <div class="film" id="film">
+    <div class="fr f1 on"><img src="images/hero-mother-newborn.jpg" alt="A mother holding her sleeping newborn by a sunlit window"><div class="grade"></div></div>
+    <div class="fr f2"><img src="images/heart-walk.jpg" alt="An older couple laughing together on a morning walk" loading="lazy"><div class="grade"></div></div>
+    <div class="fr f3"><img src="images/night-corridor.jpg" alt="A softly lit hospital corridor at night with a nurse on her rounds" loading="lazy"><div class="grade"></div></div>
+
+    
+
+    <div class="copy">
+      <p class="hello"><span class="dev">नमस्कार</span><i></i><span>Chinchwad Gaon<span class="long">, Dr. Lakshmi's Penguin Hospital</span></span></p>
+      <h1 id="h1"><span class="ln"><span>Together</span></span><span class="ln"><span>through life<span class="pdot">.</span></span></span></h1>
+      <div class="chap" aria-live="polite">
+        <div class="cp on" data-i="0">
+          <h2>A new life</h2>
+          <p>From the first scan to the first cuddle. Normal and painless delivery, with newborn care in the same building.</p>
+          <span class="pwho"><img src="images/dr-lakshmi-portrait.jpg" alt=""><span>With <b>Dr. Lakshmi Kalbande</b>, obstetrician</span></span>
+        </div>
+        <div class="cp" data-i="1">
+          <h2>A strong heart</h2>
+          <p>Heart check-ups, keyhole heart surgery and vein care, so the morning walks keep going.</p>
+          <span class="pwho"><img src="images/dr-ashish-portrait.jpg" alt=""><span>With <b>Dr. Ashish Baviskar</b>, heart surgeon</span></span>
+        </div>
+        <div class="cp" data-i="2">
+          <h2>Every night</h2>
+          <p>The emergency team stays awake so you can rest. In a medical emergency, call 108 or 112 first.</p>
+          <span class="pwho"><span class="pill"><svg class="ico"><use href="#i-alert"/></svg>Emergency open day and night</span></span>
+        </div>
+      </div>
+      <div class="ctas"><a class="btn btn-p" href="book.html"><svg class="ico"><use href="#i-cal"/></svg>Book a visit</a><a class="btn btn-g" href="tel:+919518904156"><svg class="ico"><use href="#i-phone"/></svg>95189 04156</a></div>
+    </div>
+
+    <button class="pause" id="pause" type="button" aria-label="Pause the slideshow"><svg class="ico"><use href="#i-pause"/></svg></button>
+
+    <div class="reel" role="tablist" aria-label="Chapters">
+      <button class="rb on" role="tab" aria-selected="true" data-i="0"><img src="images/hero-mother-newborn.jpg" alt=""><span>Pregnancy and birth<b>A new life</b></span><span class="pbar"><i></i></span></button>
+      <button class="rb" role="tab" aria-selected="false" data-i="1"><img src="images/heart-walk.jpg" alt=""><span>Heart and vessels<b>A strong heart</b></span><span class="pbar"><i></i></span></button>
+      <button class="rb" role="tab" aria-selected="false" data-i="2"><img src="images/night-corridor.jpg" alt=""><span>Emergency<b>Every night</b></span><span class="pbar"><i></i></span></button>
+      <div class="live"><span class="clock" id="clock">--:--</span><span class="lst"><b><i></i>Open now</b><span id="opd">Chinchwad time</span></span></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="under" aria-labelledby="u-h"><div class="wrap"><div class="in">
+<div class="l"><span class="tag"><i></i>Under one roof</span><h2 class="h2" id="u-h">Every chapter, <span class="soft">from the first flutter to the years after.</span></h2><p class="lede">Penguin Hospital is a family hospital in Chinchwad Gaon. Women come to us for periods, pregnancy and the years after. Their parents and husbands come to us for their hearts. Two specialists lead the care, and an emergency team is here around the clock.</p></div>
+<div class="pstrip"><a class="pcard" href="pregnancy-care.html"><img src="images/pregnant-window.jpg" alt="A pregnant woman by a window at dawn" loading="lazy"><span class="go"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="cap"><small>Nine months</small><b>Pregnancy care, week by week</b></span></a>
+<a class="pcard" href="obstetrics-gynaecology.html"><img src="images/newborn-hand.jpg" alt="A newborn's hand holding a parent's finger" loading="lazy"><span class="go"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="cap"><small>Day one</small><b>Delivery and newborn care</b></span></a>
+<a class="pcard" href="heart-and-vascular-surgery.html"><img src="images/heart-grandfather.jpg" alt="A grandfather laughing with his granddaughter" loading="lazy"><span class="go"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="cap"><small>The years after</small><b>Heart and vascular care</b></span></a></div>
+</div></div></section>
+<section class="hs" id="chapters" aria-labelledby="ch-h">
+  <div class="pin" id="pin" data-a="0">
+    <div class="track" id="track">
+      <div class="panel intro">
+        <span class="tag"><i></i>A life, in chapters</span>
+        <h2 class="h2" id="ch-h">Every chapter of a woman's life. <span class="soft">And the heart that carries the family.</span></h2>
+        <span class="note"><svg viewBox="0 0 46 34"><path d="M2 6c14 2 26 10 34 24M30 28l6 3 2-7"/></svg>Keep scrolling, the story moves sideways</span>
+      </div>
+      <article class="panel p1" data-c="1">
+        <div class="txt">
+          <div class="age"><b>13+</b><span>Chapter one<br>Growing up</span></div>
+          <h3>Getting to know your body</h3>
+          <p>Periods that are too heavy, too painful or too irregular. A PCOS diagnosis that raises more questions than it answers. Dr. Lakshmi explains what your body is doing, then what can help.</p>
+          <div class="links"><a href="obstetrics-gynaecology.html">PCOS</a><a href="obstetrics-gynaecology.html">Heavy periods</a><a href="obstetrics-gynaecology.html">Irregular periods</a><a href="obstetrics-gynaecology.html">Fibroids</a></div>
+          <span class="by"><img src="images/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi Kalbande</span>
+        </div>
+        <div class="scene sc" aria-hidden="true"><svg viewBox="0 0 520 520" id="sc1">
+          <circle class="ring0" cx="260" cy="260" r="236"/>
+          <g class="spin"><g id="cycleDots"></g></g>
+          <circle cx="260" cy="260" r="120" fill="#FDEDE8"/>
+          <text class="big" x="260" y="282" text-anchor="middle">28</text>
+          <text class="mid" x="260" y="316" text-anchor="middle">day cycle</text>
+          <text class="lbl" x="260" y="30" text-anchor="middle">Period</text>
+          <text class="lbl" x="260" y="500" text-anchor="middle">Ovulation</text>
+        </svg></div>
+      </article>
+      <article class="panel p2" data-c="2">
+        <div class="txt">
+          <div class="age"><b>40</b><span>Chapter two<br>Weeks of pregnancy</span></div>
+          <h3>Nine months, one visit at a time</h3>
+          <p>Check-ups, scans and blood tests at the right weeks, with closer watch when a pregnancy needs it: twins, diabetes, high blood pressure or a history of loss.</p>
+          <div class="links"><a href="pregnancy-care.html">Your week by week</a><a href="obstetrics-gynaecology.html">High-risk pregnancy</a><a href="obstetrics-gynaecology.html">Preeclampsia</a></div>
+          <span class="by"><img src="images/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi Kalbande</span>
+        </div>
+        <div class="scene sc" aria-hidden="true"><svg viewBox="0 0 520 520">
+          <circle cx="260" cy="260" r="220" fill="none" stroke="#E8F0FA" stroke-width="26"/>
+          <path d="M260 40 A220 220 0 0 1 465 340" fill="none" stroke="#C9DDF5" stroke-width="26" stroke-linecap="round"/>
+          <path d="M460 352 A220 220 0 0 1 120 432" fill="none" stroke="#F9C9B6" stroke-width="26" stroke-linecap="round"/>
+          <path d="M108 424 A220 220 0 0 1 252 40" fill="none" stroke="#F4978E" stroke-width="26" stroke-linecap="round" opacity=".75"/>
+          <text class="lbl" x="420" y="150">1st</text><text class="lbl" x="330" y="470">2nd</text><text class="lbl" x="58" y="210">3rd</text>
+          <g class="breathe"><circle cx="260" cy="260" r="138" fill="#FDEDE8"/><circle cx="260" cy="260" r="138" fill="none" stroke="#F4978E" stroke-width="1.5" stroke-dasharray="3 7"/>
+          <use href="#fetus" x="160" y="160" width="200" height="200"/></g>
+        </svg></div>
+      </article>
+      <article class="panel p3" data-c="3">
+        <div class="txt">
+          <div class="age"><b>Day 1</b><span>Chapter three<br>First breath</span></div>
+          <h3>The day your baby arrives</h3>
+          <p>Normal birth, painless delivery with an epidural, or a caesarean when it is the safer way. The labour team is here day and night, and newborn care is in the same building.</p>
+          <div class="links"><a href="obstetrics-gynaecology.html">Labour and delivery</a><a href="obstetrics-gynaecology.html">Painless delivery</a><a href="obstetrics-gynaecology.html">Newborn care</a></div>
+          <span class="by"><img src="images/dr-lakshmi-portrait.jpg" alt="">With Dr. Lakshmi and the night team</span>
+        </div>
+        <div class="scene sc" aria-hidden="true"><svg viewBox="0 0 520 520">
+          <circle cx="260" cy="230" r="150" fill="#FDEDE8"/>
+          <path d="M170 300c0-70 40-120 90-120s90 50 90 120c0 30-40 50-90 50s-90-20-90-50z" fill="#fff" stroke="#F4978E" stroke-width="3"/>
+          <path d="M190 290c30 14 110 14 140 0" fill="none" stroke="#F9C9B6" stroke-width="3"/>
+          <circle cx="260" cy="186" r="52" fill="#fff" stroke="url(#ng)" stroke-width="4"/>
+          <path d="M240 186c4 4 10 4 14 0M266 186c4 4 10 4 14 0M250 206c6 5 14 5 20 0" fill="none" stroke="url(#ng)" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M256 134c-2-12 8-18 16-12" fill="none" stroke="url(#ng)" stroke-width="3.4" stroke-linecap="round"/>
+          <text class="lbl" x="40" y="420">Mother</text><text class="lbl" x="40" y="476">Baby</text>
+          <path d="M120 416h90l12-24 16 46 14-34 10 12h218" fill="none" stroke="#E8F0FA" stroke-width="3"/>
+          <path class="ecg-run" d="M120 416h90l12-24 16 46 14-34 10 12h218" fill="none" stroke="#17407E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M120 472h50l8-16 10 30 10-22 6 8h60l8-16 10 30 10-22 6 8h142" fill="none" stroke="#E8F0FA" stroke-width="3"/>
+          <path class="ecg-run fast" d="M120 472h50l8-16 10 30 10-22 6 8h60l8-16 10 30 10-22 6 8h142" fill="none" stroke="#F4978E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></div>
+      </article>
+      <article class="panel p4" data-c="4">
+        <div class="txt">
+          <div class="age"><b>Always</b><span>Chapter four<br>The heart</span></div>
+          <h3 style="color:#fff">A heart for the years ahead</h3>
+          <p>Chest pain, breathlessness or a worrying ECG. Tests happen here, and when surgery is needed, Dr. Ashish explains every option, including keyhole heart surgery through a small cut in the side.</p>
+          <div class="links"><a href="heart-and-vascular-surgery.html">Explore the heart map</a><a href="heart-and-vascular-surgery.html">Keyhole surgery</a><a href="heart-and-vascular-surgery.html">Varicose veins</a></div>
+          <span class="by"><img src="images/dr-ashish-portrait.jpg" alt="">With Dr. Ashish Baviskar</span>
+        </div>
+        <div class="scene sc" aria-hidden="true"><svg viewBox="0 0 520 520">
+          <g fill="none" stroke="rgba(143,184,234,.18)" stroke-width="1"><circle cx="260" cy="250" r="230"/><circle cx="260" cy="250" r="180"/><circle cx="260" cy="250" r="130"/></g>
+          <g class="beat2"><path d="M260 400s-150-86-150-196a76 76 0 0 1 150-30 76 76 0 0 1 150 30c0 110-150 196-150 196z" fill="rgba(42,91,168,.25)" stroke="#8FB8EA" stroke-width="2.4"/>
+          <path d="M260 372s-120-72-120-166a56 56 0 0 1 104-28" fill="none" stroke="rgba(249,201,182,.5)" stroke-width="8" stroke-linecap="round"/></g>
+          <path d="M40 260h120l16-34 22 70 20-52 12 16h250" fill="none" stroke="rgba(244,151,142,.25)" stroke-width="3"/>
+          <path class="ecg-run" d="M40 260h120l16-34 22 70 20-52 12 16h250" fill="none" stroke="#F4978E" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></div>
+      </article>
+    </div>
+    <div class="hs-count" aria-hidden="true"><b id="hsN">01</b> / 04</div>
+    <div class="lifeline" aria-hidden="true">
+      <svg viewBox="0 0 1000 46" preserveAspectRatio="none"><path class="bgp" id="llb" d="M0 23H220l10-16 12 32 10-22 6 6H470l10-16 12 32 10-22 6 6H720l10-16 12 32 10-22 6 6H1000"/><path class="fgp" id="llf" d="M0 23H220l10-16 12 32 10-22 6 6H470l10-16 12 32 10-22 6 6H720l10-16 12 32 10-22 6 6H1000"/></svg>
+      <div class="marks"><span data-m="1">Growing up</span><span data-m="2">Nine months</span><span data-m="3">First breath</span><span data-m="4">The heart</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGNANCY COMPANION -->
+<section class="pad comp" id="mothers" aria-labelledby="m-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><span class="tag"><i></i>For mothers-to-be</span><h2 class="h2 rv" id="m-h">Your pregnancy, <span class="soft">week by week.</span></h2></div>
+      <p class="lede rv">Drag the dial to your week, or enter the first day of your last period. You will see your baby's size, what happens at Penguin at that stage, and what you might feel.</p>
+    </div>
+    <div class="comp-card rv">
+      <div class="dialw" id="dialw">
+        <svg viewBox="0 0 500 500" class="dial" id="dial" role="slider" aria-label="Week of pregnancy" aria-valuemin="4" aria-valuemax="40" aria-valuenow="20" tabindex="0">
+          <circle class="trk" cx="250" cy="250" r="200"/>
+          <g id="triArcs"></g>
+          <path class="prog" id="progArc" d=""/>
+          <g id="dticks"></g>
+          <g id="dms"></g>
+          <circle cx="250" cy="250" r="150" fill="#FFF6F3"/>
+          <g class="baby" id="baby"><circle cx="250" cy="168" r="0" fill="none"/>
+            <use href="#fetus" x="198" y="112" width="104" height="104"/></g>
+          <text class="wknum" id="wkN" x="250" y="300">20</text>
+          <text class="wksub" id="wkS" x="250" y="330">weeks · second trimester</text>
+          <g class="knob" id="knob"><circle class="o" r="20"/><circle class="i" r="8"/></g>
+        </svg>
+        <span class="hint">drag me</span>
+      </div>
+      <div class="comp-r">
+        <div class="ddate">
+          <label for="lmp">First day of your last period<input type="date" id="lmp"></label>
+          <button class="btn btn-navy" type="button" id="lmpGo" style="height:52px">Work it out</button>
+          <p class="out" id="lmpOut">Or simply drag the dial to your week.</p>
+        </div>
+        <div class="stage" id="stage"></div>
+        <p class="fine">A general guide for healthy pregnancies. Dr. Lakshmi sets your own schedule after your first visit.</p>
+      </div>
+    </div>
+    <div class="miles" id="miles" aria-label="Pregnancy milestones"></div>
+  </div>
+</section>
+
+<!-- HEART MAP -->
+<section class="pad hm" id="heart" aria-labelledby="hm-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><span class="tag dk"><i></i>Heart and vessels</span><h2 class="h2 rv" id="hm-h">Tap a part of the heart. <span class="soft">See how Dr. Ashish treats it.</span></h2></div>
+      <p class="lede rv">A plain-language map of heart surgery. Every operation starts with tests and a conversation, and many heart problems never need surgery at all.</p>
+    </div>
+    <div class="hm-grid">
+      <div class="hm-art" id="hmArt" data-z="1">
+        <svg viewBox="0 0 560 560" aria-hidden="true">
+          <!-- lungs -->
+          <path class="bp soft" d="M120 170c-50 40-74 120-62 210 6 46 40 60 78 44 30-12 44-40 44-80V200c0-30-30-50-60-30z"/>
+          <path class="bp soft" d="M440 170c50 40 74 120 62 210-6 46-40 60-78 44-30-12-44-40-44-80V200c0-30 30-50 60-30z"/>
+          <g class="zone z5"><path d="M120 170c-50 40-74 120-62 210 6 46 40 60 78 44 30-12 44-40 44-80V200c0-30-30-50-60-30z" fill="rgba(244,151,142,.18)" stroke="#F4978E" stroke-width="2"/><path d="M440 170c50 40 74 120 62 210-6 46-40 60-78 44-30-12-44-40-44-80V200c0-30 30-50 60-30z" fill="rgba(244,151,142,.18)" stroke="#F4978E" stroke-width="2"/></g>
+          <!-- aorta + pulmonary -->
+          <path class="bp" d="M300 210c0-60 20-110 70-110s60 50 60 80v40"/>
+          <path class="bp" d="M330 210c0-46 12-80 40-80s32 30 32 50v40"/>
+          <path class="bp" d="M320 116v-50M350 104v-46M380 104v-40"/>
+          <path class="bp" d="M250 220c-10-40-40-70-80-76M268 214c-6-30-26-50-56-58"/>
+          <g class="zone z3"><path d="M300 210c0-60 20-110 70-110s60 50 60 80v40" fill="none" stroke="#F4978E" stroke-width="5" stroke-linecap="round" opacity=".9"/></g>
+          <!-- heart body -->
+          <path class="fillh" d="M290 470c-80-30-150-100-150-180 0-60 40-100 96-100 30 0 50 12 64 30 16-22 40-36 74-36 54 0 86 44 86 100 0 90-80 160-170 186z"/>
+          <path class="bp" d="M290 470c-80-30-150-100-150-180 0-60 40-100 96-100 30 0 50 12 64 30 16-22 40-36 74-36 54 0 86 44 86 100 0 90-80 160-170 186z"/>
+          <path class="bp soft" d="M300 222c-6 70 2 160-10 248"/>
+          <!-- coronary arteries -->
+          <g class="zone z1"><path class="cor" d="M296 226c-30 20-60 30-84 64-20 30-24 70-14 100"/><path class="cor" d="M302 230c26 30 70 50 92 96 14 30 10 70-6 92"/><path class="cor" d="M252 300c20 10 36 30 40 60"/></g>
+          <g class="dim"><path d="M296 226c-30 20-60 30-84 64-20 30-24 70-14 100" fill="none" stroke="rgba(244,151,142,.35)" stroke-width="1.6"/><path d="M302 230c26 30 70 50 92 96 14 30 10 70-6 92" fill="none" stroke="rgba(244,151,142,.35)" stroke-width="1.6"/></g>
+          <!-- valves -->
+          <g class="zone z2"><circle cx="268" cy="290" r="18" fill="rgba(244,151,142,.22)" stroke="#F4978E" stroke-width="2"/><path d="M268 272v36M252 299l32-18" stroke="#F4978E" stroke-width="2"/><circle cx="330" cy="280" r="16" fill="rgba(244,151,142,.22)" stroke="#F4978E" stroke-width="2"/><path d="M330 264v32M316 288l28-16" stroke="#F4978E" stroke-width="2"/></g>
+          <g class="dim"><circle cx="268" cy="290" r="18" fill="none" stroke="rgba(143,184,234,.4)" stroke-width="1.4"/><circle cx="330" cy="280" r="16" fill="none" stroke="rgba(143,184,234,.4)" stroke-width="1.4"/></g>
+          <!-- MICS small cut -->
+          <g class="zone z4"><path d="M470 300c18 4 34 16 40 32" fill="none" stroke="#F4978E" stroke-width="5" stroke-linecap="round"/><path d="M462 300 L360 300" stroke="#F4978E" stroke-width="1.6" stroke-dasharray="5 6"/><text x="440" y="368" fill="#F9C9B6" style="font:600 13px Figtree,sans-serif;letter-spacing:.1em">SMALL SIDE CUT</text></g>
+        </svg>
+        <button class="hspot" style="left:47%;top:58%" data-z="1" aria-pressed="true" aria-label="Coronary arteries"><span>1</span></button>
+        <button class="hspot" style="left:54%;top:44%" data-z="2" aria-pressed="false" aria-label="Heart valves"><span>2</span></button>
+        <button class="hspot" style="left:70%;top:19%" data-z="3" aria-pressed="false" aria-label="Aorta"><span>3</span></button>
+        <button class="hspot" style="left:88%;top:56%" data-z="4" aria-pressed="false" aria-label="Side of the chest"><span>4</span></button>
+        <button class="hspot" style="left:14%;top:52%" data-z="5" aria-pressed="false" aria-label="Lungs"><span>5</span></button>
+      </div>
+      <div class="hm-card">
+        <div class="hm-list" id="hmList">
+          <button class="hm-item" data-z="1" aria-pressed="true"><span class="n">1</span><span><b>Coronary arteries</b><small>When the heart's own arteries are blocked, bypass surgery (CABG) routes blood around the blockage, on the heart-lung machine or on a beating heart.</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+          <button class="hm-item" data-z="2" aria-pressed="false"><span class="n">2</span><span><b>Heart valves</b><small>Narrow or leaking valves can often be repaired. When they cannot, they are replaced. Dr. Ashish explains which suits you and why.</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+          <button class="hm-item" data-z="3" aria-pressed="false"><span class="n">3</span><span><b>The aorta</b><small>The body's main artery can widen or tear. Aortic and aortic root surgery repairs it, sometimes as an emergency.</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+          <button class="hm-item" data-z="4" aria-pressed="false"><span class="n">4</span><span><b>Keyhole access (MICS)</b><small>Some operations can be done through a small cut between the ribs on the side, instead of opening the breastbone. You will be told if you are suited to it.</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+          <button class="hm-item" data-z="5" aria-pressed="false"><span class="n">5</span><span><b>Lungs and chest</b><small>Thoracic surgery for lung and chest conditions, planned with scans and a clear talk about recovery.</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        </div>
+        <div class="beyond"><span>Beyond the heart:</span><span class="c">Varicose veins</span><span class="c">Leg artery disease</span><span class="c">AV fistula for dialysis</span></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-coral" href="book.html"><svg class="ico"><use href="#i-cal"/></svg>Book with Dr. Ashish</a><a class="btn btn-glass" href="book.html">Heart check-up</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="pad" id="doctors" aria-labelledby="d-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><span class="tag"><i></i>Your doctors</span><h2 class="h2 rv" id="d-h">Two names on the door. <span class="soft">The same two in the room.</span></h2></div>
+      <p class="lede rv">You see your specialist yourself, from the first visit to the follow-up.</p>
+    </div>
+    <article class="doc">
+      <div class="ph rv">
+        <div class="frame"><img src="images/dr-lakshmi-portrait.jpg" alt="Dr. Lakshmi Vijay Kalbande at Penguin Hospital"></div>
+        <span class="confirm lowres">CONFIRM: new 4:5 portrait</span>
+        <span class="note"><span>the "Lakshmi" in<br>our logo</span></span>
+      </div>
+      <div class="dinfo">
+        <h3 class="rv">Dr. Lakshmi <span class="soft">Vijay Kalbande</span></h3>
+        <span class="role rv">Obstetrician and gynaecologist · Laparoscopic surgeon · Founder</span>
+        <div class="idcard rv">
+          <div class="hd"><span>Doctor profile</span><svg viewBox="0 0 40 40"><use href="#pg"/></svg></div>
+          <dl>
+            <dt>Qualifications</dt><dd>MBBS, DNB (Obstetrics and Gynaecology)</dd>
+            <dt>Fellowship</dt><dd>Gynaecological and Obstetric Ultrasound, FOGSI recognised</dd>
+            <dt>Registration</dt><dd>2013/04/1086 <span class="confirm">CONFIRM council</span></dd>
+            <dt>Memberships</dt><dd>Indian Menopause Society · IOTA group</dd>
+            <dt>Languages</dt><dd><span class="confirm">CONFIRM</span></dd>
+          </dl>
+        </div>
+        <div class="three rv">
+          <div><b>i.</b><span>Every high-risk pregnancy gets its own plan</span></div>
+          <div><b>ii.</b><span>Normal and painless birth discussed first, when safe</span></div>
+          <div><b>iii.</b><span>Keyhole surgery only when it is the right step</span></div>
+        </div>
+        <a class="btn btn-navy rv" href="book.html" style="justify-self:start">Book with Dr. Lakshmi<svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+    <article class="doc flip">
+      <div class="ph rv">
+        <div class="frame"><img src="images/dr-ashish-portrait.jpg" alt="Dr. Ashish A. Baviskar at Penguin Hospital"></div>
+        <span class="confirm lowres">CONFIRM: new 4:5 portrait</span>
+        <span class="note"><span>does keyhole<br>heart surgery</span></span>
+      </div>
+      <div class="dinfo">
+        <h3 class="rv">Dr. Ashish <span class="soft">A. Baviskar</span></h3>
+        <span class="role rv">Cardiothoracic and vascular surgeon (CTVS)</span>
+        <div class="idcard rv">
+          <div class="hd"><span>Doctor profile</span><svg viewBox="0 0 40 40"><use href="#pg"/></svg></div>
+          <dl>
+            <dt>Qualifications</dt><dd>MBBS, MS (General Surgery), MCh (CTVS)</dd>
+            <dt>Experience</dt><dd>More than 15 years, in hospitals across India</dd>
+            <dt>Registration</dt><dd><span class="confirm">CONFIRM</span></dd>
+            <dt>Languages</dt><dd><span class="confirm">CONFIRM</span></dd>
+          </dl>
+        </div>
+        <div class="three rv">
+          <div><b>i.</b><span>ECG, echo and TMT here, before any decision</span></div>
+          <div><b>ii.</b><span>Medicine, keyhole or open surgery, compared plainly</span></div>
+          <div><b>iii.</b><span>Family welcome in the room for big decisions</span></div>
+        </div>
+        <a class="btn btn-navy rv" href="book.html" style="justify-self:start">Book with Dr. Ashish<svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- VISIT: 24h dial -->
+<section class="pad" id="visit" aria-labelledby="v-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><span class="tag"><i></i>Visit us</span><h2 class="h2 rv" id="v-h">Open when you need us. <span class="soft">Which is any hour.</span></h2></div>
+      <p class="lede rv">Pick a day to see the hours. The hand shows the time in Chinchwad right now.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="clockcard rv">
+        <div class="days" id="days"></div>
+        <div class="h24"><svg viewBox="0 0 420 420" id="h24"></svg></div>
+        <div class="legend"><span><i style="background:var(--coral)"></i>Emergency</span><span><i style="background:var(--navy)"></i>OPD <span class="confirm">CONFIRM</span></span></div>
+      </div>
+      <div class="addr rv" style="--d:.1s">
+        <div style="display:grid;gap:14px"><h3>Opposite Laxmi Medico, Bijli Nagar Road</h3><p>Plot No. 59, New Pawana Nagar Society, Chinchwad Gaon, Pimpri-Chinchwad 411033</p></div>
+        <div class="minimap" aria-hidden="true"><svg viewBox="0 0 400 180" preserveAspectRatio="none"><g fill="none" stroke="rgba(255,255,255,.14)" stroke-width="12" stroke-linecap="round"><path d="M-10 150 C100 130 160 60 410 40"/><path d="M200 -10 L260 190"/></g><g fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"><path d="M-10 80H410"/><path d="M80 -10V190"/><path d="M330 -10V190"/></g></svg><span class="pin"></span><span class="lb">Penguin Hospital</span></div>
+        <div class="rows">
+          <div><span>Phone and WhatsApp</span><span class="sel">+91 95189 04156</span></div>
+          <div><span>Landline</span><span class="sel">020 2735 1100</span></div>
+          <div><span>Email</span><span class="sel">penguinhospitals@gmail.com <span class="confirm">CONFIRM</span></span></div>
+        </div>
+        <div style="display:grid;gap:10px"><span style="font-size:14px;color:var(--on-dark-2)">Families come to us from</span><div class="areas"><span>Pimpri</span><span>Nigdi</span><span>Akurdi</span><span>Ravet</span><span>Moshi</span><span>Wakad</span><span>Hinjawadi</span><span>Punawale</span><span>Tathawade</span></div></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-coral" href="https://maps.app.goo.gl/StwJKYnv9kRLnd1k7"><svg class="ico"><use href="#i-pin"/></svg>Get directions</a><a class="btn btn-glass" href="book.html"><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT FAQ -->
+<section class="pad" id="faq" aria-labelledby="f-h" style="padding-top:0">
+  <div class="wrap chatw">
+    <div style="display:grid;gap:22px;justify-items:center;text-align:center"><span class="tag"><i></i>Quick answers</span><h2 class="h2 rv" id="f-h">You asked. <span class="soft">We answered.</span></h2></div>
+    <div class="thread" id="thread">
+      <div class="b sys"><svg class="ico"><use href="#i-alert"/></svg>Medical emergency? Call 108 or 112 first.</div>
+      <div class="b q">Is the hospital open on Sundays?</div>
+      <div class="b a"><span class="av"><svg viewBox="0 0 40 40"><use href="#pg"/></svg></span><span><b>Penguin Hospital</b>Yes. The OPD runs on Sundays from 4 to 6 pm <span class="confirm">CONFIRM</span>, and the emergency team is here all day and night.</span></div>
+      <div class="b q">Labour has started at 2 am. Can I come?</div>
+      <div class="b a"><span class="av"><svg viewBox="0 0 40 40"><use href="#pg"/></svg></span><span><b>Penguin Hospital</b>Yes, come straight in. Call 95189 04156 on the way so the labour team is ready for you.</span></div>
+      <div class="b q">Is painless delivery available?</div>
+      <div class="b a"><span class="av"><svg viewBox="0 0 40 40"><use href="#pg"/></svg></span><span><b>Penguin Hospital</b>Yes, with an epidural, after a talk with Dr. Lakshmi about whether it suits you and your labour.</span></div>
+      <div class="b q">Does every heart problem need surgery?</div>
+      <div class="b a"><span class="av"><svg viewBox="0 0 40 40"><use href="#pg"/></svg></span><span><b>Penguin Hospital</b>No. Many heart conditions are managed with medicines and follow-up. Dr. Ashish explains when surgery would help, and what kind.</span></div>
+      <div class="typing" id="typing"><i></i><i></i><i></i></div>
+    </div>
+    <div class="ask-more"><a class="btn btn-line" href="book.html">See all questions</a><a class="btn btn-navy" href="book.html"><svg class="ico"><use href="#i-wa"/></svg>Ask us on WhatsApp</a></div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-labelledby="c-h">
+  <div class="wrap">
+    <div class="closew">
+      <canvas id="aurora2" aria-hidden="true"></canvas>
+      <div><h2 id="c-h">Together<br>through life.</h2><p>For the first scan, the first breath, and every heartbeat after.</p>
+      <div class="ctas"><a class="btn btn-coral" href="book.html"><svg class="ico"><use href="#i-cal"/></svg>Book a visit</a><a class="btn btn-glass" href="book.html"><svg class="ico"><use href="#i-phone"/></svg>95189 04156</a></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot"><div class="wrap">
+<div class="fgrid">
+<div><img class="logo" src="images/logo.png" alt="Dr. Lakshmi's Penguin Hospital"><p>Plot No. 59, New Pawana Nagar Society,<br>Bijli Nagar Road, Chinchwad Gaon,<br>Pimpri-Chinchwad 411033</p>
+<div class="hrs"><span><b>Emergency</b> open day and night</span><span><b>OPD</b> Monday to Saturday <span class="confirm">CONFIRM</span>, Sunday 4 pm to 6 pm</span><span><b>Call or WhatsApp</b> <a href="tel:+919518904156">+91 95189 04156</a></span></div></div>
+<div><h4>Women and pregnancy</h4><ul><li><a href="pregnancy-care.html">Pregnancy care</a></li><li><a href="#">High-risk pregnancy</a></li><li><a href="#">Painless delivery</a></li><li><a href="#">PCOS</a></li><li><a href="#">Fibroids</a></li><li><a href="obstetrics-gynaecology.html">All women's care</a></li></ul></div>
+<div><h4>Heart and vessels</h4><ul><li><a href="#">Heart check-up</a></li><li><a href="#">Keyhole heart surgery</a></li><li><a href="#">Bypass and valves</a></li><li><a href="#">Varicose veins</a></li><li><a href="heart-and-vascular-surgery.html">All heart care</a></li></ul></div>
+<div><h4>Patient info</h4><ul><li><a href="book.html">Book a visit</a></li><li><a href="emergency.html">Emergency</a></li><li><a href="about.html">About us</a></li><li><a href="faqs.html">Questions and answers</a></li><li><a href="health-library.html">Health library</a></li><li><a href="privacy-policy.html">Privacy policy</a></li><li><a href="#">Cookie settings</a></li></ul></div>
+</div>
+<p class="pcpndt-f">Sex determination of the foetus is a crime under the PCPNDT Act. We do not disclose the sex of the baby.</p>
+<div class="legal"><span>© 2026 Dr. Lakshmi's Penguin Hospital <span class="confirm">CONFIRM legal entity</span></span><span>Information on this site is for education. It does not replace a visit to a doctor.</span></div>
+</div></footer>
+<a class="wa" href="#" aria-label="WhatsApp us"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></a>
+<nav class="mbar" aria-label="Quick actions"><a href="book.html"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Book</a><a href="tel:+919518904156"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>Call</a><a href="#"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a></nav>
+<div class="pv"><button type="button" aria-expanded="false"><i></i>Preview: 14 pages</button><ul><li><a href="index.html" aria-current=page>Home<small>Approved design</small></a></li><li><a href="about.html">About<small>Story and building</small></a></li><li><a href="obstetrics-gynaecology.html">Women and pregnancy<small>Hub template</small></a></li><li><a href="pregnancy-care.html">Pregnancy care<small>Service page template</small></a></li><li><a href="heart-and-vascular-surgery.html">Heart and vessels<small>Hub template</small></a></li><li><a href="dr-lakshmi-vijay-kalbande.html">Dr. Lakshmi<small>Doctor profile</small></a></li><li><a href="emergency.html">Emergency<small>Info page</small></a></li><li><a href="book.html">Book a visit<small>Form page</small></a></li><li><a href="doctors.html">Our doctors<small>Doctors hub</small></a></li><li><a href="pregnancy-week-by-week.html">Week by week<small>Tool page</small></a></li><li><a href="health-library.html">Health library<small>Article list</small></a></li><li><a href="signs-of-labour.html">Blog post<small>Article template</small></a></li><li><a href="faqs.html">Questions and answers<small>FAQ page</small></a></li><li><a href="privacy-policy.html">Privacy policy<small>Legal template</small></a></li></ul></div>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+  var NS='http://www.w3.org/2000/svg';
+
+  /* ---------- aurora ---------- */
+  function aurora(cv,opts){
+    var ctx=cv.getContext('2d'),w,h,dpr,t=Math.random()*100,run=false,raf;
+    var bands=opts.bands;
+    function size(){dpr=Math.min(devicePixelRatio||1,2);w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+    function draw(){
+      ctx.clearRect(0,0,w,h);ctx.globalCompositeOperation='lighter';
+      try{ctx.filter='blur('+Math.round(Math.min(w,900)/26)+'px)'}catch(e){}
+      bands.forEach(function(b,i){
+        var base=h*b.y,amp=h*b.a,g=ctx.createLinearGradient(0,base-amp*2,0,base+h*b.t);
+        g.addColorStop(0,'rgba('+b.c+',0)');g.addColorStop(.35,'rgba('+b.c+','+b.o+')');g.addColorStop(1,'rgba('+b.c+',0)');
+        ctx.fillStyle=g;ctx.beginPath();
+        for(var x=-20;x<=w+20;x+=16){var y=base+Math.sin(x*b.f/w*6.28+t*b.s+i)*amp+Math.sin(x*b.f2/w*6.28-t*b.s*.7)*amp*.5;if(x===-20)ctx.moveTo(x,y);else ctx.lineTo(x,y)}
+        for(x=w+20;x>=-20;x-=16){var y2=base+h*b.t+Math.sin(x*b.f/w*6.28+t*b.s*.8+i)*amp*.6;ctx.lineTo(x,y2)}
+        ctx.closePath();ctx.fill();
+      });
+      ctx.filter='none';ctx.globalCompositeOperation='source-over';
+    }
+    function loop(){t+=.006;draw();if(run)raf=requestAnimationFrame(loop)}
+    size();draw();
+    addEventListener('resize',function(){size();draw()});
+    if(reduce||!('IntersectionObserver' in window))return;
+    new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!run){run=true;loop()}else if(!e.isIntersecting){run=false;cancelAnimationFrame(raf)}})}).observe(cv);
+  }
+  var B=[{c:'42,91,168',o:.55,y:.28,a:.08,t:.3,f:1.2,f2:2.6,s:1},{c:'143,184,234',o:.32,y:.18,a:.06,t:.22,f:.8,f2:3.1,s:1.3},{c:'244,151,142',o:.42,y:.36,a:.07,t:.26,f:1.6,f2:2.2,s:.9},{c:'90,200,190',o:.18,y:.24,a:.05,t:.2,f:2.1,f2:1.4,s:1.1}];
+  
+  aurora($('#aurora2'),{bands:B});
+
+  /* ---------- hero load ---------- */
+  var h1=$('#h1');if(!reduce){h1.classList.add('pre');requestAnimationFrame(function(){requestAnimationFrame(function(){h1.classList.remove('pre')})})}
+
+  /* ---------- live time + OPD ---------- */
+  var names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var OPD={0:[16,18],1:[0,24],2:[0,24],3:[0,24],4:[0,24],5:[0,24],6:[0,24]};
+  function ist(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});return{d:names.indexOf(o.weekday),h:+o.hour,m:+o.minute,t:(+o.hour)+(+o.minute)/60}}
+  function f12(h,m){return (h%12||12)+':'+('0'+m).slice(-2)+'<small>'+(h>=12?'PM':'AM')+'</small>'}
+  function live(){var n=ist(),o=OPD[n.d],open=n.t>=o[0]&&n.t<o[1];return n}
+  var now=live();setInterval(function(){now=live();drawDial24()},30000);
+
+  /* ---------- nav ---------- */
+  var nb=$('#navbar');addEventListener('scroll',function(){nb.classList.toggle('small',scrollY>40)},{passive:true});
+  
+
+  /* ---------- cycle dots (chapter 1) ---------- */
+  var cd='';for(var i=0;i<28;i++){var a=i/28*Math.PI*2,x=260+Math.sin(a)*190,y=260-Math.cos(a)*190,c,r=9;
+    if(i<5)c='#F4978E';else if(i<13)c='#C9DDF5';else if(i===13){c='#001F43';r=14}else c='#E8F0FA';
+    cd+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" fill="'+c+'"'+(i>13?' stroke="#C8D5E6" stroke-width="1.2"':'')+'/>'}
+  cd+='<circle cx="260" cy="44" r="5" fill="#E40913"/>';
+  $('#cycleDots').innerHTML=cd;
+
+  /* ---------- pinned horizontal chapters ---------- */
+  var hs=$('#chapters'),pin=$('#pin'),track=$('#track'),llf=$('#llf'),L=llf.getTotalLength(),marks=$$('.lifeline .marks span'),hsN=$('#hsN');
+  llf.style.strokeDasharray=L;llf.style.strokeDashoffset=L;
+  function hsFrame(){
+    if(innerWidth<=860){return}
+    var r=hs.getBoundingClientRect(),total=r.height-innerHeight,p=clamp(-r.top/total,0,1);
+    var dist=track.scrollWidth-innerWidth;track.style.transform='translate3d('+(-p*dist).toFixed(1)+'px,0,0)';
+    llf.style.strokeDashoffset=(L*(1-p)).toFixed(1);
+    var panels=$$('.panel[data-c]'),act=0;
+    panels.forEach(function(pn){var b=pn.getBoundingClientRect();if(b.left<innerWidth*.5)act=+pn.dataset.c});
+    pin.dataset.a=act;hsN.textContent='0'+Math.max(1,act);
+    marks.forEach(function(m){m.classList.toggle('on',+m.dataset.m===act)});
+  }
+
+  /* ---------- pregnancy dial ---------- */
+  var CX=250,CY=250,R=200;
+  function pt(w,rad){var a=(w/40)*Math.PI*2-Math.PI/2;return[CX+Math.cos(a)*rad,CY+Math.sin(a)*rad]}
+  function arc(w0,w1,rad){var p0=pt(w0,rad),p1=pt(w1,rad),large=(w1-w0)>20?1:0;return 'M'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+rad+' '+rad+' 0 '+large+' 1 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1)}
+  $('#triArcs').innerHTML='<path class="tri" d="'+arc(.3,13,R)+'" stroke="#C9DDF5"/><path class="tri" d="'+arc(13.6,27,R)+'" stroke="#F9C9B6"/><path class="tri" d="'+arc(27.6,39.7,R)+'" stroke="#F4978E"/>';
+  var tk='';for(var wk=0;wk<40;wk++){var maj=wk%4===0,p0=pt(wk,R+18),p1=pt(wk,R+(maj?30:25));tk+='<line class="tk'+(maj?' maj':'')+'" x1="'+p0[0].toFixed(1)+'" y1="'+p0[1].toFixed(1)+'" x2="'+p1[0].toFixed(1)+'" y2="'+p1[1].toFixed(1)+'"/>';if(maj&&wk>0){var pl=pt(wk,R+44);tk+='<text class="wl" x="'+pl[0].toFixed(1)+'" y="'+(pl[1]+4).toFixed(1)+'">'+wk+'</text>'}}
+  $('#dticks').innerHTML=tk;
+  var MS=[[8,'Dating scan','8 wks'],[12,'NT scan','12 wks'],[20,'Anomaly scan','20 wks'],[26,'Sugar test','26 wks'],[32,'Growth scan','32 wks'],[37,'Full term','37 wks'],[40,'Due date','40 wks']];
+  $('#dms').innerHTML=MS.map(function(m,k){var p=pt(m[0],R);return '<circle class="ms" data-k="'+k+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="7"/>'}).join('');
+  $('#miles').innerHTML=MS.map(function(m,k){return '<button class="mile" type="button" data-w="'+m[0]+'"><b>'+m[2]+'</b>'+m[1]+'</button>'}).join('');
+  var FR=[
+    [4,7,'Pomegranate seed','#D9534F',.32,['Confirm the pregnancy','First visit and folic acid'],['Tiredness','Nausea, for some','Sore breasts']],
+    [8,11,'Jamun','#5B3A73',.42,['Booking visit with blood tests','Dating scan'],['Nausea may peak','Needing to pee more often']],
+    [12,14,'Lemon','#E6CF4A',.5,['NT scan and first-trimester screening','Diet, work and travel talk'],['Energy often returns','Nausea often eases']],
+    [15,19,'Guava','#8DBF6A',.58,['Monthly check: weight, BP, urine','Blood tests if due'],['A small bump','First flutters, for some']],
+    [20,23,'Mango','#F2B33D',.68,['Anomaly scan, usually 18 to 22 weeks','Iron and calcium checked'],['Clear baby movements','Back ache, for some']],
+    [24,28,'Papaya','#F39A4A',.78,['Sugar test for diabetes in pregnancy','Blood pressure watched closely'],['Heartburn','Leg cramps at night']],
+    [29,34,'Coconut','#8B6B4A',.88,['Visits every two weeks','Growth scan if needed, birth plan talk'],['Breathless on stairs','Practice tightenings']],
+    [35,40,'Watermelon','#4E9A5B',1,['Weekly visits and movement checks','Painless delivery and hospital bag planned'],['Baby moves lower','Trouble sleeping']]
+  ];
+  function fruitSvg(c,s){return '<svg viewBox="0 0 54 54" style="transform:scale('+(.55+s*.45).toFixed(2)+')"><ellipse cx="27" cy="30" rx="20" ry="18" fill="'+c+'"/><ellipse cx="20" cy="24" rx="6" ry="4" fill="#fff" opacity=".35"/><path d="M27 12c4-8 12-8 14-6-4 4-8 6-14 6z" fill="#4E9A5B"/></svg>'}
+  var knob=$('#knob'),prog=$('#progArc'),wkN=$('#wkN'),wkS=$('#wkS'),baby=$('#baby'),stage=$('#stage'),dial=$('#dial'),cur=-1,lastF=-1;
+  function setWeek(w,extra){
+    w=clamp(Math.round(w),4,40);if(w===cur&&!extra)return;cur=w;
+    var p=pt(w,R);knob.setAttribute('transform','translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')');
+    prog.setAttribute('d',arc(0.01,Math.max(w,.5),R));
+    wkN.textContent=w;var tri=w<14?'first':(w<28?'second':'third');wkS.textContent='weeks · '+tri+' trimester';
+    dial.setAttribute('aria-valuenow',w);dial.setAttribute('aria-valuetext',w+' weeks');
+    baby.style.transform='scale('+(.5+w/40*.6).toFixed(2)+')';
+    $$('.ms').forEach(function(m){var mw=MS[+m.dataset.k][0];m.classList.toggle('done',mw<w);m.classList.toggle('cur',Math.abs(mw-w)<=1||(mw>=w&&MS.filter(function(x){return x[0]>=w})[0][0]===mw))});
+    $$('.mile').forEach(function(m){var mw=+m.dataset.w;m.classList.toggle('done',mw<w);m.classList.toggle('cur',MS.filter(function(x){return x[0]>=w})[0]&&MS.filter(function(x){return x[0]>=w})[0][0]===mw)});
+    var fi=0;FR.forEach(function(f,k){if(w>=f[0]&&w<=f[1])fi=k});
+    if(fi!==lastF){lastF=fi;var f=FR[fi];stage.classList.remove('swap');void stage.offsetWidth;stage.classList.add('swap');
+      stage.innerHTML='<div class="st"><span class="k">Baby is about the size of</span><div class="fruit">'+fruitSvg(f[3],f[4])+'<b>'+f[2]+'</b></div></div>'+
+      '<div class="st dark"><span class="k">At Penguin, now</span><ul>'+f[5].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+
+      '<div class="st"><span class="k">You may notice</span><ul>'+f[6].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>';}
+  }
+  setWeek(20,true);
+  function fromEvent(e){var r=dial.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*500-CX,y=(e.clientY-r.top)/r.height*500-CY;var a=Math.atan2(y,x)+Math.PI/2;if(a<0)a+=Math.PI*2;return a/(Math.PI*2)*40}
+  var drag=false;
+  dial.addEventListener('pointerdown',function(e){drag=true;dial.setPointerCapture(e.pointerId);setWeek(fromEvent(e));$('.dialw .hint').style.opacity=0});
+  dial.addEventListener('pointermove',function(e){if(drag)setWeek(fromEvent(e))});
+  dial.addEventListener('pointerup',function(){drag=false});dial.addEventListener('pointercancel',function(){drag=false});
+  dial.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowUp'){setWeek(cur+1);e.preventDefault()}if(e.key==='ArrowLeft'||e.key==='ArrowDown'){setWeek(cur-1);e.preventDefault()}});
+  $$('.mile').forEach(function(m){m.onclick=function(){setWeek(+m.dataset.w)}});
+  $('#lmpGo').onclick=function(){
+    var v=$('#lmp').value,out=$('#lmpOut');if(!v){out.textContent='Choose a date first.';return}
+    var d=new Date(v+'T00:00:00'),today=new Date();today.setHours(0,0,0,0);
+    var days=Math.floor((today-d)/864e5);if(days<0||days>300){out.textContent='That date looks outside a pregnancy. Please check it.';return}
+    var due=new Date(d.getTime()+280*864e5),wk=Math.floor(days/7),dd=days%7;
+    out.innerHTML='You are about <b>'+wk+' weeks and '+dd+' day'+(dd===1?'':'s')+'</b>. Your due date is around <b>'+due.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})+'</b>.';
+    setWeek(Math.max(4,wk));
+  };
+
+  /* ---------- heart map ---------- */
+  var hmArt=$('#hmArt');
+  function setZ(z){hmArt.dataset.z=z;$$('.hspot').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.z==z?'true':'false')});$$('.hm-item').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.z==z?'true':'false')})}
+  $$('.hspot,.hm-item').forEach(function(b){b.onclick=function(){setZ(b.dataset.z)}});
+
+  /* ---------- 24h dial ---------- */
+  var sel=now.d,h24=$('#h24'),order=[1,2,3,4,5,6,0];
+  $('#days').innerHTML=order.map(function(d){return '<button type="button" data-d="'+d+'" aria-pressed="'+(d===sel)+'"'+(d===now.d?' class="today"':'')+'>'+names[d]+'</button>'}).join('');
+  $$('#days button').forEach(function(b){b.onclick=function(){sel=+b.dataset.d;$$('#days button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});drawDial24()}});
+  function a24(hh,rad){var a=hh/24*Math.PI*2-Math.PI/2;return[210+Math.cos(a)*rad,210+Math.sin(a)*rad]}
+  function seg(h0,h1,rad,wd,col){if(h1-h0>=24){return '<circle cx="210" cy="210" r="'+rad+'" fill="none" stroke="'+col+'" stroke-width="'+wd+'"/>'}var p0=a24(h0,rad),p1=a24(h1,rad),l=(h1-h0)>12?1:0;return '<path d="M'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+rad+' '+rad+' 0 '+l+' 1 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+'" fill="none" stroke="'+col+'" stroke-width="'+wd+'" stroke-linecap="round"/>'}
+  function drawDial24(){
+    var s='<circle cx="210" cy="210" r="180" fill="none" stroke="#E8F0FA" stroke-width="20"/><circle cx="210" cy="210" r="150" fill="none" stroke="#E8F0FA" stroke-width="20"/>';
+    s+=seg(0,24,180,20,'#F4978E');var o=OPD[sel];s+=seg(o[0],o[1],150,20,'#001F43');
+    for(var hh=0;hh<24;hh++){var q=a24(hh,204),q2=a24(hh,hh%6===0?196:200);s+='<line x1="'+q[0].toFixed(1)+'" y1="'+q[1].toFixed(1)+'" x2="'+q2[0].toFixed(1)+'" y2="'+q2[1].toFixed(1)+'" stroke="#C8D5E6" stroke-width="1.4"/>'}
+    [[0,'12 am'],[6,'6 am'],[12,'12 pm'],[18,'6 pm']].forEach(function(l){var q=a24(l[0],118);s+='<text class="hl" x="'+q[0].toFixed(1)+'" y="'+(q[1]+4).toFixed(1)+'">'+l[1]+'</text>'});
+    if(sel===now.d){var hp=a24(now.t,196);s+='<line x1="210" y1="210" x2="'+hp[0].toFixed(1)+'" y2="'+hp[1].toFixed(1)+'" stroke="#0B1A30" stroke-width="3" stroke-linecap="round"/><circle cx="'+hp[0].toFixed(1)+'" cy="'+hp[1].toFixed(1)+'" r="7" fill="#0B1A30" stroke="#fff" stroke-width="3"/><circle cx="210" cy="210" r="6" fill="#0B1A30"/>'}
+    var open=sel===now.d?(now.t>=o[0]&&now.t<o[1]):null;
+    s+='<circle cx="210" cy="210" r="86" fill="#fff"/>';
+    if(sel===now.d){s+='<text class="ct" x="210" y="214">'+((now.h%12)||12)+':'+('0'+now.m).slice(-2)+'</text><text class="cs" x="210" y="244" fill="'+(open?'#2F7D5B':'#77869C')+'">OPD '+(open?'open now':'closed now')+'</text>'}
+    else{s+='<text class="ct" x="210" y="214" style="font-size:40px">'+names[sel]+'</text><text class="cs" x="210" y="244" fill="#77869C">'+(o[1]-o[0]===24?'OPD 24 hours':'OPD 4 to 6 pm')+'</text>'}
+    h24.innerHTML=s;
+  }
+  drawDial24();
+
+  /* ---------- chat FAQ reveal ---------- */
+  var bubbles=$$('#thread .b'),typing=$('#typing'),chatDone=false;
+  if(!reduce&&'IntersectionObserver' in window){
+    var startTop=$('#thread').getBoundingClientRect().top;
+    if(startTop>innerHeight){bubbles.forEach(function(b){b.classList.add('hide')});
+      var co=new IntersectionObserver(function(es){if(es[0].isIntersecting&&!chatDone){chatDone=true;co.disconnect();var k=0;(function next(){if(k>=bubbles.length){typing.classList.remove('on');return}var b=bubbles[k];if(b.classList.contains('a')){typing.classList.add('on');b.parentNode.insertBefore(typing,b);setTimeout(function(){typing.classList.remove('on');b.classList.remove('hide');k++;setTimeout(next,260)},550)}else{b.classList.remove('hide');k++;setTimeout(next,260)}})()}},{threshold:.2});
+      co.observe($('#thread'));
+      setTimeout(function(){},0);
+    }
+  }
+
+  /* ---------- reveals ---------- */
+  var vh=innerHeight;
+  if(!reduce&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+    $$('.rv').forEach(function(el){if(el.getBoundingClientRect().top>vh*.95)el.classList.add('pre');io.observe(el)});
+  }
+
+  /* ---------- scroll loop ---------- */
+  var tick=false;function req(){if(!tick){tick=true;requestAnimationFrame(function(){tick=false;hsFrame()})}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);hsFrame();
+})();
+</script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)},$$=function(s){return[].slice.call(document.querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frs=$$('.fr'),cps=$$('.cp'),rbs=$$('.rb'),cur=0,DUR=7000,t0=performance.now(),paused=reduce,raf;
+
+  function show(i){
+    cur=(i+frs.length)%frs.length;
+    frs.forEach(function(f,k){f.classList.toggle('on',k===cur);if(k===cur){var im=f.querySelector('img');im.style.animation='none';im.offsetWidth;im.style.animation=''}});
+    cps.forEach(function(c,k){c.classList.toggle('on',k===cur)});
+    rbs.forEach(function(b,k){b.classList.toggle('on',k===cur);b.classList.toggle('done',k<cur);b.setAttribute('aria-selected',k===cur);b.querySelector('.pbar i').style.transform=k<cur?'scaleX(1)':'scaleX(0)'});
+    t0=performance.now();
+  }
+  function loop(now){
+    if(!paused){
+      var p=Math.min(1,(now-t0)/DUR);
+      rbs[cur].querySelector('.pbar i').style.transform='scaleX('+p.toFixed(3)+')';
+      if(p>=1)show(cur+1);
+    }else{t0=now-(parseFloat(rbs[cur].dataset.p||0)*DUR)}
+    raf=requestAnimationFrame(loop);
+  }
+  rbs.forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.i)})});
+  var pb=$('#pause');
+  function setPaused(v){paused=v;rbs[cur].dataset.p=(performance.now()-t0)/DUR;pb.innerHTML='<svg class="ico"><use href="#i-'+(v?'play':'pause')+'"/></svg>';pb.setAttribute('aria-label',v?'Play the slideshow':'Pause the slideshow')}
+  pb.addEventListener('click',function(){setPaused(!paused)});
+  if(reduce){setPaused(true)}
+  raf=requestAnimationFrame(loop);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)t0=performance.now()});
+
+  /* live Chinchwad clock. Hours still to be confirmed with the client */
+  var OPD={0:[16,18],1:[0,24],2:[0,24],3:[0,24],4:[0,24],5:[0,24],6:[0,24]};
+  function tick(){
+    var d=new Date(Date.now()+(330+new Date().getTimezoneOffset())*60000),h=d.getHours(),m=d.getMinutes(),o=OPD[d.getDay()];
+    $('#clock').innerHTML=((h%12)||12)+':'+(m<10?'0':'')+m+'<small>'+(h<12?'AM':'PM')+'</small>';
+    $('#opd').textContent=(h>=o[0]&&h<o[1])?'Emergency and OPD':'Emergency only, OPD at '+(o[0]%12||12)+(o[0]<12?' am':' pm');
+  }
+  tick();setInterval(tick,20000);
+
+  /* scroll: the film settles into a rounded frame; cards drift */
+  var film=$('#film'),hero=$('#hero'),cards=[];
+  function onScroll(){
+    var y=scrollY,h=hero.offsetHeight,p=Math.max(0,Math.min(1,y/(h*.7)));
+    if(!reduce){
+      var inset=(p*Math.min(28,innerWidth*.03)).toFixed(1),r=(p*36).toFixed(1);
+      film.style.clipPath='inset('+inset+'px '+inset+'px '+inset+'px '+inset+'px round '+r+'px)';
+      if(innerWidth>720)cards.forEach(function(c,k){var b=c.getBoundingClientRect();var q=(b.top-innerHeight)/innerHeight;c.style.setProperty('--py',(q*(k+1)*-18).toFixed(1)+'px')});
+    }
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(onScroll)},{passive:true});onScroll();
+})();
+</script>
+<script src="site.js"></script>
