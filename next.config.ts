@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
   experimental: { optimizePackageImports: ["lucide-react", "@radix-ui/react-navigation-menu", "@radix-ui/react-accordion"] },
   trailingSlash: true,
   poweredByHeader: false,
+  devIndicators: false,
   productionBrowserSourceMaps: false,
   images: {
     formats: ["image/avif", "image/webp"],

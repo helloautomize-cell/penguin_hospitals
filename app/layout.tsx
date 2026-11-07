@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Instrument_Serif, Noto_Sans_Devanagari } from "next/font/google";
+import { Figtree, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -15,14 +15,6 @@ const instrument = Instrument_Serif({
   style: ["normal", "italic"],
   variable: "--font-instrument",
   preload: false,
-});
-
-const devanagari = Noto_Sans_Devanagari({
-  subsets: ["devanagari"],
-  weight: ["500", "600"],
-  variable: "--font-devanagari",
-  preload: false,
-  display: "swap",
 });
 
 const INDEXABLE = process.env.SITE_INDEXABLE === "true" && process.env.VERCEL_ENV !== "preview";
@@ -65,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en-IN"
       data-scroll-behavior="smooth"
-      className={`${figtree.variable} ${instrument.variable} ${devanagari.variable}`}
+      className={`${figtree.variable} ${instrument.variable}`}
     >
       <body suppressHydrationWarning>
         <SiteHeader

@@ -434,17 +434,8 @@
   .home .mo .wr::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:#fff;border:2.5px solid var(--coral);box-shadow:0 4px 12px rgba(0,31,67,.25)}
   .home .mo .lmp input[type="date"]{min-height:52px;font-size:16px}
   .home .mo .lmp .btn{min-height:52px}
-  /* milestone timeline: vertical on phones */
-  .home .mo .tlw{overflow-x:visible;padding-bottom:0}
-  .home .mo .tl{min-width:0;height:auto;margin:0;display:flex;flex-direction:column;gap:2px}
-  .home .mo .tl .bar{display:none}
-  .home .mo .tl .fill{left:9px;top:0;bottom:auto;width:2px;height:var(--tl,0%);border-radius:2px;background:linear-gradient(180deg,var(--blue),var(--coral));transition:height .5s var(--ease)}
-  .home .mo .pin{position:static;transform:none;width:100%;height:auto;min-height:44px;display:flex;align-items:center;gap:14px;text-align:left;padding:4px 0}
-  .home .mo .pin .d{flex:none;width:20px;height:20px;position:relative;z-index:1}
-  .home .mo .pin .t{position:static;white-space:normal;text-align:left;font-size:16px;display:flex;align-items:baseline;gap:10px}
-  .home .mo .pin .t small{display:inline;font-size:12px}
-  .home .mo .pin.next .d{animation:mo-mspulse 1.2s var(--ease)}
-  @keyframes mo-mspulse{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1.25)}}
+  /* milestone timeline: desktop-only, the week slider carries mobile */
+  .home .mo .tlw{display:none}
 
   /* S4: heart map — normal flow, diagram then accordion */
   .home .hm-grid{display:flex;flex-direction:column;gap:30px;align-items:stretch}

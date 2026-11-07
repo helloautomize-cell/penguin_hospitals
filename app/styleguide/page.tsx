@@ -250,10 +250,6 @@ export default function Styleguide() {
             <p className="font-serif text-[64px] leading-none text-ink">20</p>
             <p className="font-serif text-[24px] italic text-coral-ink">drag me</p>
           </div>
-          <div className="grid gap-2">
-            <span className="t-fine text-ink-2">Noto Sans Devanagari · hero greeting only</span>
-            <p className="font-deva text-[24px] font-semibold text-navy">नमस्कार</p>
-          </div>
         </div>
       </Section>
 

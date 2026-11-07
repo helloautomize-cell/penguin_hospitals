@@ -121,7 +121,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   --coral:#F4978E;--peach:#F9C9B6;--alert:#FF6B63;--ok:#3DDC97;
   --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
   --num:'Instrument Serif',Georgia,serif;
-  --dev:'Noto Sans Devanagari','Figtree',sans-serif;
+  --dev:'Figtree',sans-serif;
   --ease:cubic-bezier(.2,.7,.1,1);
   --gl:max(20px,env(safe-area-inset-left,0px),4.5vw);--gr:max(20px,env(safe-area-inset-right,0px),4.5vw);
 }

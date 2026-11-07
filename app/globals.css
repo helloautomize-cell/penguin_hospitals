@@ -48,7 +48,6 @@
   /* Type families (font variables are set by next/font on <html>) */
   --font-sans: var(--font-figtree), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
-  --font-deva: var(--font-devanagari), var(--font-figtree), sans-serif;
 
   /* Radius */
   --radius-chip: 8px;

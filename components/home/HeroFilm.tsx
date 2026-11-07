@@ -161,8 +161,6 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
 
         <div className="copy">
           <p className="hello">
-            <span className="dev">नमस्कार</span>
-            <i></i>
             <span>
               Chinchwad Gaon<span className="long">, Dr. Lakshmi&apos;s Penguin Hospital</span>
             </span>
