@@ -1,7 +1,7 @@
 ---
-title: AV fistula surgery for dialysis in Chinchwad | Penguin Hospital
+title: AV fistula surgery in Chinchwad | Penguin Hospital
 url: /av-fistula-for-dialysis/
-description: An AV fistula gives lasting, safe access for haemodialysis. When to plan it, the operation, and caring for your fistula. Vascular surgeon Dr. Ashish Baviskar, Chinchwad.
+description: An AV fistula gives lasting, safe access for haemodialysis. When to plan it, the operation, and caring for your fistula. Vascular surgeon Dr.
 badge: fistula
 related: [peripheral-artery-disease, varicose-veins]
 ---

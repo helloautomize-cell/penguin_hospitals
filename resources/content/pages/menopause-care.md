@@ -1,7 +1,7 @@
 ---
 title: Menopause care in Chinchwad | Penguin Hospital
 url: /menopause-care/
-description: Hot flushes, sleep, mood, bone and heart health around menopause. Care from Dr. Lakshmi Kalbande, Indian Menopause Society member, at Penguin Hospital, Chinchwad.
+description: Hot flushes, sleep, mood, bone and heart health around menopause. Care from Dr. Lakshmi Kalbande, Indian Menopause Society member, at Penguin Hospital
 badge: menopause
 related: [heavy-periods, irregular-menstruation, heart-check-up]
 ---

@@ -1,7 +1,7 @@
 ---
 title: Varicose veins treatment in Chinchwad | Penguin Hospital
 url: /varicose-veins/
-description: Swollen, aching leg veins, heaviness or skin changes. Causes, when treatment is needed, and options including laser and surgery. Dr. Ashish Baviskar, Penguin Hospital, Chinchwad.
+description: Swollen, aching leg veins, heaviness or skin changes. Causes, when treatment is needed, and options including laser and surgery. Dr.
 badge: veins
 related: [peripheral-artery-disease, heart-check-up]
 ---

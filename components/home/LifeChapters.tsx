@@ -9,9 +9,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import {
   buildChapterInstrument,
+  type ChapterInstrumentKind,
   type ChapterInstrumentUpdate,
 } from "@/lib/chapter-instruments";
 
@@ -37,6 +39,124 @@ function By({ img, children }: { img: ByImg; children: React.ReactNode }) {
   );
 }
 
+/* Phones: the four chapters as one swipeable story card (.lcm). */
+const MSLIDES: {
+  inst: ChapterInstrumentKind;
+  img: string;
+  em: string;
+  tab: string;
+  age: string;
+  chap: string;
+  h: string;
+  txt: string;
+  links: [string, string][];
+  who: "lakshmi" | "ashish" | "night";
+  byText: string;
+  ro: React.ReactNode;
+}[] = [
+  {
+    inst: "cycle",
+    img: "/images/chapters/ch1.jpg",
+    em: "13+",
+    tab: "Growing up",
+    age: "13+",
+    chap: "Chapter one, Growing up",
+    h: "Getting to know your body",
+    txt: "Periods that are too heavy, too painful or too irregular. A PCOS diagnosis that raises more questions than it answers. Dr. Lakshmi explains what your body is doing, then what can help.",
+    links: [
+      ["PCOS", "/pcos/"],
+      ["Heavy periods", "/heavy-periods/"],
+      ["Irregular periods", "/irregular-menstruation/"],
+      ["Fibroids", "/uterine-fibroids/"],
+    ],
+    who: "lakshmi",
+    byText: "With Dr. Lakshmi Kalbande",
+    ro: (
+      <>
+        <span>Day</span>
+        <b data-v="">1</b>
+        <i></i>
+        <span data-l="">Period</span>
+      </>
+    ),
+  },
+  {
+    inst: "weeks",
+    img: "/images/chapters/ch2.jpg",
+    em: "40 weeks",
+    tab: "Nine months",
+    age: "40",
+    chap: "Chapter two, Weeks of pregnancy",
+    h: "Nine months, one visit at a time",
+    txt: "Check-ups, scans and blood tests at the right weeks, with closer watch when a pregnancy needs it: twins, diabetes, high blood pressure or a history of loss.",
+    links: [
+      ["Pregnancy week by week", "/pregnancy-week-by-week/"],
+      ["High-risk pregnancy", "/high-risk-pregnancy/"],
+      ["Preeclampsia", "/preeclampsia-treatment/"],
+    ],
+    who: "lakshmi",
+    byText: "With Dr. Lakshmi Kalbande",
+    ro: (
+      <>
+        <span>Week</span>
+        <b data-v="">4</b>
+        <i></i>
+        <span data-l="">First trimester</span>
+      </>
+    ),
+  },
+  {
+    inst: "hour",
+    img: "/images/chapters/ch3.jpg",
+    em: "Day 1",
+    tab: "First breath",
+    age: "Day 1",
+    chap: "Chapter three, First breath",
+    h: "The day your baby arrives",
+    txt: "Normal birth, painless delivery with an epidural, or a caesarean when it is the safer way. The labour team is here day and night, and newborn care is in the same building.",
+    links: [
+      ["Normal delivery", "/normal-delivery/"],
+      ["Painless delivery", "/painless-delivery/"],
+      ["After birth", "/postnatal-care/"],
+    ],
+    who: "night",
+    byText: "With Dr. Lakshmi and the night team",
+    ro: (
+      <>
+        <span>Minute</span>
+        <b data-v="">0</b>
+        <i></i>
+        <span data-l="">First cry</span>
+      </>
+    ),
+  },
+  {
+    inst: "heart",
+    img: "/images/chapters/ch4.jpg",
+    em: "Always",
+    tab: "The heart",
+    age: "Always",
+    chap: "Chapter four, The heart",
+    h: "A heart for the years ahead",
+    txt: "Chest pain, breathlessness or a worrying ECG. Tests happen here, and when surgery is needed, Dr. Ashish explains every option, including keyhole heart surgery through a small cut in the side.",
+    links: [
+      ["Explore the heart map", "/heart-and-vascular-surgery/"],
+      ["Keyhole surgery", "/keyhole-heart-surgery/"],
+      ["Varicose veins", "/varicose-veins/"],
+    ],
+    who: "ashish",
+    byText: "With Dr. Ashish Baviskar",
+    ro: (
+      <>
+        <b>24</b>
+        <span>hours</span>
+        <i></i>
+        <span>Every day</span>
+      </>
+    ),
+  },
+];
+
 export function LifeChapters({
   lakshmiImg,
   ashishImg,
@@ -50,6 +170,16 @@ export function LifeChapters({
   const cntRef = useRef<HTMLSpanElement>(null);
   const lifeBRef = useRef<SVGPathElement>(null);
   const lifeFRef = useRef<SVGPathElement>(null);
+
+  /* phones: swipeable story card state */
+  const trackMRef = useRef<HTMLDivElement>(null);
+  const updMRef = useRef<ChapterInstrumentUpdate[]>([]);
+  const mActiveRef = useRef(0);
+  const holdRef = useRef(0);
+  const visRef = useRef(false);
+  const [mActive, setMActive] = useState(0);
+  const [mPaused, setMPaused] = useState(false);
+  const [mOpen, setMOpen] = useState<number | null>(null);
 
   useEffect(() => {
     const sec = secRef.current;
@@ -65,7 +195,7 @@ export function LifeChapters({
 
     /* instruments */
     const upd: ChapterInstrumentUpdate[] = [];
-    $$<SVGSVGElement>("[data-inst]").forEach((s) => {
+    $$<SVGSVGElement>(".lc-track [data-inst]").forEach((s) => {
       upd.push(
         buildChapterInstrument(
           s.getAttribute("data-inst") as Parameters<
@@ -75,6 +205,17 @@ export function LifeChapters({
         ),
       );
     });
+
+    /* phones: one instrument per swipe slide, driven by the active slide */
+    updMRef.current = $$<SVGSVGElement>(".lcm [data-minst]").map((s) =>
+      buildChapterInstrument(
+        s.getAttribute("data-minst") as Parameters<
+          typeof buildChapterInstrument
+        >[0],
+        s,
+      ),
+    );
+    updMRef.current.forEach((u) => u(0));
 
     /* lifeline */
     const dl = "M0 20H651l8-14 10 28 9-20 5 6H1000";
@@ -214,6 +355,89 @@ export function LifeChapters({
       else stacked.removeListener(onMode);
     };
   }, []);
+
+  /* phones: snap-track active slide, instrument drive, 7s auto-advance */
+  useEffect(() => {
+    const track = trackMRef.current;
+    if (!track) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const runInst = (i: number) => {
+      const u = updMRef.current[i];
+      if (!u) return;
+      if (reduce) {
+        u(REST[i]);
+        return;
+      }
+      const t0 = performance.now();
+      (function st(n: number) {
+        const k = Math.min(1, (n - t0) / 1600);
+        u(REST[i] * ease(k));
+        if (k < 1 && mActiveRef.current === i) requestAnimationFrame(st);
+      })(t0);
+    };
+
+    const setActive = (i: number) => {
+      if (i === mActiveRef.current) return;
+      mActiveRef.current = i;
+      setMActive(i);
+      runInst(i);
+    };
+
+    const onScroll = () => {
+      const w = track.clientWidth || 1;
+      setActive(Math.max(0, Math.min(3, Math.round(track.scrollLeft / w))));
+    };
+    track.addEventListener("scroll", onScroll, { passive: true });
+
+    /* user holds pause auto-advance for a while */
+    const hold = () => {
+      holdRef.current = Date.now() + 12000;
+    };
+    track.addEventListener("pointerdown", hold);
+    track.addEventListener("touchmove", hold, { passive: true });
+
+    /* run the first instrument once the card scrolls into view; keep
+       watching so auto-advance stops while it is off screen */
+    let ran = false;
+    const io = new IntersectionObserver(
+      (es) => {
+        visRef.current = es[0].isIntersecting;
+        if (visRef.current && !ran) {
+          ran = true;
+          runInst(mActiveRef.current);
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(track);
+
+    const id = setInterval(() => {
+      if (mPaused || reduce || !visRef.current) return;
+      if (document.hidden || Date.now() < holdRef.current) return;
+      const next = (mActiveRef.current + 1) % MSLIDES.length;
+      track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
+    }, 7000);
+
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      track.removeEventListener("pointerdown", hold);
+      track.removeEventListener("touchmove", hold);
+      io.disconnect();
+      clearInterval(id);
+    };
+  }, [mPaused]);
+
+  const goM = (i: number) => {
+    holdRef.current = Date.now() + 12000;
+    trackMRef.current?.scrollTo({
+      left: i * trackMRef.current.clientWidth,
+      behavior: "smooth",
+    });
+  };
+
+  const byFor = (who: "lakshmi" | "ashish" | "night") =>
+    who === "ashish" ? ashishImg : lakshmiImg;
 
   return (
     <section className="lc" ref={secRef} aria-labelledby="lc-h">
@@ -487,6 +711,97 @@ export function LifeChapters({
               The heart
             </a>
           </div>
+        </div>
+      </div>
+
+      {/* phones: one swipeable story card */}
+      <div className="lcm">
+        <div className="lcm-head">
+          <div>
+            <span className="tag">
+              <i></i>A life, in chapters
+            </span>
+            <h2>
+              Every chapter of a woman&apos;s life.{" "}
+              <span>And the heart that carries the family.</span>
+            </h2>
+          </div>
+          <button
+            className="lcpause"
+            type="button"
+            aria-label={mPaused ? "Play chapters" : "Pause chapters"}
+            aria-pressed={mPaused}
+            onClick={() => setMPaused((v) => !v)}
+          >
+            {mPaused ? <Play className="ico" /> : <Pause className="ico" />}
+          </button>
+        </div>
+        <div className="lcm-tabs" role="tablist" aria-label="Chapters">
+          {MSLIDES.map((s, i) => (
+            <button
+              key={s.inst}
+              type="button"
+              role="tab"
+              aria-selected={i === mActive}
+              aria-controls={`mch${i + 1}`}
+              className={`ltab${i === mActive ? " on" : ""}`}
+              onClick={() => goM(i)}
+            >
+              <Image src={s.img} alt="" width={56} height={56} />
+              <span>
+                <em>{s.em}</em>
+                {s.tab}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="lprog" aria-hidden="true">
+          <i style={{ transform: `scaleX(${(mActive + 1) / MSLIDES.length})` }}></i>
+        </div>
+        <div className="lctrack" ref={trackMRef}>
+          {MSLIDES.map((s, i) => (
+            <article
+              key={s.inst}
+              className={`lslide${i === mActive ? " on" : ""}`}
+              id={`mch${i + 1}`}
+              aria-label={`${s.chap}`}
+            >
+              <div className="stage" aria-hidden="true">
+                <Image
+                  className="ph"
+                  src={s.img}
+                  alt=""
+                  width={280}
+                  height={280}
+                  sizes="280px"
+                />
+                <svg viewBox="0 0 600 600" data-minst={s.inst}></svg>
+                <div className="ro">{s.ro}</div>
+              </div>
+              <p className="lage">
+                <b>{s.age}</b>
+                <span>{s.chap}</span>
+              </p>
+              <h3>{s.h}</h3>
+              <p className={`ltxt${mOpen === i ? " open" : ""}`}>{s.txt}</p>
+              <button
+                className="lmore"
+                type="button"
+                aria-expanded={mOpen === i}
+                onClick={() => setMOpen(mOpen === i ? null : i)}
+              >
+                {mOpen === i ? "Read less" : "Read more"}
+              </button>
+              <div className="links">
+                {s.links.map(([label, href]) => (
+                  <Link key={href} href={href}>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+              <By img={byFor(s.who)}>{s.byText}</By>
+            </article>
+          ))}
         </div>
       </div>
     </section>

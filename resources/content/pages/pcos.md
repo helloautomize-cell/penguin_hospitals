@@ -1,7 +1,7 @@
 ---
-title: PCOS treatment in Chinchwad | Polycystic ovary syndrome | Penguin Hospital
+title: PCOS treatment in Chinchwad | Penguin Hospital
 url: /pcos/
-description: Irregular periods, acne, extra hair, weight gain or trouble getting pregnant? How PCOS (now also called PMOS) is diagnosed and managed with Dr. Lakshmi Kalbande, Chinchwad.
+description: Irregular periods, acne, extra hair, weight gain or trouble getting pregnant? How PCOS (now also called PMOS) is diagnosed and managed with Dr.
 badge: pcos
 related: [irregular-menstruation, fertility-evaluation, heavy-periods]
 ---

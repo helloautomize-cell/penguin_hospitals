@@ -1,15 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, CalendarDays, Pause, Phone, Play } from "lucide-react";
 import { site } from "@/lib/site-config";
+import { Button } from "@/components/Button";
 
 const FRAMES = [
   {
     cls: "f1",
     src: "/images/hero/hero-mother-newborn.jpg",
     alt: "A mother holding her sleeping newborn by a sunlit window",
+    mf: "74% 38%",
     tag: "Pregnancy and birth",
     title: "A new life",
     text: "From the first scan to the first cuddle. Normal and painless delivery, with newborn care in the same building.",
@@ -19,6 +20,7 @@ const FRAMES = [
     cls: "f2",
     src: "/images/hero/heart-walk.jpg",
     alt: "An older couple laughing together on a morning walk",
+    mf: "64% 22%",
     tag: "Heart and vessels",
     title: "A strong heart",
     text: "Heart check-ups, keyhole heart surgery and vein care, so the morning walks keep going.",
@@ -28,6 +30,7 @@ const FRAMES = [
     cls: "f3",
     src: "/images/hero/night-corridor.jpg",
     alt: "A softly lit hospital corridor at night with a nurse on her rounds",
+    mf: "60% 50%",
     tag: "Emergency",
     title: "Every night",
     text: "The emergency team stays awake so you can rest. In a medical emergency, call 108 or 112 first.",
@@ -46,19 +49,37 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
   const [opd, setOpd] = useState("Chinchwad time");
   const filmRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const t0 = useRef(performance.now());
+  const t0 = useRef(0);
   const pausedRef = useRef(false);
   const curRef = useRef(0);
   const pAt = useRef(0);
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+
+  // Keep the pause button vertically centred on the h1 block on phones:
+  // --pty is the h1's centre relative to .film.
+  useEffect(() => {
+    const film = filmRef.current, h1 = h1Ref.current;
+    if (!film || !h1 || !("ResizeObserver" in window)) return;
+    const set = () => {
+      const fr = film.getBoundingClientRect(), hr = h1.getBoundingClientRect();
+      film.style.setProperty("--pty", `${Math.round(hr.top - fr.top + hr.height / 2)}px`);
+    };
+    const ro = new ResizeObserver(set);
+    ro.observe(h1);
+    ro.observe(film);
+    set();
+    return () => ro.disconnect();
+  }, []);
 
   const OPD: Record<number, [number, number]> = { 0: [16, 18], 1: [0, 24], 2: [0, 24], 3: [0, 24], 4: [0, 24], 5: [0, 24], 6: [0, 24] };
 
   useEffect(() => {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setPaused(true);
       pausedRef.current = true;
+      requestAnimationFrame(() => setPaused(true));
     }
+    t0.current = performance.now();
     let raf = 0;
     const loop = (now: number) => {
       if (!pausedRef.current) {
@@ -120,6 +141,7 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
     pAt.current = 0;
     setCur(i);
     setProgress(0);
+    // eslint-disable-next-line react-hooks/purity -- event handler, not render
     t0.current = performance.now();
   };
 
@@ -127,7 +149,11 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
     <section className="phs" id="hero" aria-label="Welcome" ref={heroRef}>
       <div className={`film${paused ? " paused" : ""}`} ref={filmRef}>
         {FRAMES.map((f, i) => (
-          <div className={`fr ${f.cls}${i === cur ? " on" : ""}`} key={f.cls}>
+          <div
+            className={`fr ${f.cls}${i === cur ? " on" : ""}`}
+            key={f.cls}
+            style={{ "--mf": f.mf } as React.CSSProperties}
+          >
             <img src={f.src} alt={f.alt} loading={i === 0 ? undefined : "lazy"} fetchPriority={i === 0 ? "high" : undefined} />
             <div className="grade"></div>
           </div>
@@ -138,10 +164,10 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
             <span className="dev">नमस्कार</span>
             <i></i>
             <span>
-              Chinchwad Gaon<span className="long">, Dr. Lakshmi's Penguin Hospital</span>
+              Chinchwad Gaon<span className="long">, Dr. Lakshmi&apos;s Penguin Hospital</span>
             </span>
           </p>
-          <h1 id="h1">
+          <h1 id="h1" ref={h1Ref}>
             <span className="ln">
               <span>Together</span>
             </span>
@@ -173,14 +199,14 @@ export function HeroFilm({ whoImgs }: { whoImgs?: [string, string] }) {
             ))}
           </div>
           <div className="ctas">
-            <Link className="btn btn-p" href="/book/">
+            <Button variant="primary" href="/book/" className="btn-p">
               <CalendarDays className="ico" aria-hidden="true" />
               Book a visit
-            </Link>
-            <a className="btn btn-g" href={`tel:${site.phone.tel}`}>
+            </Button>
+            <Button variant="glass" href={`tel:${site.phone.tel}`} className="btn-g">
               <Phone className="ico" aria-hidden="true" />
               {site.phone.nationalDisplay}
-            </a>
+            </Button>
           </div>
         </div>
 

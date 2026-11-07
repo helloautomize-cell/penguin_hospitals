@@ -125,7 +125,8 @@ function RelatedCards({ related, doc }: { related: string[]; doc: PageDoc }) {
   const items = related
     .map((r) => {
       const p = pages.find((x) => x.url === `/${r}/`);
-      return p ? { href: p.url, title: p.title.split("|")[0].trim(), text: p.description ?? "" } : null;
+      // hidden pages 404 in production: never link to them
+      return p && !p.hidden ? { href: p.url, title: p.title.split("|")[0].trim(), text: p.description ?? "" } : null;
     })
     .filter(Boolean) as { href: string; title: string; text: string }[];
   if (!items.length) return null;

@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { CalendarDays, Phone, TriangleAlert } from "lucide-react";
 import { whatsappLink } from "@/lib/whatsapp";
 import { site } from "@/lib/site-config";
 import { WhatsAppIcon } from "./icons";
+import { Button } from "./Button";
 
-const HERO_SEL = ".hhero,.v-hero,.a-hero,.d-hero,.chero,.phero,.dhero,.hero";
+const HERO_SEL = ".phs,.hhero,.v-hero,.a-hero,.d-hero,.chero,.phero,.dhero,.hero";
 const BLOCK_SEL = ".foot,.pct,.cta-band,.fcta";
 
 /** Floating glass dock (.mbar) under 767px; hides while the hero, the footer,
@@ -38,18 +38,35 @@ export function MobileActionBar() {
     }
     /* landscape phones: dock only ever appears on scroll-up */
     const land = matchMedia("(max-height: 500px) and (max-width: 920px)").matches;
-    let blocked = false; // hero, footer or CTA on screen
+    const hero = document.querySelector(HERO_SEL);
+    /* live check too: IO callbacks can lag a fast scroll-up */
+    const heroAboveDock = () =>
+      hero ? hero.getBoundingClientRect().bottom > innerHeight - 84 : false;
+    let heroBlocked = false, bandBlocked = false;
+    const blocked = () => heroBlocked || bandBlocked || heroAboveDock();
+    const update = () => {
+      if (blocked() || land) setHidden(true);
+      else setHidden(false);
+    };
+    /* the dock may only appear once the hero's bottom edge has passed the
+       top of the dock (~84px above the viewport bottom) */
     const io = new IntersectionObserver(
       (es) => {
-        blocked = es.some((e) => e.isIntersecting);
-        if (blocked || land) setHidden(true);
-        else setHidden(false);
+        heroBlocked = es.some((e) => e.isIntersecting);
+        update();
+      },
+      { threshold: 0, rootMargin: "0px 0px -84px 0px" },
+    );
+    if (hero) io.observe(hero);
+    /* footer / CTA bands hide it as soon as they peek into view */
+    const io2 = new IntersectionObserver(
+      (es) => {
+        bandBlocked = es.some((e) => e.isIntersecting);
+        update();
       },
       { threshold: 0.08 },
     );
-    const hero = document.querySelector(HERO_SEL);
-    if (hero) io.observe(hero);
-    document.querySelectorAll(BLOCK_SEL).forEach((el) => io.observe(el));
+    document.querySelectorAll(BLOCK_SEL).forEach((el) => io2.observe(el));
 
     let raf = 0;
     const onScroll = () => {
@@ -59,7 +76,7 @@ export function MobileActionBar() {
         const y = window.scrollY;
         const dy = y - lastY.current;
         lastY.current = y;
-        if (blocked) return; // IO controls visibility while hero/footer/CTA is up
+        if (blocked()) return; // IO controls visibility while hero/footer/CTA is up
         if (dy > 12) setHidden(true);
         else if (dy < -2) setHidden(false);
       });
@@ -68,12 +85,13 @@ export function MobileActionBar() {
 
     const mo = new MutationObserver(() => {
       if (document.body.dataset.menuOpen === "1") setHidden(true);
-      else if (!blocked) setHidden((h) => h); // keep current until scroll/hero says otherwise
+      else if (!blocked()) setHidden((h) => h); // keep current until scroll/hero says otherwise
     });
     mo.observe(document.body, { attributes: true, attributeFilter: ["data-menu-open"] });
 
     return () => {
       io.disconnect();
+      io2.disconnect();
       mo.disconnect();
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
@@ -87,24 +105,24 @@ export function MobileActionBar() {
   return (
     <nav className={`mbar${hidden ? " hide" : ""}`} aria-label="Quick actions">
       {emergency ? (
-        <a className="book sos" href="tel:108">
+        <Button variant="emergency" className="book sos" href="tel:108">
           <TriangleAlert className="ico" aria-hidden="true" />
           Call 108
-        </a>
+        </Button>
       ) : (
-        <Link className="book" href="/book/">
+        <Button variant="primary" className="book" href="/book/">
           <CalendarDays className="ico" aria-hidden="true" />
           Book a visit
-        </Link>
+        </Button>
       )}
-      <a className="call" href={`tel:${emergency ? site.phone.tel : site.phone.tel}`}>
+      <Button variant="glass" className="call" href={`tel:${site.phone.tel}`}>
         <Phone className="ico" aria-hidden="true" />
         Call
-      </a>
-      <a className="waa" href={whatsappLink("a visit")}>
+      </Button>
+      <Button variant="glass" className="waa" href={whatsappLink("a visit")}>
         <WhatsAppIcon className="ico" />
         WhatsApp
-      </a>
+      </Button>
     </nav>
   );
 }

@@ -1,7 +1,7 @@
 ---
-title: Pregnancy care in Chinchwad | Antenatal check-ups | Penguin Hospital
+title: Pregnancy care in Chinchwad | Penguin Hospital
 url: /pregnancy-care/
-description: Antenatal care with Dr. Lakshmi Kalbande in Chinchwad: check-ups, scans and tests at the right weeks, diet and exercise advice, and a birth plan. Same-building ultrasound and labour room.
+description: Antenatal care with Dr. Lakshmi Kalbande in Chinchwad: check-ups, scans and tests at the right weeks, diet and exercise advice, and a birth plan.
 badge: pregnancy
 related: [high-risk-pregnancy, pregnancy-week-by-week, normal-delivery, painless-delivery]
 ---

@@ -1,7 +1,7 @@
 ---
-title: Preeclampsia and high blood pressure in pregnancy | Penguin Hospital, Chinchwad
+title: Preeclampsia care in pregnancy | Penguin Hospital
 url: /preeclampsia-treatment/
-description: Signs of preeclampsia, who is at risk, how it is watched and treated, and when to come straight in. Care with Dr. Lakshmi Kalbande at Penguin Hospital, Chinchwad.
+description: Signs of preeclampsia, who is at risk, how it is watched and treated, and when to come straight in. Care with Dr.
 badge: blood-pressure
 related: [high-risk-pregnancy, pregnancy-care, caesarean-delivery]
 ---

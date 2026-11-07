@@ -1,7 +1,7 @@
 ---
 title: Penguin Hospital, Chinchwad | Pregnancy, women's health and heart surgery
 url: /
-description: Dr. Lakshmi's Penguin Hospital in Chinchwad Gaon, PCMC. Pregnancy and delivery, gynaecology and laparoscopy, and heart and vascular surgery. Emergency open day and night.
+description: Dr. Lakshmi's Penguin Hospital in Chinchwad Gaon, PCMC. Pregnancy and delivery, gynaecology and laparoscopy, and heart and vascular surgery.
 ---
 
 <!-- Home -->

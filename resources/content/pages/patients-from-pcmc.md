@@ -1,7 +1,7 @@
 ---
-title: Patients from Pimpri, Wakad, Nigdi and across PCMC | Penguin Hospital
+title: Patients from across PCMC | Penguin Hospital
 url: /patients-from-pcmc/
-description: Coming to Penguin Hospital from Pimpri, Nigdi, Akurdi, Ravet, Moshi, Wakad, Hinjawadi, Punawale or Tathawade? How to plan your visit and make the most of one trip.
+description: Coming to Penguin Hospital from Pimpri, Nigdi, Akurdi, Ravet, Moshi, Wakad, Hinjawadi, Punawale or Tathawade?
 ---
 
 <!-- Patients from across PCMC -->

@@ -1,5 +1,5 @@
 ---
-title: Appointment, cancellation and refund policy | Penguin Hospital
+title: Appointment and refund policy | Penguin Hospital
 url: /appointment-policy/
 ---
 

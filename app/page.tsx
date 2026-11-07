@@ -14,13 +14,14 @@ import { ChatFaq } from "@/components/ChatFaq";
 import { ConfirmChip } from "@/components/Tag";
 import { doctors } from "@/lib/doctors";
 import { doctorImage, doctorImageSrcFor } from "@/lib/doctor-images.server";
+import { pageGraph } from "@/lib/schema";
 import { DOCTOR_IMAGE_SLOTS } from "@/lib/doctor-images";
 import { site } from "@/lib/site-config";
 import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
-  title: "Penguin Hospital, Chinchwad | Pregnancy, women's health and heart surgery",
+  title: { absolute: "Penguin Hospital in Chinchwad | Together through life" },
   description:
     "Dr. Lakshmi's Penguin Hospital in Chinchwad Gaon, PCMC. Pregnancy and delivery, gynaecology and laparoscopy, and heart and vascular surgery. Emergency open day and night.",
   alternates: { canonical: "https://penguinhospitals.com/" },
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
 const FAQS = [
   {
     q: "Is the hospital open on Sundays?",
+    aText: "Yes. The OPD runs on Sundays from 4 to 6 pm, and the emergency team is here all day and night.",
     a: (
       <>
         Yes. The OPD runs on Sundays from 4 to 6 pm <ConfirmChip />, and the emergency team is here
@@ -50,24 +52,10 @@ const FAQS = [
   },
 ];
 
-const hospitalLd = {
-  "@context": "https://schema.org",
-  "@type": "Hospital",
-  name: "Dr. Lakshmi's Penguin Hospital",
-  url: "https://penguinhospitals.com/",
-  telephone: site.phone.display,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: `${site.address.line1}, ${site.address.line2}`,
-    addressLocality: site.address.city,
-    postalCode: site.address.postalCode,
-    addressCountry: "IN",
-  },
-  department: [
-    { "@type": "MedicalClinic", name: "Obstetrics and Gynaecology", url: "https://penguinhospitals.com/obstetrics-gynaecology/" },
-    { "@type": "MedicalClinic", name: "Cardiothoracic and Vascular Surgery", url: "https://penguinhospitals.com/heart-and-vascular-surgery/" },
-  ],
-};
+const homeLd = pageGraph(
+  { url: "/", title: "Penguin Hospital, Chinchwad" },
+  { faq: FAQS.map((f) => ({ q: f.q, a: ("aText" in f ? f.aText : f.a) as string })) },
+);
 
 export default function Home() {
   const lak = doctorImage("lakshmiHeadshot");
@@ -172,18 +160,7 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            hospitalLd,
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: FAQS.map((f) => ({
-                "@type": "Question",
-                name: f.q,
-                acceptedAnswer: { "@type": "Answer", text: "" },
-              })),
-            },
-          ]),
+          __html: JSON.stringify(homeLd),
         }}
       />
     </div>

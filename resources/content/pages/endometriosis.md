@@ -1,7 +1,7 @@
 ---
 title: Endometriosis treatment in Chinchwad | Penguin Hospital
 url: /endometriosis/
-description: Very painful periods, pain during sex or trouble conceiving can be endometriosis. Diagnosis, treatment and keyhole surgery with Dr. Lakshmi Kalbande, Chinchwad.
+description: Very painful periods, pain during sex or trouble conceiving can be endometriosis. Diagnosis, treatment and keyhole surgery with Dr.
 badge: endometriosis
 related: [ovarian-cysts, laparoscopic-surgery, fertility-evaluation]
 ---

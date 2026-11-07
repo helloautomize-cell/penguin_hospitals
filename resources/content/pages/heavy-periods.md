@@ -1,7 +1,7 @@
 ---
 title: Heavy periods treatment in Chinchwad | Penguin Hospital
 url: /heavy-periods/
-description: Soaking pads every hour, clots, or periods longer than 7 days? Causes of heavy menstrual bleeding and treatment options with Dr. Lakshmi Kalbande at Penguin Hospital.
+description: Soaking pads every hour, clots, or periods longer than 7 days? Causes of heavy menstrual bleeding and treatment options with Dr.
 badge: heavy-bleeding
 related: [uterine-fibroids, laparoscopic-surgery, irregular-menstruation]
 ---

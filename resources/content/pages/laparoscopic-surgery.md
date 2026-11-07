@@ -1,7 +1,7 @@
 ---
-title: Laparoscopic surgery for women in Chinchwad | Penguin Hospital
+title: Laparoscopic surgery, Chinchwad | Penguin Hospital
 url: /laparoscopic-surgery/
-description: Keyhole surgery for fibroids, cysts, endometriosis, hysterectomy and more, and hysteroscopy inside the womb, with Dr. Lakshmi Kalbande at Penguin Hospital, Chinchwad.
+description: Keyhole surgery for fibroids, cysts, endometriosis, hysterectomy and more, and hysteroscopy inside the womb, with Dr.
 badge: laparoscopy
 related: [uterine-fibroids, ovarian-cysts, endometriosis, heavy-periods]
 ---

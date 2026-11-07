@@ -1,7 +1,7 @@
 ---
-title: Fertility check-up in Chinchwad | Trying to conceive | Penguin Hospital
+title: Fertility check-up in Chinchwad | Penguin Hospital
 url: /fertility-evaluation/
-description: Trying for a baby for a while? The first fertility tests for both partners, ovulation tracking and IUI consultation with Dr. Lakshmi Kalbande, Penguin Hospital, Chinchwad.
+description: Trying for a baby for a while? The first fertility tests for both partners, ovulation tracking and IUI consultation with Dr.
 badge: fertility
 related: [pcos, endometriosis, uterine-fibroids, laparoscopic-surgery]
 ---

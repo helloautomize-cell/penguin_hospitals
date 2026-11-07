@@ -1,7 +1,7 @@
 ---
 title: Keyhole heart surgery (MICS) in Chinchwad | Penguin Hospital
 url: /keyhole-heart-surgery/
-description: Minimally invasive cardiac surgery through a small cut between the ribs, for valve, bypass and hole-in-the-heart operations. Who it suits and recovery. Dr. Ashish Baviskar, Chinchwad.
+description: Minimally invasive cardiac surgery through a small cut between the ribs, for valve, bypass and hole-in-the-heart operations. Who it suits and recovery. Dr.
 badge: mics
 related: [heart-valve-surgery, bypass-surgery, heart-check-up]
 ---

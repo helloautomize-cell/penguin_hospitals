@@ -433,7 +433,8 @@ export function HeartMap({ strip }: { strip?: ReactNode }) {
                 key={zone.z}
                 className="it"
                 aria-pressed={z === zone.z}
-                onClick={() => setZ(zone.z)}
+                aria-expanded={z === zone.z}
+                onClick={() => setZ(z === zone.z ? 0 : zone.z)}
               >
                 <span className="ic">
                   <ZoneIcon icon={zone.icon} />

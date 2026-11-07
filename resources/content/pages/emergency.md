@@ -1,7 +1,7 @@
 ---
 title: Emergency care, day and night | Penguin Hospital, Chinchwad
 url: /emergency/
-description: Penguin Hospital's emergency team in Chinchwad Gaon is here day and night, for labour, pregnancy emergencies and heart symptoms. In a medical emergency call 108 or 112.
+description: Penguin Hospital's emergency team in Chinchwad Gaon is here day and night, for labour, pregnancy emergencies and heart symptoms.
 ---
 
 <!-- Emergency care -->

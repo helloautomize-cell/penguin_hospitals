@@ -1,7 +1,7 @@
 ---
-title: Gynaecologist and obstetrician in Chinchwad | Penguin Hospital
+title: Obstetrics and gynaecology | Penguin Hospital
 url: /obstetrics-gynaecology/
-description: Pregnancy care, delivery, high-risk pregnancy, PCOS, period problems, fibroids, menopause and keyhole surgery with Dr. Lakshmi Kalbande at Penguin Hospital, Chinchwad.
+description: Pregnancy care, delivery, high-risk pregnancy, PCOS, period problems, fibroids, menopause and keyhole surgery with Dr.
 badge: obg
 ---
 

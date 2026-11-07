@@ -1,7 +1,7 @@
 ---
-title: Dr. Ashish Baviskar | Heart and vascular surgeon in Chinchwad
+title: Dr. Ashish Baviskar, heart surgeon | Penguin Hospital
 url: /doctors/dr-ashish-baviskar/
-description: Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon at Penguin Hospital, Chinchwad. Bypass and valve surgery, keyhole heart surgery, lung surgery and varicose veins.
+description: Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon at Penguin Hospital, Chinchwad.
 reviewer: Dr. Ashish A. Baviskar
 ---
 

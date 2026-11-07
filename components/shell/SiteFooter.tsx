@@ -6,6 +6,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 import { ConfirmChip } from "@/components/Tag";
 import { MapPin, Phone, ChevronDown } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons";
+import { Button } from "@/components/Button";
 
 /** Footer (.foot) from the approved preview; link groups are accordions on phones. */
 export function SiteFooter() {
@@ -30,18 +31,18 @@ export function SiteFooter() {
               {site.address.locality}, {site.address.city} {site.address.postalCode}
             </p>
             <div className="facts">
-              <a className="dir" href={site.googleMapsUrl} target="_blank" rel="noopener">
+              <Button variant="navy" className="dir" href={site.googleMapsUrl} target="_blank" rel="noopener">
                 <MapPin className="ico" aria-hidden="true" />
                 Directions
-              </a>
-              <a className="cal2" href={`tel:${site.phone.tel}`}>
+              </Button>
+              <Button variant="primary" className="cal2" href={`tel:${site.phone.tel}`}>
                 <Phone className="ico" aria-hidden="true" />
                 Call
-              </a>
-              <a className="wa2" href={whatsappLink("a visit")}>
+              </Button>
+              <Button variant="whatsapp" className="wa2" href={whatsappLink("a visit")}>
                 <WhatsAppIcon className="ico" />
                 WhatsApp
-              </a>
+              </Button>
             </div>
             <div className="hrs">
               <span>

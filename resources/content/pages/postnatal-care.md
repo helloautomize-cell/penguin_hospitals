@@ -1,7 +1,7 @@
 ---
 title: Postnatal care after delivery | Penguin Hospital, Chinchwad
 url: /postnatal-care/
-description: Recovery after a normal or caesarean birth, breastfeeding help, the six-week check, low mood after birth, and contraception. Postnatal care at Penguin Hospital, Chinchwad.
+description: Recovery after a normal or caesarean birth, breastfeeding help, the six-week check, low mood after birth, and contraception.
 badge: postnatal
 related: [normal-delivery, caesarean-delivery, newborn-care]
 ---

@@ -1,7 +1,7 @@
 ---
 title: About Penguin Hospital, Chinchwad
 url: /about/
-description: Why a family hospital in Chinchwad Gaon is named after a penguin, who runs it, and what the building holds: labour room, operation theatre, ultrasound and wards.
+description: Why a family hospital in Chinchwad Gaon is named after a penguin, who runs it, and what the building holds: labour room, operation theatre, ultrasound and
 reviewer: Dr. Lakshmi Vijay Kalbande
 ---
 

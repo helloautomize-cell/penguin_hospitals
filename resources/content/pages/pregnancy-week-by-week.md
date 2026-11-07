@@ -1,7 +1,7 @@
 ---
-title: Pregnancy week by week and due date calculator | Penguin Hospital
+title: Pregnancy week by week | Penguin Hospital
 url: /pregnancy-week-by-week/
-description: Find your due date and see what happens in each week of pregnancy: your baby's size, the scans and tests due, and what you might feel. Reviewed by Dr. Lakshmi Kalbande.
+description: Find your due date and see what happens in each week of pregnancy: your baby's size, the scans and tests due, and what you might feel. Reviewed by Dr.
 reviewer: Dr. Lakshmi Vijay Kalbande
 ---
 

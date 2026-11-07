@@ -1,7 +1,7 @@
 ---
 title: Irregular periods treatment in Chinchwad | Penguin Hospital
 url: /irregular-menstruation/
-description: Periods too early, too late, or missing? Common causes of irregular periods, when to see a gynaecologist, and how Dr. Lakshmi Kalbande finds the reason, Chinchwad.
+description: Periods too early, too late, or missing? Common causes of irregular periods, when to see a gynaecologist, and how Dr.
 badge: cycle
 related: [pcos, heavy-periods, menopause-care]
 ---

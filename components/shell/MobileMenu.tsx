@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, CalendarDays, Phone } from "lucide-react";
 import { womenGroups, heartGroups, sheetSoloLinks } from "@/lib/nav";
 import { site } from "@/lib/site-config";
+import { Button } from "@/components/Button";
 
 const womenLinks = [
   ...womenGroups[0].links,
@@ -103,7 +104,9 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       aria-hidden={!open}
     >
       <div className="top">
-        <Image src="/images/brand/logo-penguin-hospital.png" alt="Dr. Lakshmi's Penguin Hospital" width={70} height={44} />
+        <span className="mlchip">
+          <Image src="/images/brand/logo-penguin-hospital.png" alt="Dr. Lakshmi's Penguin Hospital" width={57} height={36} />
+        </span>
         <button className="x" type="button" aria-label="Close menu" onClick={close} ref={closeRef}>
           <span className="sr-only">Close menu</span>
         </button>
@@ -154,18 +157,21 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       </div>
       <div className="foot2">
         <div className="contactc">
-          <i aria-hidden="true" />
-          <span>{opd ? "OPD open now" : "OPD closed now"} · Emergency open, day and night</span>
+          <span className="l">
+            <i aria-hidden="true" />
+            {opd ? "OPD open now" : "OPD closed now"}
+          </span>
+          <span className="r">Emergency open day and night</span>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Link className="btn btn-coral" href="/book/" onClick={onClose}>
+        <div className="footbtns">
+          <Button variant="primary" size="lg" href="/book/" onClick={onClose}>
             <CalendarDays className="ico" aria-hidden="true" />
             Book
-          </Link>
-          <a className="btn btn-navy" href={`tel:${site.phone.tel}`}>
+          </Button>
+          <Button variant="glass" size="lg" href={`tel:${site.phone.tel}`}>
             <Phone className="ico" aria-hidden="true" />
             Call
-          </a>
+          </Button>
         </div>
       </div>
     </div>

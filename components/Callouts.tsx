@@ -7,6 +7,7 @@ import { doctorImageSrcFor } from "@/lib/doctor-images.server";
 import { doctorSlot } from "@/lib/doctor-images";
 import { FallbackFlag } from "./DoctorImage";
 import { WhatsAppIcon } from "./icons";
+import { Button } from "./Button";
 
 /** Emergency callout (.callem) inside prose. */
 export function EmergencyCallout({ children, items, title = "When to get help straight away." }: { children?: React.ReactNode; items?: string[]; title?: string }) {
@@ -91,18 +92,18 @@ export function CtaBand({
             </p>
           </div>
           <div className="ctas">
-            <a className="btn btn-coral" href="/book/">
+            <Button variant="primary" href="/book/">
               <CalendarDays className="ico" aria-hidden="true" />
               Book a visit
-            </a>
-            <a className="btn btn-glass" href={`tel:${site.phone.tel}`}>
+            </Button>
+            <Button variant="glass" href={`tel:${site.phone.tel}`}>
               <Phone className="ico" aria-hidden="true" />
               Call
-            </a>
-            <a className="btn btn-glass" href={whatsappLink("a visit")}>
+            </Button>
+            <Button variant="glass" href={whatsappLink("a visit")}>
               <WhatsAppIcon className="ico" />
               WhatsApp
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -138,12 +139,12 @@ export function DocBand({ doctorIndex = 0 }: { doctorIndex?: number }) {
           ))}
         </ul>
         <div className="ctas">
-          <a className="btn btn-navy" href={`/book/?doctor=${d.slug}`}>
+          <Button variant="navy" href={`/book/?doctor=${d.slug}`}>
             {d.bookingLabel}
-          </a>
-          <a className="btn btn-line" href={d.profileHref}>
+          </Button>
+          <Button variant="outline" href={d.profileHref}>
             Doctor profile
-          </a>
+          </Button>
         </div>
       </div>
     </div>

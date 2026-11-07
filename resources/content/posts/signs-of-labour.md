@@ -1,5 +1,5 @@
 ---
-title: Signs of labour, and when to come to hospital
+title: Signs of labour: when to come in | Penguin Hospital
 url: /health-library/signs-of-labour/
 author: Dr. Lakshmi Vijay Kalbande
 published: [launch date]

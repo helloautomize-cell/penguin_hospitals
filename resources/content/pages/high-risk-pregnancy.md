@@ -1,7 +1,7 @@
 ---
 title: High-risk pregnancy care in Chinchwad | Penguin Hospital
 url: /high-risk-pregnancy/
-description: Closer care for twins, diabetes, high blood pressure, thyroid problems, placenta previa or a past pregnancy loss, with Dr. Lakshmi Kalbande at Penguin Hospital, Chinchwad.
+description: Closer care for twins, diabetes, high blood pressure, thyroid problems, placenta previa or a past pregnancy loss, with Dr.
 badge: high-risk
 related: [preeclampsia-treatment, pregnancy-care, caesarean-delivery, emergency]
 ---

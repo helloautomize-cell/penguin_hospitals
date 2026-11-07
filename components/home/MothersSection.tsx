@@ -13,7 +13,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { FR, fruitForWeek } from "@/lib/pregnancy-weeks";
+import { fruitForWeek } from "@/lib/pregnancy-weeks";
 import { FruitSvg } from "@/components/fruits";
 import { lmpCalc, type LmpState } from "@/app/actions";
 
@@ -344,6 +344,29 @@ export function MothersSection() {
               </span>
             </div>
 
+            {/* phones only: readout + week slider directly under the dial */}
+            <div className="wsl">
+              <div className="eyb">
+                <span className="chip">{TRI[tri][3]}</span>
+                <span>
+                  Week <b>{week}</b> of 40
+                </span>
+              </div>
+              <input
+                className="wr"
+                type="range"
+                min={4}
+                max={40}
+                value={week}
+                onChange={(e) => {
+                  setWeek(+e.target.value);
+                  touch();
+                }}
+                style={{ "--p": `${tlPct}%` } as React.CSSProperties}
+                aria-label="Week of pregnancy"
+              />
+            </div>
+
             <div className="now" aria-live="polite">
               <div className="eyb">
                 <span className="chip">{TRI[tri][3]}</span>
@@ -416,7 +439,10 @@ export function MothersSection() {
                 <i style={{ width: "38.9%", background: "#FCDCCD" }}></i>
                 <i style={{ width: "33.3%", background: "#F8BDB6" }}></i>
               </div>
-              <div className="fill" style={{ width: `${tlPct}%` }}></div>
+              <div
+                className="fill"
+                style={{ "--tl": `${tlPct}%` } as React.CSSProperties}
+              ></div>
               {MS.map((m, i) => (
                 <button
                   key={m[0]}

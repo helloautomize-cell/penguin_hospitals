@@ -1,5 +1,5 @@
 ---
-title: Heart check-up in Chinchwad | ECG, echo, TMT | Penguin Hospital
+title: Heart check-up in Chinchwad | Penguin Hospital
 url: /heart-check-up/
 description: A heart check-up with ECG, 2D echo and stress test (TMT), reviewed by a heart specialist. Who needs one and what to expect. Penguin Hospital, Chinchwad.
 badge: heart-check

@@ -1,7 +1,7 @@
 ---
 title: Our doctors | Penguin Hospital, Chinchwad
 url: /doctors/
-description: Meet Dr. Lakshmi Vijay Kalbande, obstetrician and gynaecologist, and Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon, at Penguin Hospital, Chinchwad.
+description: Meet Dr. Lakshmi Vijay Kalbande, obstetrician and gynaecologist, and Dr. Ashish A. Baviskar, cardiothoracic and vascular surgeon, at Penguin Hospital
 ---
 
 <!-- Our doctors (hub) -->

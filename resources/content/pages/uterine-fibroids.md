@@ -1,7 +1,7 @@
 ---
-title: Fibroid treatment in Chinchwad | Uterine fibroids | Penguin Hospital
+title: Fibroid treatment in Chinchwad | Penguin Hospital
 url: /uterine-fibroids/
-description: What fibroids are, symptoms, when they need treatment, and options from medicines to laparoscopic removal. Fibroid care with Dr. Lakshmi Kalbande, Chinchwad.
+description: What fibroids are, symptoms, when they need treatment, and options from medicines to laparoscopic removal. Fibroid care with Dr.
 badge: fibroid
 related: [heavy-periods, laparoscopic-surgery, fertility-evaluation]
 ---

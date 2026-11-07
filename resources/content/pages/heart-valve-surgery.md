@@ -1,7 +1,7 @@
 ---
-title: Heart valve repair and replacement in Chinchwad | Penguin Hospital
+title: Heart valve surgery in Chinchwad | Penguin Hospital
 url: /heart-valve-surgery/
-description: Repair or replacement of narrowed or leaking heart valves, including mitral and aortic valves, tissue or mechanical. Dr. Ashish Baviskar, Penguin Hospital, Chinchwad.
+description: Repair or replacement of narrowed or leaking heart valves, including mitral and aortic valves, tissue or mechanical. Dr.
 badge: valve
 related: [keyhole-heart-surgery, heart-check-up, bypass-surgery]
 ---

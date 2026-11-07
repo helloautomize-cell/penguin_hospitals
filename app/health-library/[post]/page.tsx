@@ -14,6 +14,7 @@ import { WhatsAppIcon } from "@/components/icons";
 import { doctors } from "@/lib/doctors";
 import { site } from "@/lib/site-config";
 import { DoctorImg } from "@/components/DoctorImage";
+import { postGraph } from "@/lib/schema";
 
 export function generateStaticParams() {
   return allPosts().map((p) => ({ post: p.url.split("/").filter(Boolean).pop()! }));
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ post: str
     title: doc.title,
     description: doc.description,
     alternates: { canonical: `https://penguinhospitals.com${doc.url}` },
+    openGraph: { images: [{ url: `/og${doc.url}`, width: 1200, height: 630 }] },
   };
 }
 
@@ -65,6 +67,10 @@ export default async function PostPage({ params }: { params: Promise<{ post: str
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(postGraph(doc, d)) }}
+      />
       <section className="chero post-hero">
         <div className="wrap narrow">
           <Breadcrumbs

@@ -15,6 +15,7 @@ import {
   LegalTemplate,
 } from "@/components/templates/PageTemplate";
 import { doctors } from "@/lib/doctors";
+import { pageGraph } from "@/lib/schema";
 import { DoctorsPage } from "@/components/pages/DoctorsPage";
 import { AboutPage } from "@/components/pages/AboutPage";
 import { VisitPage } from "@/components/pages/VisitPage";
@@ -30,12 +31,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const url = "/" + (slug ?? []).join("/") + "/";
   const doc = getPage(url);
   if (!doc) return {};
+  // Content titles already end with "| Penguin Hospital"; strip so the
+  // root template does not append the brand a second time.
+  const title = doc.title.replace(/\s*\|\s*Penguin Hospital\s*$/, "");
   return {
-    title: doc.title,
+    title,
     description: doc.description,
     robots: doc.url === "/thank-you/" ? { index: false } : undefined,
     alternates: { canonical: `https://penguinhospitals.com${doc.url}` },
-    openGraph: { title: doc.title, description: doc.description, url: `https://penguinhospitals.com${doc.url}`, locale: "en_IN" },
+    openGraph: {
+      title,
+      description: doc.description,
+      url: `https://penguinhospitals.com${doc.url}`,
+      locale: "en_IN",
+      images: [{ url: `/og${doc.url === "/" ? "/" : doc.url}`, width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -50,15 +60,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
 
   const docSlug = url.includes("dr-lakshmi") ? doctors[0] : url.includes("dr-ashish") ? doctors[1] : undefined;
   const isMedical = !["legal", "thankyou", "form"].includes(templateFor(url));
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": docSlug ? "Physician" : "MedicalWebPage",
-    name: doc.title,
-    url: `https://penguinhospitals.com${doc.url}`,
-    ...(doc.reviewer ? { reviewedBy: { "@type": "Physician", name: doc.reviewer } } : {}),
-    ...(doc.lastReviewed ? { lastReviewed: doc.lastReviewed } : {}),
-    ...(docSlug ? { medicalSpecialty: docSlug.role } : {}),
-  };
+  const jsonLd = pageGraph(doc, { physician: docSlug });
 
   const tpl = templateFor(url);
   let el: React.ReactNode;

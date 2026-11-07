@@ -25,14 +25,23 @@ const devanagari = Noto_Sans_Devanagari({
   display: "swap",
 });
 
+const INDEXABLE = process.env.SITE_INDEXABLE === "true" && process.env.VERCEL_ENV !== "preview";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://penguinhospitals.com"),
   title: {
     default: "Penguin Hospital, Chinchwad",
     template: "%s | Penguin Hospital",
   },
   description:
     "Dr. Lakshmi's Penguin Hospital in Chinchwad Gaon, PCMC. Pregnancy and delivery, gynaecology and laparoscopy, and heart and vascular surgery. Emergency open day and night.",
-  robots: { index: false, follow: false }, // SITE_INDEXABLE switch: noindex until launch
+  openGraph: {
+    siteName: "Dr. Lakshmi's Penguin Hospital",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
+  robots: INDEXABLE ? undefined : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

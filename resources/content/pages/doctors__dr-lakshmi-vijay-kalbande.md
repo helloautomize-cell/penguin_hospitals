@@ -1,7 +1,7 @@
 ---
-title: Dr. Lakshmi Vijay Kalbande | Gynaecologist in Chinchwad
+title: Dr. Lakshmi Kalbande, gynaecologist | Penguin Hospital
 url: /doctors/dr-lakshmi-vijay-kalbande/
-description: Dr. Lakshmi Vijay Kalbande, obstetrician, gynaecologist and laparoscopic surgeon at Penguin Hospital, Chinchwad. Pregnancy, high-risk pregnancy, PCOS, fibroids and menopause.
+description: Dr. Lakshmi Vijay Kalbande, obstetrician, gynaecologist and laparoscopic surgeon at Penguin Hospital, Chinchwad.
 reviewer: Dr. Lakshmi Vijay Kalbande
 ---
 

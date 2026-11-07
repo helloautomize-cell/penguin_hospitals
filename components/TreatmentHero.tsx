@@ -13,6 +13,7 @@ import { doctorFor, whatsappTopic } from "@/lib/booking-context";
 import { site } from "@/lib/site-config";
 import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
+import { Button } from "@/components/Button";
 
 function crumbsFor(url: string) {
   const parts = url.split("/").filter(Boolean);
@@ -80,14 +81,14 @@ export function TreatmentHero({ doc, h1, intro }: { doc: PageDoc; h1: string; in
                 <h1>{title}</h1>
                 <p className="intro">{intro}</p>
                 <div className="ctas">
-                  <Link className="btn btn-coral" href={`/book/?doctor=${d.slug}`}>
+                  <Button variant="primary" href={`/book/?doctor=${d.slug}`}>
                     <CalendarDays className="ico" aria-hidden="true" />
                     Book with {d.name.split(" ")[1]}
-                  </Link>
-                  <a className="btn btn-glass" href={`tel:${site.phone.tel}`}>
+                  </Button>
+                  <Button variant="glass" href={`tel:${site.phone.tel}`}>
                     <Phone className="ico" aria-hidden="true" />
                     {site.phone.nationalDisplay}
-                  </a>
+                  </Button>
                 </div>
               </div>
               <LedByCard d={d} />
@@ -115,14 +116,14 @@ export function TreatmentHero({ doc, h1, intro }: { doc: PageDoc; h1: string; in
             <h1>{title}</h1>
             <p className="intro">{intro}</p>
             <div className="ctas">
-              <Link className="btn btn-coral" href={`/book/?doctor=${d.slug}`}>
+              <Button variant="primary" href={`/book/?doctor=${d.slug}`}>
                 <CalendarDays className="ico" aria-hidden="true" />
                 {d.bookingLabel}
-              </Link>
-              <a className="btn btn-glass" href={whatsappLink(whatsappTopic(doc.url))}>
+              </Button>
+              <Button variant="glass" href={whatsappLink(whatsappTopic(doc.url))}>
                 <WhatsAppIcon className="ico" />
                 WhatsApp
-              </a>
+              </Button>
             </div>
             <div className="meta">
               <span>

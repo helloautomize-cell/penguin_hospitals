@@ -1,5 +1,5 @@
 ---
-title: Caesarean section (C-section) in Chinchwad | Penguin Hospital
+title: Caesarean delivery in Chinchwad | Penguin Hospital
 url: /caesarean-delivery/
 description: When a caesarean is advised, what happens before, during and after, and how recovery goes. Planned and emergency C-sections at Penguin Hospital, Chinchwad.
 badge: caesarean

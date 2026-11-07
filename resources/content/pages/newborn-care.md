@@ -1,7 +1,7 @@
 ---
 title: Newborn care at birth | Penguin Hospital, Chinchwad
 url: /newborn-care/
-description: How your baby is cared for in the first hours and days at Penguin Hospital: the newborn warming station, first checks, feeding support, vaccines and when to call us.
+description: How your baby is cared for in the first hours and days at Penguin Hospital: the newborn warming station, first checks, feeding support, vaccines and when
 reviewer: [CONFIRM: paediatrician name] or Dr. Lakshmi Vijay Kalbande
 hidden: true
 related: [postnatal-care, normal-delivery, caesarean-delivery]

@@ -1,7 +1,7 @@
 ---
-title: Peripheral artery disease treatment in Chinchwad | Penguin Hospital
+title: Peripheral artery disease | Penguin Hospital
 url: /peripheral-artery-disease/
-description: Leg pain on walking, cold feet or wounds that do not heal can mean blocked leg arteries. Diagnosis and treatment with vascular surgeon Dr. Ashish Baviskar, Chinchwad.
+description: Leg pain on walking, cold feet or wounds that do not heal can mean blocked leg arteries. Diagnosis and treatment with vascular surgeon Dr.
 badge: arteries
 related: [varicose-veins, heart-check-up, bypass-surgery]
 ---

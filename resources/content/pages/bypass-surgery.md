@@ -1,7 +1,7 @@
 ---
 title: Bypass surgery (CABG) in Chinchwad | Penguin Hospital
 url: /bypass-surgery/
-description: Coronary artery bypass surgery for blocked heart arteries: when it is advised, on-pump and beating-heart options, and recovery. Dr. Ashish Baviskar, Penguin Hospital, Chinchwad.
+description: Coronary artery bypass surgery for blocked heart arteries: when it is advised, on-pump and beating-heart options, and recovery. Dr.
 badge: cabg
 related: [heart-check-up, keyhole-heart-surgery, heart-valve-surgery]
 ---

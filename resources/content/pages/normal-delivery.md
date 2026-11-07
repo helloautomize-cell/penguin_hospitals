@@ -1,7 +1,7 @@
 ---
 title: Normal delivery in Chinchwad | Penguin Hospital
 url: /normal-delivery/
-description: Support for a safe normal (vaginal) birth at Penguin Hospital, Chinchwad: what labour looks like, pain relief, the labour room, and care for you and your newborn.
+description: Support for a safe normal (vaginal) birth at Penguin Hospital, Chinchwad: what labour looks like, pain relief, the labour room, and care for you and your
 badge: birth
 related: [painless-delivery, caesarean-delivery, postnatal-care, pregnancy-care]
 ---

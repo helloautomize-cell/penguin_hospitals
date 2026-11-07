@@ -1,5 +1,5 @@
 ---
-title: Painless delivery with epidural in Chinchwad | Penguin Hospital
+title: Painless delivery in Chinchwad | Penguin Hospital
 url: /painless-delivery/
 description: What "painless delivery" means, how an epidural works, who can have one, and what it feels like. Labour pain relief at Penguin Hospital, Chinchwad.
 badge: epidural

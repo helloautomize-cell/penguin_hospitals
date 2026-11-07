@@ -1,5 +1,5 @@
 ---
-title: Lung and chest surgery in Chinchwad | Thoracic surgery | Penguin Hospital
+title: Lung and chest surgery | Penguin Hospital
 url: /lung-and-chest-surgery/
 description: Surgery for lung growths, fluid or pus around the lung, air leaks, and chest injuries. Thoracic surgeon Dr. Ashish Baviskar at Penguin Hospital, Chinchwad.
 badge: lungs

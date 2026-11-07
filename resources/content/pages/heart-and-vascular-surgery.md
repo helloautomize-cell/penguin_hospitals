@@ -1,7 +1,7 @@
 ---
 title: Heart and vascular surgeon in Chinchwad | Penguin Hospital
 url: /heart-and-vascular-surgery/
-description: Heart check-ups, keyhole heart surgery, bypass and valve surgery, lung surgery, varicose veins and leg arteries with Dr. Ashish Baviskar, CTVS surgeon, Penguin Hospital, Chinchwad.
+description: Heart check-ups, keyhole heart surgery, bypass and valve surgery, lung surgery, varicose veins and leg arteries with Dr.
 badge: heart
 ---
 

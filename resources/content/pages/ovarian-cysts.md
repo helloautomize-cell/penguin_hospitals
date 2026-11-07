@@ -1,7 +1,7 @@
 ---
 title: Ovarian cyst treatment in Chinchwad | Penguin Hospital
 url: /ovarian-cysts/
-description: Found a cyst on your ovary? Which cysts are harmless, which need follow-up, and when keyhole surgery helps. Ovarian cyst care with Dr. Lakshmi Kalbande, Chinchwad.
+description: Found a cyst on your ovary? Which cysts are harmless, which need follow-up, and when keyhole surgery helps. Ovarian cyst care with Dr.
 badge: ovary
 related: [endometriosis, laparoscopic-surgery, pcos]
 ---
