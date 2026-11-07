@@ -30,6 +30,7 @@ const TOP = 78;
 /** Interactive building: tap a floor to look inside (reference buildTower/showRoom). */
 export function BuildingTour() {
   const [ix, setIx] = useState(5);
+  const [mOpen, setMOpen] = useState(5);
   const [fading, setFading] = useState(false);
   const userRef = useRef(false);
   const fadeT = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -105,6 +106,53 @@ export function BuildingTour() {
           })}
           <rect x="10" y="526" width="340" height="6" rx="3" fill="#2A5BA8" />
         </svg>
+      </div>
+      <div className="bldm" role="list">
+        {ROOMS.map((room, i) => (
+          <div key={room.k}>
+            <button
+              type="button"
+              className="brow"
+              aria-expanded={i === mOpen}
+              onClick={() => {
+                userRef.current = true;
+                setMOpen((o) => (o === i ? -1 : i));
+                pick(i);
+              }}
+            >
+              {room.n}
+              <svg className="chev" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            {i === mOpen && (
+              <div className="bview">
+                <figure>
+                  <Image
+                    src={roomSrc(room.img)}
+                    alt={room.n}
+                    fill
+                    sizes="100vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <span className="real">Real photo</span>
+                </figure>
+                <div className="cap">
+                  <b>{room.n}</b>
+                  <p>
+                    {room.t}
+                    {room.c && (
+                      <>
+                        {" "}
+                        <span className="confirm">CONFIRM room types, beds</span>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
       <div>
         <div className="roomview">

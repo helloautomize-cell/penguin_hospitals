@@ -20,6 +20,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import { TreatmentHero } from "@/components/TreatmentHero";
+import { ProseFx } from "@/components/pages/ProseFx";
 import { treatmentHeroes } from "@/lib/treatment-heroes";
 import { allPages } from "@/lib/content";
 
@@ -231,6 +232,16 @@ function Prose({ blocks }: { blocks: Block[] }) {
           <div className="callem" role="note" key={i}>
             <TriangleAlert className="ico" aria-hidden="true" />
             <p>{b.nodes}</p>
+            <div className="calbtns">
+              <a className="c108" href="tel:108">
+                <Phone className="ico" aria-hidden="true" />
+                Call 108
+              </a>
+              <a className="chosp" href={`tel:${site.phone.tel}`}>
+                <Phone className="ico" aria-hidden="true" />
+                Call the hospital
+              </a>
+            </div>
           </div>,
         );
         break;
@@ -271,23 +282,49 @@ function Prose({ blocks }: { blocks: Block[] }) {
           </section>,
         );
         break;
-      case "facts":
+      case "facts": {
         close();
+        const factMedia = (f: string): { img: string; t: string } =>
+          /ultrasound|scan/i.test(f)
+            ? { img: "real-ultrasound", t: "Ultrasound" }
+            : /labour|newborn/i.test(f)
+              ? { img: "real-labour-room", t: "Labour room" }
+              : /theatre|surgery|keyhole|operation|mics/i.test(f)
+                ? { img: "real-operation-theatre", t: "Operation theatre" }
+                : { img: "real-reception", t: "Reception" };
         out.push(
           <section className="sec tight" key={i}>
             <div className="wrap">
               <div className="facts rv">
-                {b.items.map((f) => (
-                  <div key={f}>
-                    <Plus className="ico" aria-hidden="true" />
-                    <b>{f}</b>
-                  </div>
-                ))}
+                {b.items.map((f) => {
+                  const m = factMedia(f);
+                  return (
+                    <label className="fac" key={f}>
+                      <input type="checkbox" className="ftog" aria-label={`Details: ${f}`} />
+                      <span className="fflip" aria-hidden="true">
+                        <span className="fface ffront">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={`/images/real/${m.img}.jpg`} alt="" loading="lazy" />
+                          <i className="fgrad" />
+                          <b>{m.t}</b>
+                        </span>
+                        <span className="fface fback">
+                          <span>{f}</span>
+                        </span>
+                      </span>
+                      <span className="frow">
+                        <Plus className="ico" aria-hidden="true" />
+                        <b>{f}</b>
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
             </div>
           </section>,
         );
         break;
+      }
       case "chips":
         put(
           <div className="chips" key={i}>
@@ -345,6 +382,7 @@ export function PageTemplate({ doc }: { doc: PageDoc }) {
 
   return (
     <article>
+      <ProseFx />
       {doc.hidden ? <HiddenBanner /> : null}
       <TreatmentHero doc={doc} h1={h1} intro={intro} />
       <section className="sec white" style={{ paddingTop: "clamp(48px,6vw,80px)" }}>
@@ -394,6 +432,7 @@ export function HubTemplate({ doc }: { doc: PageDoc }) {
 
   return (
     <article>
+      <ProseFx />
       {treatmentHeroes[doc.url] ? (
         <TreatmentHero doc={doc} h1={h1} intro={intro} />
       ) : (
@@ -678,6 +717,7 @@ export function EmergencyTemplate({ doc }: { doc: PageDoc }) {
     <article className="em-page">
       <div className="ebar">
         Medical emergency? Call <a href="tel:108">108</a> or <a href="tel:112">112</a> first.
+        <a className="ecover" href="tel:108" aria-label="Call 108"></a>
       </div>
       <section className="phero">
         <div className="wrap">
@@ -738,12 +778,18 @@ export function EmergencyTemplate({ doc }: { doc: PageDoc }) {
           <div className="signs">
             {signs.map((s, i) => (
               <article className="sign rv" key={s.t} style={{ "--d": `${i * 0.06}s` } as React.CSSProperties}>
-                <header>
-                  <span className="badge badge-sm" aria-hidden="true" style={{ width: 52, height: 52 }}>
-                    <Icon name={s.icon} size={26} />
-                  </span>
-                  <h3>{s.t}</h3>
-                </header>
+                <input type="checkbox" className="stog" id={`stog-${i}`} defaultChecked={i === 0} />
+                <label className="slab" htmlFor={`stog-${i}`}>
+                  <header>
+                    <span className="badge badge-sm" aria-hidden="true" style={{ width: 52, height: 52 }}>
+                      <Icon name={s.icon} size={26} />
+                    </span>
+                    <h3>{s.t}</h3>
+                    <svg className="schev" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </header>
+                </label>
                 <ul>
                   {s.items.map((x) => (
                     <li key={x}>{x}</li>

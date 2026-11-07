@@ -8,6 +8,8 @@ export function WeekTool({ initial }: { initial?: number }) {
   const [week, setWeek] = useState(() =>
     initial ? Math.max(MIN_WEEK, Math.min(MAX_WEEK, Math.round(initial))) : 20,
   );
+  const [lmp, setLmp] = useState("");
+  const [showDate, setShowDate] = useState(false);
   const [lmpOut, setLmpOut] = useState<React.ReactNode | null>(null);
   const info = weekInfo(week);
   const tri = week < 14 ? "first" : week < 28 ? "second" : "third";
@@ -27,19 +29,45 @@ export function WeekTool({ initial }: { initial?: number }) {
     setWeek(Math.max(MIN_WEEK, Math.min(MAX_WEEK, wk)));
   };
 
+  const ago = (wks: number) => {
+    const d = new Date(Date.now() - wks * 7 * 864e5);
+    const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    setLmp(iso);
+    calc(iso);
+  };
+
   const stageWeeks = [[4, 7], [8, 11], [12, 14], [15, 19], [20, 23], [24, 28], [29, 34], [35, 40]];
 
   return (
     <div className="tool">
       <div className="lmp">
         <label htmlFor="tool-lmp">First day of your last period</label>
-        <div className="row">
-          <input type="date" id="tool-lmp" />
+        <p className="lmphint">How many weeks ago was it?</p>
+        <div className="lmpchips" role="group" aria-label="Weeks since your last period">
+          {[4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 36, 40].map((w) => (
+            <button type="button" className="lmpchip" key={w} onClick={() => ago(w)}>
+              {w}
+              <small>wks ago</small>
+            </button>
+          ))}
+        </div>
+        {!showDate && (
+          <button type="button" className="falt" onClick={() => setShowDate(true)}>
+            Pick the exact date
+          </button>
+        )}
+        <div className={`row${showDate ? "" : " lmpalt"}`}>
+          <input
+            type="date"
+            id="tool-lmp"
+            value={lmp}
+            onChange={(e) => setLmp(e.target.value)}
+          />
           <button
             className="btn btn-navy"
             type="button"
             style={{ minHeight: 54 }}
-            onClick={() => calc((document.getElementById("tool-lmp") as HTMLInputElement).value)}
+            onClick={() => calc(lmp)}
           >
             Work it out
           </button>

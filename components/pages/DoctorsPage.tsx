@@ -243,7 +243,7 @@ export function DoctorsPage() {
                 </p>
               </div>
               <p className="intro prv">
-                The &ldquo;Lakshmi&rdquo; in our name. She looks after women from their first period
+                Our founder. She looks after women from their first period
                 problems through pregnancy, birth and menopause, and reads many scans herself, so
                 you hear what they show in the same visit.
               </p>

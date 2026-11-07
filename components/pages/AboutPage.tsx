@@ -275,7 +275,7 @@ export function AboutPage() {
             <ol>
               {STORY.map((s) => (
                 <li key={s.b} className={s.now ? "now" : ""}>
-                  <div className="yr">
+                  <div className={`yr${s.yr === "20__" ? " tbc" : ""}`} aria-hidden={s.yr === "20__"}>
                     {s.yr === "20__" ? (
                       <>
                         20<span style={{ opacity: 0.35 }}>__</span>

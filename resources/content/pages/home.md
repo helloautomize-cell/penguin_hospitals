@@ -47,7 +47,7 @@ Beyond the heart: Varicose veins · Leg artery disease · AV fistula for dialysi
 ### Meet your doctors
 H2: Two names on the door. The same two in the room.
 Lede: You see your specialist yourself, from the first visit to the follow-up.
-- **Dr. Lakshmi Vijay Kalbande.** Obstetrician and gynaecologist, laparoscopic surgeon, founder. MBBS, DNB (Obstetrics and Gynaecology), Fellowship in Gynaecological and Obstetric Ultrasound. Margin note: *the "Lakshmi" in our name.* Three principles: Every high-risk pregnancy gets its own plan. Normal and painless birth discussed first, when safe. Keyhole surgery only when it is the right step. [Book with Dr. Lakshmi]
+- **Dr. Lakshmi Vijay Kalbande.** Obstetrician and gynaecologist, laparoscopic surgeon, founder. MBBS, DNB (Obstetrics and Gynaecology), Fellowship in Gynaecological and Obstetric Ultrasound. Margin note: *Our founder.* Three principles: Every high-risk pregnancy gets its own plan. Normal and painless birth discussed first, when safe. Keyhole surgery only when it is the right step. [Book with Dr. Lakshmi]
 - **Dr. Ashish A. Baviskar.** Cardiothoracic and vascular surgeon. MBBS, MS (General Surgery), MCh (CTVS). More than 15 years of surgical practice in hospitals across India. Margin note: *does keyhole heart surgery.* Three principles: Tests and a clear explanation before any decision. Keyhole surgery offered when it suits you. Your family is part of every conversation. [Book with Dr. Ashish]
 
 ### Visit

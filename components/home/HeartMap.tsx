@@ -420,6 +420,14 @@ export function HeartMap({ strip }: { strip?: ReactNode }) {
           </div>
 
           <div className="list">
+            <button
+              type="button"
+              className="itx"
+              aria-label="Close"
+              onClick={() => setZ(0)}
+            >
+              ×
+            </button>
             {ZONES.map((zone) => (
               <button
                 key={zone.z}

@@ -15,6 +15,17 @@ const RATIO_MAX: Partial<Record<DoctorSlotRatio, number>> = {
 /** Fixed header offset for anchor scrolling (same as .prose section). */
 const HEADER_OFFSET = "110px";
 
+/** Default `sizes` per slot kind — Hero/Cutout photos render ~460-600px wide,
+ *  Headshot chips ~56px. Wrong sizes make the browser fetch a tiny variant
+ *  and stretch it (blurry heroes). */
+const SIZES_BY_KIND: Record<DoctorSlotKind, string> = {
+  Headshot: "56px",
+  Hero: "(max-width: 767px) 92vw, 580px",
+  Cutout: "(max-width: 900px) 88vw, 560px",
+  Consult: "(max-width: 900px) 88vw, 900px",
+  Note: "(max-width: 900px) 60vw, 480px",
+};
+
 /** Drop-in replacement for an existing <img> spot (chips, cards, heroes).
  *  Resolves to public/images/doctors/<file> when present, else the slot's
  *  fallback, else renders nothing. DOM shape stays a bare <img>. Pass `slot`
@@ -24,24 +35,26 @@ export function DoctorImg({
   who,
   kind = "Headshot",
   className,
+  sizes,
 }: {
   slot?: DoctorSlotId;
   who?: string;
   kind?: DoctorSlotKind;
   className?: string;
+  sizes?: string;
 }) {
   const s = slot ?? (who ? doctorSlot(who, kind) : null);
   if (!s) return null;
   const v = doctorImage(s);
   if (v.kind !== "single") return null;
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <Image
       src={v.src}
       alt={v.alt}
       className={className}
-      loading="lazy"
-      decoding="async"
+      width={64}
+      height={64}
+      sizes={sizes ?? SIZES_BY_KIND[kind]}
       style={v.objectPosition ? { objectPosition: v.objectPosition } : undefined}
     />
   );

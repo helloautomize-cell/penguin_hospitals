@@ -34,6 +34,8 @@ function prog(el: HTMLElement): number {
 /** Pinned "one doctor, start to finish" journey scene (scroll-driven). */
 export function JourneyScene() {
   const secRef = useRef<HTMLElement>(null);
+  const stickRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
   const jphRef = useRef<HTMLDivElement>(null);
   const knobRef = useRef<HTMLElement>(null);
   const btnL = useRef<HTMLButtonElement>(null);
@@ -43,6 +45,7 @@ export function JourneyScene() {
   const [jp, setJp] = useState(0);
   const [fading, setFading] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [tall, setTall] = useState(false);
   const fadeT = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const moveKnob = useCallback(() => {
@@ -68,7 +71,13 @@ export function JourneyScene() {
       if (!sec || window.innerWidth <= 860) return;
       const p = prog(sec);
       setJp(p);
-      setStep(Math.min(3, Math.floor(p * 4)));
+      setStep(Math.min(3, Math.floor(p * 4.6)));
+    };
+    const measure = () => {
+      const left = leftRef.current;
+      const stick = stickRef.current;
+      if (!left || !stick || window.innerWidth <= 860) return;
+      setTall(left.scrollHeight > stick.clientHeight);
     };
     const handler = () => {
       if (!raf) raf = requestAnimationFrame(() => {
@@ -86,7 +95,9 @@ export function JourneyScene() {
     const onResize = () => {
       onScroll();
       moveKnob();
+      measure();
     };
+    measure();
     window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(init);
@@ -113,14 +124,25 @@ export function JourneyScene() {
   const steps = JOURNEYS[doc];
   const capStep = steps[Math.min(Math.max(step, 0), steps.length - 1)];
 
+  const head = (
+    <>
+      <p className="kicker">One doctor, start to finish</p>
+      <h2 style={{ marginTop: 12, maxWidth: "14ch" }}>
+        The doctor you meet is the doctor who stays.
+      </h2>
+    </>
+  );
+
   return (
-    <section className="journey night" id="journey" ref={secRef}>
-      <div className="stick wrap">
-        <div>
-          <p className="kicker">One doctor, start to finish</p>
-          <h2 style={{ marginTop: 12, maxWidth: "14ch" }}>
-            The doctor you meet is the doctor who stays.
-          </h2>
+    <section
+      className={`journey night${tall ? " jtall" : ""}`}
+      id="journey"
+      ref={secRef}
+    >
+      {tall && <div className="wrap jhead">{head}</div>}
+      <div className="stick wrap" ref={stickRef}>
+        <div ref={leftRef}>
+          {!tall && head}
           <div className="jtoggle" role="group" aria-label="Choose doctor">
             <span className="knob" ref={knobRef}></span>
             <button

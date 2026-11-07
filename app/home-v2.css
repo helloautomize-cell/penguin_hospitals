@@ -365,3 +365,11 @@
   .home .dclose .dclose-ph img{object-position:55% 15%}
   .home .dclose-tx{padding:24px}
 }
+
+/* landscape phones: unpin the life-chapters filmstrip */
+@media(max-height:500px){
+  .home .lc{height:auto}
+  .home .lc-pin{position:static;height:auto;overflow:visible}
+  .home .lc-track{transform:none!important;flex-wrap:wrap;width:100%}
+  .home .lc .pnl{width:100%;min-height:auto;padding:48px 24px}
+}

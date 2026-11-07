@@ -403,7 +403,7 @@ export function LifeChapters({
               <div className="links">
                 <Link href="/normal-delivery/">Normal delivery</Link>
                 <Link href="/painless-delivery/">Painless delivery</Link>
-                <Link href="/newborn-care/">Newborn care</Link>
+                <Link href="/postnatal-care/">After birth</Link>
               </div>
               <By img={lakshmiImg}>With Dr. Lakshmi and the night team</By>
             </div>

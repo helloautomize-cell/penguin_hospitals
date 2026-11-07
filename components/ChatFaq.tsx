@@ -21,6 +21,50 @@ export function ChatFaq({ items }: { items: FaqItem[] }) {
     const bubbles = Array.from(thread.querySelectorAll<HTMLElement>(".b"));
     const typing = thread.querySelector<HTMLElement>(".typing");
     if (thread.getBoundingClientRect().top <= innerHeight) return;
+
+    /* phones: questions show straight away, each answer types when it enters view */
+    if (matchMedia("(max-width: 767px)").matches) {
+      const answers = bubbles.filter((b) => b.classList.contains("a"));
+      answers.forEach((b) => b.classList.add("hide"));
+      let busy = false;
+      const timers: ReturnType<typeof setTimeout>[] = [];
+      const io = new IntersectionObserver(
+        (es) => {
+          es.forEach((e) => {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            const b = e.target as HTMLElement;
+            const reveal = () => {
+              if (busy) {
+                timers.push(setTimeout(reveal, 700));
+                return;
+              }
+              busy = true;
+              if (typing) {
+                typing.classList.add("on");
+                thread.insertBefore(typing, b);
+              }
+              timers.push(
+                setTimeout(() => {
+                  typing?.classList.remove("on");
+                  b.classList.remove("hide");
+                  timers.push(setTimeout(() => (busy = false), 260));
+                }, 600),
+              );
+            };
+            reveal();
+          });
+        },
+        { threshold: 0.35 },
+      );
+      answers.forEach((b) => io.observe(b));
+      return () => {
+        io.disconnect();
+        timers.forEach(clearTimeout);
+      };
+    }
+
+    if (thread.getBoundingClientRect().top <= innerHeight) return;
     bubbles.forEach((b) => b.classList.add("hide"));
     let done = false;
     const io = new IntersectionObserver(

@@ -24,7 +24,7 @@ export const doctors: Doctor[] = [
     nameSoft: "Vijay Kalbande",
     role: "Obstetrician and gynaecologist · Laparoscopic surgeon · Founder",
     shortRole: "Obstetrics and gynaecology",
-    marginNote: "the \u201cLakshmi\u201d in our name.",
+    marginNote: "Our founder.",
     bookingLabel: "Book with Dr. Lakshmi",
     profileHref: "/doctors/dr-lakshmi-vijay-kalbande/",
     portrait: "/images/clinic/dr-lakshmi-portrait.jpg",

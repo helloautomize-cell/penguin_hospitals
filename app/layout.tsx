@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Figtree, Instrument_Serif, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
 
@@ -33,6 +33,13 @@ export const metadata: Metadata = {
   description:
     "Dr. Lakshmi's Penguin Hospital in Chinchwad Gaon, PCMC. Pregnancy and delivery, gynaecology and laparoscopy, and heart and vascular surgery. Emergency open day and night.",
   robots: { index: false, follow: false }, // SITE_INDEXABLE switch: noindex until launch
+};
+
+export const viewport: Viewport = {
+  themeColor: "#001F43",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 import { SiteHeader } from "@/components/shell/SiteHeader";

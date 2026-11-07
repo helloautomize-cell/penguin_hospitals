@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, TriangleAlert, ArrowRight } from "lucide-react";
 import { headerMenu, womenGroups, heartGroups, type NavGroup } from "@/lib/nav";
 import { doctors } from "@/lib/doctors";
@@ -33,7 +34,7 @@ function Mega({ groups, doctorIndex, wide, img }: { groups: NavGroup[]; doctorIn
         </div>
       ))}
       <Link className="mdoc" href={d.profileHref}>
-        <img src={img ?? d.portrait} alt="" />
+        <Image src={img ?? d.portrait} alt="" width={56} height={56} />
         <span>
           <b>
             {d.name} {d.nameSoft}
@@ -53,23 +54,68 @@ export function SiteHeader({ docImgs }: { docImgs?: [string, string] }) {
   const pathname = usePathname();
   const [small, setSmall] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hid, setHid] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setSmall(window.scrollY > 40);
+    const phone = () => matchMedia("(max-width:767px)").matches;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY;
+        setSmall(y > 40);
+        if (phone()) {
+          const dy = y - lastY.current;
+          if (dy > 12 && y > 120) setHid(true);
+          else if (dy < -2 || y < 60) setHid(false);
+        }
+        lastY.current = y;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (pathname !== prevPath) {
+    setPrevPath(pathname);
+    setOpen(false);
+  }
+  const [prevMenuOpen, setPrevMenuOpen] = useState(open);
+  if (open !== prevMenuOpen) {
+    setPrevMenuOpen(open);
+    if (open) setHid(false);
+  }
+
+  const openMenu = () => {
+    const b = burgerRef.current?.getBoundingClientRect();
+    const sheet = document.getElementById("msheet");
+    if (b && sheet) {
+      sheet.style.setProperty("--cx", `${b.left + b.width / 2}px`);
+      sheet.style.setProperty("--cy", `${b.top + b.height / 2}px`);
+    }
+    setOpen(true);
+  };
 
   return (
     <>
-      <header className={`navbar${small ? " small" : ""}`} id="navbar">
+      <header className={`navbar${small ? " small" : ""}${hid && !open ? " hid" : ""}`} id="navbar">
         <div className="wrap">
           <div className="pillnav">
             <Link href="/" aria-label="Dr. Lakshmi's Penguin Hospital, home">
-              <img className="logo" src="/images/brand/logo-penguin-hospital.png" alt="Dr. Lakshmi's Penguin Hospital" />
+              <Image
+                className="logo"
+                src="/images/brand/logo-penguin-hospital.png"
+                alt="Dr. Lakshmi's Penguin Hospital"
+                width={140}
+                height={88}
+                sizes="70px"
+                priority
+              />
             </Link>
             <nav className="mainnav" aria-label="Main">
               {headerMenu.map((item) =>
@@ -107,7 +153,8 @@ export function SiteHeader({ docImgs }: { docImgs?: [string, string] }) {
               type="button"
               aria-label="Open menu"
               aria-controls="msheet"
-              onClick={() => setOpen(true)}
+              ref={burgerRef}
+              onClick={openMenu}
             >
               <Menu className="ico" aria-hidden="true" />
             </button>

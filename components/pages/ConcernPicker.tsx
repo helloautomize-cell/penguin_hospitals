@@ -37,10 +37,13 @@ export function ConcernPicker() {
   const [showB, setShowB] = useState(false);
   const [fields, setFields] = useState(() => fieldsFor(0));
   const [swap, setSwap] = useState(false);
+  const [open, setOpen] = useState(false);
   const busy = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchY = useRef(0);
 
   const pick = (ix: number, e: React.MouseEvent) => {
     e.preventDefault();
+    setOpen(true);
     if (ix === sel) return;
     const c = concerns[ix];
     setSel(ix);
@@ -70,7 +73,7 @@ export function ConcernPicker() {
   };
 
   return (
-    <div className="pk prv">
+    <div className="pk">
       <div>
         {GROUPS.map(({ g, title }) => (
           <div className="pkgrp" key={g}>
@@ -96,7 +99,25 @@ export function ConcernPicker() {
           </div>
         ))}
       </div>
-      <div className={`ans${swap ? " swap" : ""}`} aria-live="polite">
+      <div
+        className={`ans${swap ? " swap" : ""}${open ? " open" : ""}`}
+        aria-live="polite"
+        onTouchStart={(e) => {
+          touchY.current = e.touches[0].clientY;
+        }}
+        onTouchMove={(e) => {
+          if (e.touches[0].clientY - touchY.current > 70) setOpen(false);
+        }}
+      >
+        <span className="grab" aria-hidden="true" />
+        <button
+          type="button"
+          className="pkclose"
+          aria-label="Close"
+          onClick={() => setOpen(false)}
+        >
+          ×
+        </button>
         <div className="ph">
           <Image
             className={showA ? "show" : ""}
@@ -135,6 +156,11 @@ export function ConcernPicker() {
           </div>
         </div>
       </div>
+      <div
+        className={`pkback${open ? " open" : ""}`}
+        aria-hidden="true"
+        onClick={() => setOpen(false)}
+      />
     </div>
   );
 }
