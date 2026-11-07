@@ -28,7 +28,7 @@ const CARDS = [
     p: "Your own specialist, with time for your questions and your family.",
   },
   {
-    img: "/images/pages/ultrasound-room.jpg",
+    img: "/images/real/real-ultrasound.jpg",
     alt: "The ultrasound room next to the consultation room",
     b: "Scan next door, if needed",
     p: "The ultrasound room is beside the consultation room. Many scans happen in the same visit.",

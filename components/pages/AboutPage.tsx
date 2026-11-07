@@ -35,8 +35,8 @@ const STORY = [
   },
   {
     yr: "20__",
-    img: "/images/pages/labour-room.jpg",
-    alt: "The labour room",
+    img: "/images/real/real-facade.jpg",
+    alt: "The Penguin Hospital entrance",
     b: "Penguin Hospital opens",
     t: "Chinchwad Gaon, with a labour room and theatre.",
     now: false,

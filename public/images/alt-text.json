@@ -37,5 +37,11 @@
   "clinic/operation-theatre.jpg": "The operation theatre at Penguin Hospital",
   "clinic/ultrasound-room.jpg": "The ultrasound room at Penguin Hospital",
   "clinic/general-ward.jpg": "A general ward with curtained beds at Penguin Hospital",
-  "clinic/labour-room.jpg": "The labour room at Penguin Hospital"
+  "clinic/labour-room.jpg": "The labour room at Penguin Hospital",
+  "real/real-facade.jpg": "The Penguin Hospital entrance with its blue and red sign",
+  "real/real-labour-room.jpg": "The labour room with the newborn warming station",
+  "real/real-operation-theatre.jpg": "The operation theatre",
+  "real/real-pharmacy.jpg": "Penguin Pharmacy counter and waiting seats",
+  "real/real-reception.jpg": "The Penguin Hospital reception desk with the hospital logo",
+  "real/real-ultrasound.jpg": "The ultrasound room next to the consultation room"
 }

@@ -91,6 +91,13 @@ export const site = {
   ],
 
   googleMapsUrl: "https://maps.app.goo.gl/StwJKYnv9kRLnd1k7",
+  /**
+   * Google Maps embed src for the Plan your visit map.
+   * Fallback query URL until the business-listing embed code is supplied
+   * (Share > Embed a map on the Google Maps listing pins the exact place).
+   */
+  mapEmbedSrc:
+    "https://www.google.com/maps?q=Penguin+Hospital,+Bijli+Nagar+Road,+Chinchwad+Gaon,+Pimpri-Chinchwad,+Maharashtra+411033&z=16&output=embed",
 
   /** Year shown in the footer legal line. [CONFIRM: legal entity wording] */
   copyright: {

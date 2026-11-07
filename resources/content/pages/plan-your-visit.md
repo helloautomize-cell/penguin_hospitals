@@ -41,7 +41,7 @@ By road from Pimpri, Akurdi or Nigdi, head for Chinchwad Gaon and Bijli Nagar Ro
 ### FAQs
 1. **How long does a first visit take?** Plan for about an hour, including registration, checks and any scan done the same day. Visits are longer if blood tests or a scan are needed. Follow-up visits are usually shorter.
 2. **Can I get my scan on the same day?** Often, yes. Our ultrasound room is next to the consultation room, so many pregnancy and gynaecology scans are done during the same visit. Some scans need a full bladder or a specific week of pregnancy, and the team will tell you when.
-3. **Is there a pharmacy?** [CONFIRM] If not in-house, Laxmi Medico is directly opposite the hospital.
+3. **Is there a pharmacy?** Yes. Penguin Pharmacy is part of the hospital, so you can collect your medicines before you leave. [CONFIRM pharmacy hours]
 4. **Can children visit an admitted patient?** [CONFIRM visiting rules] To protect newborns and patients after surgery, we may limit visitors at times.
 
 [CTA band]

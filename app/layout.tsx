@@ -46,7 +46,11 @@ import { doctorImageSrcFor } from "@/lib/doctor-images.server";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${figtree.variable} ${instrument.variable} ${devanagari.variable}`}>
+    <html
+      lang="en-IN"
+      data-scroll-behavior="smooth"
+      className={`${figtree.variable} ${instrument.variable} ${devanagari.variable}`}
+    >
       <body suppressHydrationWarning>
         <SiteHeader
           docImgs={[

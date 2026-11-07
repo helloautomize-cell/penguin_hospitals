@@ -5,7 +5,7 @@ import { PagesFx } from "@/components/pages/PagesFx";
 import { VisitHScroll } from "@/components/pages/VisitHScroll";
 import { PackingList } from "@/components/pages/PackingList";
 import { HoursWeek } from "@/components/pages/HoursWeek";
-import { RouteMap } from "@/components/pages/RouteMap";
+import { MapSection } from "@/components/pages/MapSection";
 import { InsuranceCard } from "@/components/pages/InsuranceCard";
 import { ConfirmChip } from "@/components/Tag";
 
@@ -103,12 +103,13 @@ export function VisitPage() {
         <div className="v-photo">
           <div className="main">
             <Image
-              src="/images/pages/step-2-arrive.jpg"
-              alt="A couple arriving at the Penguin Hospital front desk"
+              src="/images/real/real-reception.jpg"
+              alt="The Penguin Hospital reception desk with the hospital logo"
               fill
               priority
               sizes="(max-width: 900px) 100vw, 52vw"
             />
+            <span className="realtag">Real photo</span>
           </div>
           <div className="ticket">
             <svg viewBox="0 0 62 62" aria-hidden="true">
@@ -181,7 +182,7 @@ export function VisitPage() {
           <h2 className="h-l" style={{ marginTop: 12, maxWidth: "18ch" }}>
             Where are you coming from?
           </h2>
-          <RouteMap />
+          <MapSection />
         </div>
       </section>
 
@@ -294,7 +295,8 @@ export function VisitPage() {
                 Is there a pharmacy?<i />
               </summary>
               <p>
-                <ConfirmChip /> If not in-house, Laxmi Medico is directly opposite the hospital.
+                Yes. Penguin Pharmacy is part of the hospital, so you can collect your medicines
+                before you leave. <ConfirmChip note="pharmacy hours" />
               </p>
             </details>
             <details>

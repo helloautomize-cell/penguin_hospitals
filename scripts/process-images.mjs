@@ -125,6 +125,13 @@ const jobs = [
     out: "clinic/labour-room.jpg",
     run: (s) => deCyan(s, { brightness: 0.96 }).jpeg(JPEG),
   },
+  /* -------- real hospital photos (FIX-real-photos-and-map): no retouch, EXIF/GPS strip only -------- */
+  { src: "real-photos/real-facade.jpg", out: "real/real-facade.jpg", run: (s) => s.jpeg(JPEG) },
+  { src: "real-photos/real-labour-room.jpg", out: "real/real-labour-room.jpg", run: (s) => s.jpeg(JPEG) },
+  { src: "real-photos/real-operation-theatre.jpg", out: "real/real-operation-theatre.jpg", run: (s) => s.jpeg(JPEG) },
+  { src: "real-photos/real-pharmacy.jpg", out: "real/real-pharmacy.jpg", run: (s) => s.jpeg(JPEG) },
+  { src: "real-photos/real-reception.jpg", out: "real/real-reception.jpg", run: (s) => s.jpeg(JPEG) },
+  { src: "real-photos/real-ultrasound.jpg", out: "real/real-ultrasound.jpg", run: (s) => s.jpeg(JPEG) },
 ];
 
 const alt = {
@@ -167,6 +174,12 @@ const alt = {
   "clinic/ultrasound-room.jpg": "The ultrasound room at Penguin Hospital",
   "clinic/general-ward.jpg": "A general ward with curtained beds at Penguin Hospital",
   "clinic/labour-room.jpg": "The labour room at Penguin Hospital",
+  "real/real-facade.jpg": "The Penguin Hospital entrance with its blue and red sign",
+  "real/real-labour-room.jpg": "The labour room with the newborn warming station",
+  "real/real-operation-theatre.jpg": "The operation theatre",
+  "real/real-pharmacy.jpg": "Penguin Pharmacy counter and waiting seats",
+  "real/real-reception.jpg": "The Penguin Hospital reception desk with the hospital logo",
+  "real/real-ultrasound.jpg": "The ultrasound room next to the consultation room",
 };
 
 async function main() {

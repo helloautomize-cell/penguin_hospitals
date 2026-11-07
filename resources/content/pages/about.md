@@ -26,7 +26,7 @@ Penguin parents take turns. One keeps the egg warm through the winter while the 
 - **Ultrasound room** next to the consultation room, for pregnancy scans and gynaecology scans.
 - **Wards** with curtained beds, and private rooms [CONFIRM: private and semi-private rooms, number of beds].
 - **Emergency care** day and night.
-[CONFIRM: ICU or HDU, NICU, in-house lab, pharmacy, blood storage, lift, parking, wheelchair access]
+[CONFIRM: ICU or HDU, NICU, in-house lab, blood storage, lift, parking, wheelchair access]
 
 Photos: operation theatre, ultrasound room, labour room, general ward (real).
 
